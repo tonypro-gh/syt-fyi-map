@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MYSYT Dashboard Map</title>
+  <style>
+    /* Basic layout to fill the container (iframe) */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+    }
+    /* The map container itself */
+    #map-container {
+      width: 100%;
+      height: 100%;
+      /* The 25px jet black "picture frame" border */
+      border: 25px solid #000000; 
+      box-sizing: border-box; /* IMPORTANT: This makes the border stay inside the container's dimensions */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Outer and inner shadow for depth */
+    }
+    /* The actual map div inside the bordered container */
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+    /* Sleek control panel */
+    #controls {
+      position: absolute;
+      top: 40px;      /* Positioned to be inside the border */
+      right: 40px;     /* Positioned to be inside the border */
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    #controls select, #controls button {
+      display: block;
+      width: 100%;
+      margin-bottom: 8px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      color: #333;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    #controls button:hover, #controls select:hover {
+      background-color: #e6e6e6;
+    }
+    /* Error message display */
+    #error-message {
+      position: absolute;
+      bottom: 40px; /* Positioned to be inside the border */
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(217, 30, 24, 0.85); /* Red for error */
+      color: white;
+      font-size: 14px;
+      padding: 8px 15px;
+      border-radius: 4px;
+      display: none; /* Hidden by default */
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="map-container">
+    <div id="map"></div>
+  </div>
+  
+  <div id="controls">
+    <select id="mapType" onchange="changeMapType(this.value)">
+      <option value="roadmap">Roadmap</option>
+      <option value="satellite">Satellite</option>
+      <option value="hybrid">Hybrid</option>
+    </select>
+    <button onclick="toggle3D()">Toggle 3D</button>
+    <button onclick="showSafetyAlerts()">Safety Alerts</button>
+  </div>
+  
+  <div id="error-message"></div>
+
+  <!-- 
+    IMPORTANT: Replace YOUR_NEW_SECURE_API_KEY with the new key you created.
+    Do NOT post this key publicly again.
+  -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_NEW_SECURE_API_KEY&callback=initMap&libraries=places" async defer></script>
+  
+  <script>
+    // Global variables for map and marker
+    let map;
+    let userMarker;
+    let is3D = false;
+
+    // The main function that initializes everything
+    function initMap() {
+      // Default location (San Francisco) if GPS fails or is denied
+      const defaultLocation = { lat: 37.7749, lng: -122.4194 };
+
+      // === 1. MAP INITIALIZATION ===
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: defaultLocation,
+        zoom: 15,
+        mapTypeId: 'roadmap',
+        // A custom black and white style for the map
+        styles: [
+          { "stylers": [{ "saturation": -100 }, { "gamma": 0.8 }] }
+        ],
+        // Disabling default controls for a cleaner look
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: false,
+        zoomControl: true,
+        // Enables modern pinch-to-zoom and drag on all devices
+        gestureHandling: 'greedy' 
+      });
+
+      // === 2. GEOLOCATION TRACKING LOGIC ===
+      // This is where we integrate what you learned.
+      if (navigator.geolocation) {
+        // Use watchPosition to get real-time updates
+        navigator.geolocation.watchPosition(
+          // Success callback: This function runs when the location is found
+          (position) => {
+            const userLocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+
+            // Move the map to the user's new location
+            map.setCenter(userLocation);
+
+            // Create a marker if it doesn't exist, otherwise update its position
+            if (!userMarker) {
+              userMarker = new google.maps.Marker({
+                position: userLocation,
+                map: map,
+                title: "Your Location",
+              });
+            } else {
+              userMarker.setPosition(userLocation);
+            }
+            
+            // Hide any previous error messages
+            document.getElementById('error-message').style.display = 'none';
+          },
+          // Error callback: This function runs if something goes wrong
+          handleLocationError,
+          // Options: Request high accuracy for best results
+          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+      } else {
+        // Browser doesn't support Geolocation
+        showError("Geolocation is not supported by your browser.");
+      }
+    }
+    
+    // === 3. HELPER FUNCTIONS for errors and controls ===
+
+    function handleLocationError() {
+        // For simplicity, we show a generic error. In a real app, you could check error.code
+        showError("Location access denied. Centering on default location.");
+        // TODO: In a future step, you could add logic here to fetch the user's profile address.
+    }
+
+    function showError(message) {
+        const errorDiv = document.getElementById('error-message');
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+    }
+
+    function changeMapType(type) {
+      map.setMapTypeId(type);
+      // Only allow 3D tilt on maps that support it
+      if (type === 'satellite' || type === 'hybrid') {
+        map.setTilt(is3D ? 45 : 0);
+      } else {
+        map.setTilt(0);
+      }
+    }
+
+    function toggle3D() {
+      is3D = !is3D;
+      const currentType = map.getMapTypeId();
+      if (is3D && (currentType === 'satellite' || currentType === 'hybrid')) {
+        map.setTilt(45);
+      } else {
+        map.setTilt(0);
+      }
+    }
+
+    function showSafetyAlerts() {
+      // This is the placeholder for your future property safety feature
+      alert('Feature coming soon: Displaying local safety alerts from syt.fyi data.');
+    }
+  </script>
+</body>
+</html>
