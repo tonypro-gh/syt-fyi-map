@@ -1,206 +1,761 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MYSYT Dashboard Map</title>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <title>SYT.FYI Map</title>
   <style>
-    /* Basic layout to fill the container (iframe) */
-    html, body {
+    :root {
+      --syt-blue: #008AFC;
+      --syt-red: #F50B0B;
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --card-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+      --search-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html,
+    body {
       margin: 0;
-      padding: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      font-family: 'Arial', sans-serif;
+      font-family: Montserrat, Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
     }
-    /* The map container itself */
-    #map-container {
+    #app {
+      position: relative;
       width: 100%;
       height: 100%;
-      /* The 25px jet black "picture frame" border */
-      border: 25px solid #000000; 
-      box-sizing: border-box; /* IMPORTANT: This makes the border stay inside the container's dimensions */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Outer and inner shadow for depth */
+      background: #f7f7f7;
     }
-    /* The actual map div inside the bordered container */
     #map {
       width: 100%;
       height: 100%;
     }
-    /* Sleek control panel */
-    #controls {
+    .topbar {
       position: absolute;
-      top: 40px;      /* Positioned to be inside the border */
-      right: 40px;     /* Positioned to be inside the border */
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 5px;
-      padding: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      z-index: 10;
-    }
-    #controls select, #controls button {
-      display: block;
-      width: 100%;
-      margin-bottom: 8px;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background-color: #fff;
-      color: #333;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    #controls button:hover, #controls select:hover {
-      background-color: #e6e6e6;
-    }
-    /* Error message display */
-    #error-message {
-      position: absolute;
-      bottom: 40px; /* Positioned to be inside the border */
+      top: max(16px, env(safe-area-inset-top));
       left: 50%;
       transform: translateX(-50%);
-      background-color: rgba(217, 30, 24, 0.85); /* Red for error */
-      color: white;
+      width: min(92vw, 720px);
+      z-index: 20;
+      pointer-events: none;
+    }
+    .search-shell {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      height: 60px;
+      padding: 0 18px;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid #d9d9d9;
+      box-shadow: var(--search-shadow);
+    }
+    .search-icon {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      color: #6b7280;
+    }
+    #searchInput {
+      flex: 1 1 auto;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #222;
+      font-size: 18px;
+      font-weight: 500;
+      min-width: 0;
+    }
+    #searchInput::placeholder {
+      color: #7a7a7a;
+    }
+    .sheet {
+      position: absolute;
+      left: 50%;
+      bottom: max(18px, env(safe-area-inset-bottom));
+      transform: translateX(-50%) translateY(calc(100% + 24px));
+      width: min(92vw, 760px);
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid #dadada;
+      box-shadow: var(--card-shadow);
+      z-index: 25;
+      transition: transform 220ms ease;
+      overflow: hidden;
+      pointer-events: auto;
+    }
+    .sheet.open {
+      transform: translateX(-50%) translateY(0);
+    }
+    .sheet-handle {
+      width: 56px;
+      height: 6px;
+      background: #d4d4d4;
+      margin: 10px auto 8px;
+    }
+    .sheet-inner {
+      padding: 0 18px 18px;
+    }
+    .sheet-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .sheet-pin {
+      width: 24px;
+      height: 24px;
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+    .sheet-title-wrap {
+      min-width: 0;
+      flex: 1;
+    }
+    .sheet-title {
+      margin: 0;
+      font-size: clamp(24px, 3.6vw, 32px);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .sheet-status-row {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .status-text {
+      font-weight: 800;
+      margin-left: 8px;
+    }
+    .status-text.red {
+      color: var(--syt-red);
+    }
+    .status-text.blue {
+      color: var(--syt-blue);
+    }
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 14px 0;
+    }
+    .not-activated-meta {
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    .not-activated-meta strong {
+      font-weight: 700;
+    }
+    .muted-copy {
+      color: #6b7280;
+    }
+    .na-message {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #202020;
+    }
+    .sheet-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid #cfcfcf;
+      background: #fff;
+      color: #111;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 52px;
+    }
+    .btn-primary-red {
+      background: var(--syt-red);
+      color: #fff;
+      border-color: var(--syt-red);
+      min-width: 190px;
+    }
+    .btn-primary-blue {
+      background: var(--syt-blue);
+      color: #fff;
+      border-color: var(--syt-blue);
+      min-width: 190px;
+    }
+    .btn-secondary {
+      background: #fff;
+      color: #111;
+      border-color: #cfcfcf;
+      min-width: 190px;
+    }
+    .brand-mark {
+      margin-top: 16px;
+      text-align: right;
+      color: #b7b7b7;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      font-size: 18px;
+    }
+    .safe-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid transparent;
+    }
+    .safe-col {
+      padding-right: 14px;
+    }
+    .safe-col + .safe-col {
+      border-left: 1px solid var(--line);
+      padding-left: 18px;
+      padding-right: 0;
+    }
+    .safe-intro {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .safe-block {
+      margin-top: 12px;
+    }
+    .safe-block-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .safe-block-title svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+      color: var(--syt-blue);
+    }
+    .safe-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .safe-list li {
+      position: relative;
+      padding-left: 16px;
+      margin: 6px 0;
+      line-height: 1.35;
       font-size: 14px;
-      padding: 8px 15px;
+      color: #222;
+    }
+    .safe-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.48em;
+      width: 9px;
+      height: 9px;
+      background: var(--syt-blue);
+      border-radius: 50%;
+    }
+    .gm-style .gm-style-iw-c,
+    .gm-style .gm-style-iw-t {
+      display: none !important;
+    }
+    /* Custom markers */
+    .marker-wrap {
+      position: relative;
+      width: 18px;
+      height: 18px;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+    .marker-circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: currentColor;
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+    }
+    .marker-wrap.red {
+      color: var(--syt-red);
+    }
+    .marker-wrap.blue {
+      color: var(--syt-blue);
+    }
+    .marker-wrap.selected {
+      width: 58px;
+      height: 58px;
+      transform: translate(-50%, -100%);
+    }
+    .marker-wrap.selected .marker-circle {
+      display: none;
+    }
+    .marker-pin {
+      display: none;
+      position: absolute;
+      inset: 0;
+      filter: drop-shadow(0 0 12px rgba(0, 138, 252, 0.32));
+    }
+    .marker-wrap.red.selected .marker-pin {
+      filter: drop-shadow(0 0 16px rgba(245, 11, 11, 0.34));
+    }
+    .marker-wrap.selected .marker-pin {
+      display: block;
+    }
+    .marker-pin svg {
+      width: 58px;
+      height: 58px;
+      display: block;
+    }
+    /* Keyboard focus ring for markers */
+    .marker-wrap:focus {
+      outline: 3px solid #005fcc;
+      outline-offset: 3px;
+      border-radius: 50%;
+    }
+    .marker-wrap.selected:focus {
       border-radius: 4px;
-      display: none; /* Hidden by default */
-      z-index: 10;
+    }
+    @media (max-width: 640px) {
+      .topbar {
+        width: calc(100vw - 28px);
+      }
+      .search-shell {
+        height: 56px;
+        padding: 0 14px;
+      }
+      #searchInput {
+        font-size: 17px;
+      }
+      .sheet {
+        width: calc(100vw - 20px);
+      }
+      .sheet-inner {
+        padding: 0 14px 14px;
+      }
+      .sheet-title {
+        font-size: 24px;
+      }
+      .sheet-status-row {
+        font-size: 17px;
+      }
+      .safe-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .safe-col {
+        padding-right: 6px;
+      }
+      .safe-col + .safe-col {
+        padding-left: 12px;
+      }
+      .btn {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+    }
+    @media (max-width: 430px) {
+      .safe-grid {
+        grid-template-columns: 1fr;
+      }
+      .safe-col + .safe-col {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        padding-left: 0;
+        padding-top: 14px;
+        margin-top: 4px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <div id="map-container">
+  <div id="app">
+    <div class="topbar">
+      <div class="search-shell">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle>
+          <path d="M20 20L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search address..."
+          autocomplete="off"
+          aria-label="Search address"
+        />
+      </div>
+    </div>
     <div id="map"></div>
+    <section id="propertySheet" class="sheet" aria-live="polite" aria-hidden="true">
+      <div class="sheet-handle"></div>
+      <div class="sheet-inner" id="sheetContent"></div>
+    </section>
   </div>
-  
-  <div id="controls">
-    <select id="mapType" onchange="changeMapType(this.value)">
-      <option value="roadmap">Roadmap</option>
-      <option value="satellite">Satellite</option>
-      <option value="hybrid">Hybrid</option>
-    </select>
-    <button onclick="toggle3D()">Toggle 3D</button>
-    <button onclick="showSafetyAlerts()">Safety Alerts</button>
-  </div>
-  
-  <div id="error-message"></div>
-
-  <!-- 
-    IMPORTANT: Replace YOUR_NEW_SECURE_API_KEY with the new key you created.
-    Do NOT post this key publicly again.
-  -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXus5aZ7hnhJthYA6YU_68m1E1GYN7V8Q&callback=initMap&libraries=places" async defer></script>
-  
   <script>
-    // Global variables for map and marker
+    // Sample property data. Replace with Wix CMS / Velo data.
+    const properties = [
+      {
+        id: "PROP-0001",
+        name: "1116 Ocean Dr",
+        address: "1116 Ocean Dr, Miami Beach, FL 33139",
+        lat: 25.7812,
+        lng: -80.1305,
+        status: "syt_safe",
+        propertyType: "Condo",
+        compliance: ["Inspection Records", "40-Year Recertification"],
+        buildingInfo: ["Floor Plans", "Equipment Locations", "Safety Systems"],
+        firetactic: ["Pre-Incident Plan Shared with Responders", "Verified Property Data"],
+        digitalAssets: ["Photos", "Drone / Aerial Views", "360 / Digital Twin"]
+      },
+      {
+        id: "PROP-0002",
+        name: "1200 Brickell Ave",
+        address: "1200 Brickell Ave, Miami, FL 33131",
+        lat: 25.7615,
+        lng: -80.1918,
+        status: "not_activated",
+        propertyType: "Condo",
+        yearBuilt: 2008,
+        areaSqFt: "250,000 sq ft"
+      },
+      {
+        id: "PROP-0003",
+        name: "1300 Washington Ave",
+        address: "1300 Washington Ave, Miami Beach, FL 33139",
+        lat: 25.7862,
+        lng: -80.1323,
+        status: "not_activated",
+        propertyType: "Hotel",
+        yearBuilt: 1997,
+        areaSqFt: "118,000 sq ft"
+      },
+      {
+        id: "PROP-0004",
+        name: "1000 Collins Ave",
+        address: "1000 Collins Ave, Miami Beach, FL 33139",
+        lat: 25.7792,
+        lng: -80.1312,
+        status: "syt_safe",
+        propertyType: "Mixed Use",
+        compliance: ["Inspection Records", "Safety Review"],
+        buildingInfo: ["Floor Plans", "Safety Systems"],
+        firetactic: ["Pre-Incident Plan Shared with Responders"],
+        digitalAssets: ["Photos", "360 / Digital Twin"]
+      },
+      {
+        id: "PROP-0005",
+        name: "9th & Ocean",
+        address: "900 Ocean Dr, Miami Beach, FL 33139",
+        lat: 25.7794,
+        lng: -80.1298,
+        status: "not_activated",
+        propertyType: "Commercial",
+        yearBuilt: 1989,
+        areaSqFt: "22,400 sq ft"
+      },
+      {
+        id: "PROP-0006",
+        name: "South of Fifth Property",
+        address: "500 Ocean Dr, Miami Beach, FL 33139",
+        lat: 25.7738,
+        lng: -80.1310,
+        status: "syt_safe",
+        propertyType: "Condo",
+        compliance: ["Inspection Records"],
+        buildingInfo: ["Floor Plans", "Safety Systems"],
+        firetactic: ["Verified Property Data"],
+        digitalAssets: ["Photos", "Drone / Aerial Views"]
+      }
+    ];
+
+    // SVG icons for sheet sections (cross-platform safe, replaces emojis)
+    const ICONS = {
+      compliance: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>`,
+      firetactic: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c0 6-6 8-6 14a6 6 0 0 0 12 0c0-6-6-8-6-14Z"/><path d="M12 12c0 3-2 4-2 7a2 2 0 0 0 4 0c0-3-2-4-2-7Z"/></svg>`,
+      building: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`,
+      camera: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z"/><circle cx="12" cy="13" r="3"/></svg>`
+    };
+
+    // Sanitize text for safe innerHTML insertion
+    function sanitize(str) {
+      if (str == null) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
     let map;
-    let userMarker;
-    let is3D = false;
+    let autocomplete;
+    let selectedMarkerId = null;
+    const markers = new Map();
 
-    // The main function that initializes everything
-    function initMap() {
-      // Default location (San Francisco) if GPS fails or is denied
-      const defaultLocation = { lat: 37.7749, lng: -122.4194 };
+    function buildPinSVG(color) {
+      return `
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 2C20.4 2 11 11.4 11 23c0 14.4 16.2 28.9 19 31.3a3 3 0 0 0 3.9 0C36.8 51.9 53 37.4 53 23 53 11.4 43.6 2 32 2Z"
+                fill="${color}" stroke="white" stroke-width="3"/>
+          <circle cx="32" cy="23" r="10" fill="white"/>
+        </svg>
+      `;
+    }
 
-      // === 1. MAP INITIALIZATION ===
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: defaultLocation,
-        zoom: 15,
-        mapTypeId: 'roadmap',
-        // A custom black and white style for the map
-        styles: [
-          { "stylers": [{ "saturation": -100 }, { "gamma": 0.8 }] }
-        ],
-        // Disabling default controls for a cleaner look
-        mapTypeControl: false,
-        streetViewControl: false,
-        fullscreenControl: false,
-        zoomControl: true,
-        // Enables modern pinch-to-zoom and drag on all devices
-        gestureHandling: 'greedy' 
+    function createMarkerElement(property, isSelected = false) {
+      const { status, name, id } = property;
+      const colorClass = status === "syt_safe" ? "blue" : "red";
+      const el = document.createElement("div");
+      el.className = `marker-wrap ${colorClass}${isSelected ? " selected" : ""}`;
+      el.setAttribute("role", "button");
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("aria-label", `${name} — ${status === "syt_safe" ? "SYT Safe" : "Not Activated"}`);
+      el.setAttribute("aria-pressed", isSelected ? "true" : "false");
+
+      const circle = document.createElement("div");
+      circle.className = "marker-circle";
+
+      const pin = document.createElement("div");
+      pin.className = "marker-pin";
+      pin.innerHTML = buildPinSVG(status === "syt_safe" ? "#008AFC" : "#F50B0B");
+
+      el.appendChild(circle);
+      el.appendChild(pin);
+
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleProperty(id);
+      });
+      el.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleProperty(id);
+        }
+        if (e.key === "Escape") {
+          closeSheet();
+        }
       });
 
-      // === 2. GEOLOCATION TRACKING LOGIC ===
-      // This is where we integrate what you learned.
-      if (navigator.geolocation) {
-        // Use watchPosition to get real-time updates
-        navigator.geolocation.watchPosition(
-          // Success callback: This function runs when the location is found
-          (position) => {
-            const userLocation = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
+      return el;
+    }
 
-            // Move the map to the user's new location
-            map.setCenter(userLocation);
+    function getMapStyle() {
+      return [
+        { elementType: "geometry", stylers: [{ color: "#f2f2f2" }] },
+        { elementType: "labels.text.fill", stylers: [{ color: "#5f6368" }] },
+        { elementType: "labels.text.stroke", stylers: [{ color: "#f7f7f7" }] },
+        { featureType: "administrative", elementType: "geometry.stroke", stylers: [{ color: "#e1e1e1" }] },
+        { featureType: "poi", stylers: [{ visibility: "off" }] },
+        { featureType: "transit", stylers: [{ visibility: "off" }] },
+        { featureType: "road", elementType: "geometry", stylers: [{ color: "#ffffff" }] },
+        { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#dddddd" }] },
+        { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#2c2c2c" }] },
+        { featureType: "water", elementType: "geometry", stylers: [{ color: "#bfe8ff" }] },
+        { featureType: "landscape.natural", elementType: "geometry", stylers: [{ color: "#eef1e8" }] }
+      ];
+    }
 
-            // Create a marker if it doesn't exist, otherwise update its position
-            if (!userMarker) {
-              userMarker = new google.maps.Marker({
-                position: userLocation,
-                map: map,
-                title: "Your Location",
-              });
-            } else {
-              userMarker.setPosition(userLocation);
-            }
-            
-            // Hide any previous error messages
-            document.getElementById('error-message').style.display = 'none';
-          },
-          // Error callback: This function runs if something goes wrong
-          handleLocationError,
-          // Options: Request high accuracy for best results
-          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-        );
-      } else {
-        // Browser doesn't support Geolocation
-        showError("Geolocation is not supported by your browser.");
+    function buildPinIcon(pinColor) {
+      return `
+        <svg class="sheet-pin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2.2c-4.5 0-8.1 3.6-8.1 8.1 0 5.4 6 10.8 7.2 11.8.5.4 1.2.4 1.8 0 1.1-1 7.2-6.4 7.2-11.8 0-4.5-3.6-8.1-8.1-8.1Z" fill="${pinColor}"></path>
+          <circle cx="12" cy="10.3" r="3.7" fill="white"></circle>
+        </svg>
+      `;
+    }
+
+    function buildListItems(arr) {
+      return (arr || []).map(item => `<li>${sanitize(item)}</li>`).join("");
+    }
+
+    function buildSheet(property) {
+      const isSafe = property.status === "syt_safe";
+      const pinColor = isSafe ? "#008AFC" : "#F50B0B";
+      const pinClass = isSafe ? "blue" : "red";
+      const statusText = isSafe ? "SYT.SAFE" : "NOT ACTIVATED";
+
+      const head = `
+        <div class="sheet-head">
+          ${buildPinIcon(pinColor)}
+          <div class="sheet-title-wrap">
+            <h2 class="sheet-title">${sanitize(property.name)}</h2>
+            <div class="sheet-status-row">
+              Status:<span class="status-text ${pinClass}">${statusText}</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      if (isSafe) {
+        return `
+          ${head}
+          <div class="divider"></div>
+          <div class="safe-grid">
+            <div class="safe-col">
+              <div class="safe-intro"><strong>Property Type:</strong> ${sanitize(property.propertyType || "Property")}</div>
+              <div class="safe-block">
+                <div class="safe-block-title">${ICONS.compliance} Compliance</div>
+                <ul class="safe-list">${buildListItems(property.compliance)}</ul>
+              </div>
+              <div class="safe-block">
+                <div class="safe-block-title">${ICONS.firetactic} FireTactic Integration</div>
+                <ul class="safe-list">${buildListItems(property.firetactic)}</ul>
+              </div>
+            </div>
+            <div class="safe-col">
+              <div class="safe-block">
+                <div class="safe-block-title">${ICONS.building} Building Information</div>
+                <ul class="safe-list">${buildListItems(property.buildingInfo)}</ul>
+              </div>
+              <div class="safe-block">
+                <div class="safe-block-title">${ICONS.camera} Digital Assets</div>
+                <ul class="safe-list">${buildListItems(property.digitalAssets)}</ul>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="sheet-actions">
+            <button class="btn btn-primary-blue" type="button">View Property</button>
+          </div>
+          <div class="brand-mark">SYT.FYI</div>
+        `;
       }
-    }
-    
-    // === 3. HELPER FUNCTIONS for errors and controls ===
 
-    function handleLocationError() {
-        // For simplicity, we show a generic error. In a real app, you could check error.code
-        showError("Location access denied. Centering on default location.");
-        // TODO: In a future step, you could add logic here to fetch the user's profile address.
+      return `
+        ${head}
+        <div class="divider"></div>
+        <div class="not-activated-meta">
+          <div><strong>Property Type:</strong> ${sanitize(property.propertyType || "Property")}</div>
+          <div><strong>Year Built:</strong> ${sanitize(property.yearBuilt || "—")}</div>
+          <div><strong>Approx. Area:</strong> ${sanitize(property.areaSqFt || "—")}</div>
+        </div>
+        <div class="divider"></div>
+        <div class="na-message">
+          <div>This property has not yet been activated on SYT.FYI.</div>
+          <div class="muted-copy" style="margin-top:8px;">Only limited public information is available.</div>
+        </div>
+        <div class="sheet-actions">
+          <button class="btn btn-primary-red" type="button">View Property</button>
+          <button class="btn btn-secondary" type="button">Become a SYT.SAFE Property</button>
+        </div>
+        <div class="divider"></div>
+        <div class="brand-mark">SYT.FYI</div>
+      `;
     }
 
-    function showError(message) {
-        const errorDiv = document.getElementById('error-message');
-        errorDiv.textContent = message;
-        errorDiv.style.display = 'block';
+    function openSheet(property) {
+      const sheet = document.getElementById("propertySheet");
+      const content = document.getElementById("sheetContent");
+      content.innerHTML = buildSheet(property);
+      sheet.classList.add("open");
+      sheet.setAttribute("aria-hidden", "false");
     }
 
-    function changeMapType(type) {
-      map.setMapTypeId(type);
-      // Only allow 3D tilt on maps that support it
-      if (type === 'satellite' || type === 'hybrid') {
-        map.setTilt(is3D ? 45 : 0);
-      } else {
-        map.setTilt(0);
+    function closeSheet() {
+      const sheet = document.getElementById("propertySheet");
+      sheet.classList.remove("open");
+      sheet.setAttribute("aria-hidden", "true");
+      // Return focus to the previously selected marker
+      if (selectedMarkerId) {
+        const entry = markers.get(selectedMarkerId);
+        if (entry) entry.element.focus();
       }
+      selectedMarkerId = null;
+      refreshMarkers();
     }
 
-    function toggle3D() {
-      is3D = !is3D;
-      const currentType = map.getMapTypeId();
-      if (is3D && (currentType === 'satellite' || currentType === 'hybrid')) {
-        map.setTilt(45);
-      } else {
-        map.setTilt(0);
+    function toggleProperty(propertyId) {
+      if (selectedMarkerId === propertyId) {
+        closeSheet();
+        return;
       }
+      selectedMarkerId = propertyId;
+      refreshMarkers();
+      const property = properties.find(p => p.id === propertyId);
+      if (property) openSheet(property);
     }
 
-    function showSafetyAlerts() {
-      // This is the placeholder for your future property safety feature
-      alert('Feature coming soon: Displaying local safety alerts from syt.fyi data.');
+    function refreshMarkers() {
+      properties.forEach(property => {
+        const entry = markers.get(property.id);
+        if (!entry) return;
+        const newEl = createMarkerElement(property, selectedMarkerId === property.id);
+        entry.marker.content = newEl;
+        entry.element = newEl;
+      });
     }
+
+    async function initMap() {
+      const miamiBeachCenter = { lat: 25.7826, lng: -80.1341 };
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: miamiBeachCenter,
+        zoom: 14,
+        minZoom: 12,
+        mapTypeControl: false,
+        fullscreenControl: false,
+        streetViewControl: false,
+        clickableIcons: false,
+        gestureHandling: "greedy",
+        styles: getMapStyle()
+      });
+
+      const bounds = new google.maps.LatLngBounds();
+      properties.forEach(property => bounds.extend({ lat: property.lat, lng: property.lng }));
+      map.fitBounds(bounds, 40);
+
+      if (window.innerWidth < 700) {
+        google.maps.event.addListenerOnce(map, "bounds_changed", () => {
+          const z = map.getZoom();
+          if (z > 14) map.setZoom(14);
+        });
+      }
+
+      properties.forEach(property => {
+        const el = createMarkerElement(property, false);
+        const marker = new google.maps.marker.AdvancedMarkerElement({
+          map,
+          position: { lat: property.lat, lng: property.lng },
+          content: el,
+          title: property.name
+        });
+        markers.set(property.id, { marker, element: el });
+      });
+
+      map.addListener("click", () => {
+        if (selectedMarkerId) closeSheet();
+      });
+
+      const input = document.getElementById("searchInput");
+      autocomplete = new google.maps.places.Autocomplete(input, {
+        fields: ["geometry", "name", "formatted_address"],
+        componentRestrictions: { country: "us" }
+      });
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (!place.geometry || !place.geometry.location) return;
+        map.panTo(place.geometry.location);
+        map.setZoom(16);
+        closeSheet();
+      });
+    }
+
+    window.initMap = initMap;
   </script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjGW5ayLqqFLyYbaL5VkajyxK8hcUKW24&libraries=places,marker&callback=initMap"
+    async
+    defer
+  ></script>
 </body>
 </html>
