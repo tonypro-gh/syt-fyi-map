@@ -415,17 +415,41 @@
     .bottom-cta {
       padding: 36px 0;
     }
+    /* prevent iOS input zoom — must be 16px+ */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+      font-size: 16px;
+    }
+    /* full-width submit on mobile */
+    .btn-submit {
+      width: 100%;
+      padding: 16px 24px;
+    }
   }
   @media (max-width: 480px) {
+    .container,
+    .container-wide {
+      padding: 0 16px;
+    }
     .hero h1 {
       font-size: 1.8rem;
     }
     .question-block {
-      padding: 22px 0;
+      padding: 20px 0;
     }
     .option-group label {
-      padding: 9px 12px;
-      font-size: 0.85rem;
+      padding: 12px 12px;
+      font-size: 0.9rem;
+    }
+    .option-group input[type="radio"],
+    .option-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+    .contact-helper {
+      font-size: 0.82rem;
     }
   }
   /* ─── FADE IN ─── */
