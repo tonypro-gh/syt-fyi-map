@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYT.FYI — Property Information, Organized</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --syt-red: #F50B0B;
+    --syt-red-2: #ff3333;
+    --syt-blue: #008AFC;
+    --syt-ink: #0b0b0b;
+    --white: #ffffff;
+    --light: #f7f7f7;
+    --font-display: 'Anton', 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+    --font-body: 'Montserrat', 'Trebuchet MS', 'Gill Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--syt-ink);
+    background: var(--white);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    font-weight: 400;
+  }
+  h2, h3 {
+    font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+    line-height: 1.15;
+    font-weight: 900;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .desktop-top { display: block; }
+  .hero {
+    padding: 16px 0 8px;
+    text-align: center;
+  }
+  .hero-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--syt-red);
+    margin-bottom: 2px;
+  }
+  .hero h1 { font-size: 1.45rem; margin-bottom: 4px; }
+  .hero h1 span { color: var(--syt-red); }
+  .hero-sub {
+    font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+    font-weight: 900;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 3px;
+  }
+  .hero-desc {
+    font-size: 0.81rem;
+    opacity: 0.72;
+    max-width: 640px;
+    margin: 3px auto 0;
+  }
+  .hero-support {
+    font-size: 0.68rem;
+    opacity: 0.56;
+    max-width: 640px;
+    margin: 6px auto 0;
+  }
+  .status-strip {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    border: 1px solid rgba(0,0,0,0.12);
+    font-size: 0.61rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--white);
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .dot-grey { background: #b8b8b8; }
+  .dot-blue { background: var(--syt-blue); }
+  .cta-strip { padding: 0 0 6px; }
+  .cta-strip h2 {
+    text-align: center;
+    font-size: 0.78rem;
+    margin-bottom: 6px;
+  }
+  .cta-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .cta-card {
+    border: 1.5px solid var(--syt-ink);
+    padding: 9px 9px 11px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s ease;
+  }
+  .cta-card:hover { border-color: var(--syt-red); }
+  .cta-card h3 { font-size: 0.72rem; margin-bottom: 3px; line-height: 1.2; }
+  .cta-card p { font-size: 0.65rem; opacity: 0.65; margin-bottom: 4px; flex-grow: 1; line-height: 1.35; }
+  .cta-card .meta { font-size: 0.6rem; font-weight: 700; color: var(--syt-red); margin-bottom: 6px; }
+  .btn-primary, .btn-secondary {
+    display: block;
+    padding: 8px 10px;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-primary { background: var(--syt-red); color: var(--white); border: none; }
+  .btn-primary:hover { background: var(--syt-red-2); }
+  .btn-secondary { background: transparent; color: var(--syt-ink); border: 1.5px solid var(--syt-ink); }
+  .btn-secondary:hover { border-color: var(--syt-red); color: var(--syt-red); }
+  .accordion { padding: 2px 0 4px; }
+  .acc-item { border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .acc-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+    font-weight: 900;
+    font-size: 0.75rem;
+    color: var(--syt-ink);
+    text-align: left;
+  }
+  .acc-trigger:hover { color: var(--syt-red); }
+  .acc-arrow {
+    font-size: 0.72rem;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+    margin-left: 6px;
+    color: var(--syt-red);
+  }
+  .acc-item.open .acc-arrow { transform: rotate(180deg); }
+  .acc-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .acc-item.open .acc-content { max-height: 700px; }
+  .acc-inner { padding: 0 12px 8px; }
+  .acc-inner p { font-size: 0.68rem; opacity: 0.65; line-height: 1.45; margin-bottom: 4px; }
+  .acc-inner p:last-child { margin-bottom: 0; }
+  .mini-steps { display: flex; gap: 6px; padding: 0 12px; }
+  .mini-step { flex: 1; text-align: center; }
+  .mini-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: var(--syt-ink);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    margin-bottom: 3px;
+  }
+  .mini-step h3 { font-size: 0.62rem; margin-bottom: 1px; }
+  .mini-step p { font-size: 0.57rem; opacity: 0.55; line-height: 1.3; }
+  .mini-benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 0 12px; }
+  .mini-benefit { padding: 6px; border: 1px solid rgba(0,0,0,0.07); background: #fafafa; }
+  .mini-benefit .ico { font-size: 0.85rem; margin-bottom: 1px; }
+  .mini-benefit h3 { font-size: 0.6rem; margin-bottom: 1px; }
+  .mini-benefit p { font-size: 0.55rem; opacity: 0.55; line-height: 1.3; margin-bottom: 0; }
+  .bottom-bar {
+    background: var(--syt-ink);
+    color: var(--white);
+    padding: 8px 0;
+  }
+  .bottom-bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 8px;
+  }
+  .qr-block img { width: 48px; height: 48px; display: block; cursor: pointer; }
+  .bottom-bar-btns { display: flex; flex-direction: column; gap: 3px; align-items: flex-start; }
+  .btn-white-sm {
+    padding: 5px 14px;
+    background: var(--white);
+    color: var(--syt-red);
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+  }
+  .btn-ghost-sm {
+    padding: 4px 14px;
+    background: transparent;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 0;
+    cursor: pointer;
+  }
+  .sms-sm {
+    font-size: 0.57rem;
+    color: var(--white);
+    opacity: 0.4;
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    padding: 1px 0;
+  }
+  .micro-footer { padding: 6px 0; }
+  .micro-footer-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .micro-footer-contact { display: flex; gap: 8px; align-items: center; }
+  .micro-footer-contact a,
+  .micro-footer-contact button {
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: var(--syt-ink);
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  .micro-footer-links { display: flex; gap: 6px; }
+  .micro-footer-links a {
+    font-size: 0.57rem;
+    color: var(--syt-ink);
+    text-decoration: none;
+    opacity: 0.4;
+    font-weight: 600;
+  }
+  .legal-toggle {
+    font-size: 0.55rem;
+    color: var(--syt-ink);
+    opacity: 0.3;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    text-decoration: underline;
+    padding: 3px 0 0;
+    display: block;
+  }
+  .legal-text { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .legal-text.show { max-height: 400px; }
+  .legal-text p { font-size: 0.52rem; line-height: 1.4; opacity: 0.35; margin-top: 3px; }
+  @media (min-width: 600px) and (max-width: 1099px) {
+    .container { padding: 0 40px; }
+    .hero { padding: 36px 0 16px; }
+    .hero-label { font-size: 0.98rem; margin-bottom: 8px; }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 6px; }
+    .hero-sub { font-size: 1.12rem; margin-bottom: 6px; }
+    .hero-desc { font-size: 1.12rem; margin-top: 6px; }
+    .hero-support { font-size: 0.94rem; margin-top: 10px; }
+    .status-strip { gap: 14px; margin-top: 14px; }
+    .status-pill { font-size: 0.8rem; padding: 8px 12px; }
+    .dot { width: 12px; height: 12px; }
+    .cta-strip { padding: 0 0 14px; }
+    .cta-strip h2 { font-size: 1.43rem; margin-bottom: 16px; }
+    .cta-grid { gap: 16px; }
+    .cta-card { padding: 18px 16px; }
+    .cta-card h3 { font-size: 1.14rem; margin-bottom: 8px; }
+    .cta-card p { font-size: 1.01rem; margin-bottom: 8px; line-height: 1.45; }
+    .cta-card .meta { font-size: 0.88rem; margin-bottom: 12px; }
+    .btn-primary, .btn-secondary { padding: 11px 18px; font-size: 0.94rem; }
+    .accordion { padding: 0 0 10px; }
+    .acc-trigger { padding: 14px 16px; font-size: 1.2rem; }
+    .acc-arrow { font-size: 0.91rem; }
+    .acc-inner p { font-size: 1.04rem; line-height: 1.55; margin-bottom: 6px; padding-left: 16px; padding-right: 16px; }
+    .mini-steps { gap: 14px; }
+    .mini-step-num { width: 38px; height: 38px; font-size: 1.1rem; margin-bottom: 6px; }
+    .mini-step h3 { font-size: 0.94rem; margin-bottom: 3px; }
+    .mini-step p { font-size: 0.85rem; opacity: 0.6; }
+    .mini-benefits { gap: 10px; }
+    .mini-benefit { padding: 12px; }
+    .mini-benefit .ico { font-size: 1.43rem; margin-bottom: 4px; }
+    .mini-benefit h3 { font-size: 0.94rem; margin-bottom: 3px; }
+    .mini-benefit p { font-size: 0.81rem; }
+    .bottom-bar { padding: 16px 0; }
+    .bottom-bar-inner { gap: 24px; }
+    .qr-block img { width: 72px; height: 72px; }
+    .btn-white-sm { padding: 9px 22px; font-size: 0.94rem; }
+    .btn-ghost-sm { padding: 8px 22px; font-size: 0.94rem; }
+    .sms-sm { font-size: 0.81rem; }
+    .micro-footer { padding: 12px 0; }
+    .micro-footer-contact a, .micro-footer-contact button { font-size: 0.94rem; }
+    .micro-footer-contact { gap: 14px; }
+    .micro-footer-links a { font-size: 0.81rem; }
+    .legal-toggle { font-size: 0.75rem; }
+    .legal-text p { font-size: 0.72rem; }
+  }
+  @media (min-width: 1100px) {
+    .container { padding: 0 60px; }
+    .desktop-top {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      align-items: center;
+      gap: 40px;
+      padding: 24px 0 10px;
+    }
+    .hero { padding: 0; text-align: left; }
+    .hero-label { font-size: 0.91rem; margin-bottom: 8px; }
+    .hero h1 { font-size: 3.2rem; margin-bottom: 6px; }
+    .hero-sub { font-size: 1.16rem; margin-bottom: 4px; }
+    .hero-desc { font-size: 1.08rem; margin: 6px 0 0; }
+    .hero-support { font-size: 0.9rem; margin: 10px 0 0; }
+    .status-strip { justify-content: flex-start; gap: 12px; margin-top: 14px; }
+    .status-pill { font-size: 0.72rem; padding: 7px 10px; }
+    .cta-strip { padding: 0; }
+    .cta-strip h2 { font-size: 1.17rem; margin-bottom: 12px; text-align: left; }
+    .cta-grid { grid-template-columns: 1fr; gap: 10px; }
+    .cta-card { padding: 14px 16px; }
+    .cta-card h3 { font-size: 1.07rem; margin-bottom: 4px; }
+    .cta-card p { font-size: 0.94rem; margin-bottom: 4px; line-height: 1.4; }
+    .cta-card .meta { font-size: 0.81rem; margin-bottom: 8px; }
+    .btn-primary, .btn-secondary { padding: 9px 18px; font-size: 0.91rem; }
+    .accordion {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 36px;
+      padding: 0 0 6px;
+    }
+    .acc-trigger { padding: 10px 14px; font-size: 1.1rem; }
+    .acc-arrow { font-size: 0.85rem; }
+    .acc-inner p { font-size: 0.96rem; line-height: 1.5; padding-left: 14px; padding-right: 14px; }
+    .mini-steps { gap: 10px; }
+    .mini-step-num { width: 32px; height: 32px; font-size: 0.94rem; margin-bottom: 4px; }
+    .mini-step h3 { font-size: 0.83rem; margin-bottom: 2px; }
+    .mini-step p { font-size: 0.73rem; }
+    .mini-benefits { gap: 6px; }
+    .mini-benefit { padding: 8px; }
+    .mini-benefit .ico { font-size: 1.17rem; margin-bottom: 2px; }
+    .mini-benefit h3 { font-size: 0.81rem; margin-bottom: 2px; }
+    .mini-benefit p { font-size: 0.7rem; }
+    .bottom-bar { padding: 10px 0; }
+    .bottom-bar-inner { gap: 28px; }
+    .qr-block img { width: 58px; height: 58px; }
+    .btn-white-sm { padding: 7px 22px; font-size: 0.88rem; }
+    .btn-ghost-sm { padding: 6px 22px; font-size: 0.88rem; }
+    .sms-sm { font-size: 0.73rem; }
+    .micro-footer { padding: 6px 0; }
+    .micro-footer-contact a, .micro-footer-contact button { font-size: 0.88rem; }
+    .micro-footer-contact { gap: 12px; }
+    .micro-footer-links a { font-size: 0.73rem; }
+    .legal-toggle { font-size: 0.68rem; }
+    .legal-text p { font-size: 0.65rem; }
+  }
+  .fade-up {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="desktop-top">
+    <section class="hero">
+      <div class="hero-label">SYT.FYI</div>
+      <h1>Property Information, <span>Organized</span></h1>
+
+      <p class="hero-desc">Organize your property information in one place and activate your property through a free on-site safety visit.</p>
+    </section>
+    <section class="cta-strip">
+      <h2>Choose How You'd Like to Start</h2>
+      <div class="cta-grid">
+        <div class="cta-card fade-up">
+          <h3>Explore Properties</h3>
+          <p>View the map and open property profiles.</p>
+          <div class="meta">Map · Public Property Profiles</div>
+          <a href="https://www.syt.fyi/map" target="_blank" rel="noopener" data-cta class="btn-primary">Explore Properties</a>
+        </div>
+        <div class="cta-card fade-up">
+          <h3>Book Free Safety Visit</h3>
+          <p>Book a free SYT.360 visit to activate your property.</p>
+          <div class="meta">20–30 min · No cost</div>
+          <a href="https://www.syt.fyi/book-online" target="_blank" rel="noopener" data-cta class="btn-secondary">Book Free Safety Visit</a>
+        </div>
+        <div class="cta-card fade-up">
+          <h3>South Florida Property Safety Study</h3>
+          <p>Quick 2-minute property questionnaire.</p>
+          <div class="meta">~2 minutes</div>
+          <a href="https://www.syt.fyi/safetystudy" target="_blank" rel="noopener" data-cta class="btn-secondary">Safety Study</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="accordion container">
+  <div class="acc-item fade-up">
+    <button class="acc-trigger">Why Properties Find This Useful <span class="acc-arrow">▼</span></button>
+    <div class="acc-content"><div class="acc-inner">
+      <p>Property information is often scattered across files, drives, and vendor systems, making it hard to find when needed.</p>
+      <p>SYT.FYI organizes it into one structured system for quick access and stronger property profiles.</p>
+    </div></div>
+  </div>
+  <div class="acc-item fade-up">
+    <button class="acc-trigger">How It Works <span class="acc-arrow">▼</span></button>
+    <div class="acc-content"><div class="acc-inner">
+      <div class="mini-steps">
+        <div class="mini-step">
+          <div class="mini-step-num">1</div>
+          <h3>Explore</h3>
+          <p>Find your property on the map and open its public profile.</p>
+        </div>
+        <div class="mini-step">
+          <div class="mini-step-num">2</div>
+          <h3>Visit</h3>
+          <p>Book a free SYT.360 on-site safety visit.</p>
+        </div>
+        <div class="mini-step">
+          <div class="mini-step-num">3</div>
+          <h3>Activate</h3>
+          <p>Your property moves from Not Activated to SYT.SAFE.</p>
+        </div>
+      </div>
+    </div></div>
+  </div>
+  <div class="acc-item fade-up">
+    <button class="acc-trigger">Platform Benefits <span class="acc-arrow">▼</span></button>
+    <div class="acc-content"><div class="acc-inner">
+      <div class="mini-benefits">
+        <div class="mini-benefit">
+          <div class="ico">📂</div>
+          <h3>Centralized Documents</h3>
+          <p>All property docs in one organized location.</p>
+        </div>
+        <div class="mini-benefit">
+          <div class="ico">✅</div>
+          <h3>Structured Records</h3>
+          <p>Infrastructure and safety info clearly organized.</p>
+        </div>
+        <div class="mini-benefit">
+          <div class="ico">🔐</div>
+          <h3>Owner Controlled</h3>
+          <p>You control what stays private and what may be shared.</p>
+        </div>
+        <div class="mini-benefit">
+          <div class="ico">⚡</div>
+          <h3>Fast Retrieval</h3>
+          <p>Find important property info quickly.</p>
+        </div>
+      </div>
+    </div></div>
+  </div>
+  <div class="acc-item fade-up">
+    <button class="acc-trigger">Additional Services <span class="acc-arrow">▼</span></button>
+    <div class="acc-content"><div class="acc-inner">
+      <p><strong style="font-weight:800;">Emergency Planning —</strong> Organize EAP and pre-incident planning references when applicable.</p>
+      <p><strong style="font-weight:800;">Visual Documentation —</strong> 3D scans, drone imagery, and digital mapping available separately.</p>
+      <p><strong style="font-weight:800;">Responder Path —</strong> If authorized by the property owner, selected property information may support responder access through FireTactic.</p>
+    </div></div>
+  </div>
+</div>
+<div class="bottom-bar">
+  <div class="container">
+    <div class="bottom-bar-inner">
+      <a href="https://www.syt.fyi/map" target="_blank" rel="noopener">
+        <div class="qr-block">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=https://www.syt.fyi/map" alt="Scan to open property map">
+        </div>
+      </a>
+      <div class="bottom-bar-btns">
+        <a href="https://www.syt.fyi/map" target="_blank" rel="noopener" data-cta class="btn-white-sm">Explore Properties</a>
+        <a href="https://www.syt.fyi/book-online" target="_blank" rel="noopener" data-cta class="btn-ghost-sm">Book Free Safety Visit</a>
+        <button class="sms-sm" id="smsBtn">Share via SMS</button>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="micro-footer">
+  <div class="container">
+    <div class="micro-footer-row">
+      <div class="micro-footer-contact">
+        <button id="emailBtn">info&#64;syt.fyi</button>
+        <a href="tel:+13053060828">(305) 306-0828</a>
+      </div>
+      <div class="micro-footer-links">
+        <a href="https://www.syt.fyi/terms" target="_blank" rel="noopener noreferrer">Terms</a>
+        <a href="https://www.syt.fyi/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
+      </div>
+    </div>
+    <button class="legal-toggle" id="legalToggle">Important Information ▸</button>
+    <div class="legal-text" id="legalText">
+      <p>SYT.FYI is an independent private company serving property owners and managers. It is not a government agency and is not affiliated with, endorsed by, or operated by any public safety department or regulator. SYT.FYI is a documentation platform only. It is not an inspection service, compliance determination, or emergency response system. Information collected or displayed may be incomplete or outdated and should be independently verified. The platform does not certify regulatory compliance and does not replace professional inspections or life-safety evaluations. If authorized by the property owner, limited pre-incident reference information may be shared with verified responders through FireTactic.com, operated separately by First In Safety Foundation, Inc.</p>
+    </div>
+  </div>
+</footer>
+<script>
+  document.querySelectorAll('a[data-cta]').forEach(function(a) { a.target = '_blank'; });
+  document.getElementById('emailBtn').addEventListener('click', function() {
+    window.location.href = 'mai' + 'lto:' + 'info' + '@' + 'syt.fyi';
+  });
+  document.getElementById('smsBtn').addEventListener('click', function() {
+    var msg = encodeURIComponent('Explore SYT.FYI properties and book a free on-site safety visit: https://www.syt.fyi/map');
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    window.location.href = isIOS ? 'sms:&body=' + msg : 'sms:?&body=' + msg;
+  });
+  document.querySelectorAll('.acc-trigger').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.acc-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item').forEach(function(i) { i.classList.remove('open'); });
+      if (!wasOpen) item.classList.add('open');
+      setTimeout(sendHeight, 350);
+    });
+  });
+  document.getElementById('legalToggle').addEventListener('click', function() {
+    var text = document.getElementById('legalText');
+    text.classList.toggle('show');
+    this.textContent = text.classList.contains('show') ? 'Important Information ▾' : 'Important Information ▸';
+    setTimeout(sendHeight, 350);
+  });
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+  function sendHeight() {
+    var h = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'syt-iframe-height', height: h }, '*');
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  new MutationObserver(sendHeight).observe(document.body, { childList: true, subtree: true });
+</script>
+</body>
+</html>
