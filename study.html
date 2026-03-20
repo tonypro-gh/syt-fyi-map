@@ -676,18 +676,68 @@
     });
   });
 
-  // ─── Submit handler (placeholder — connect your backend here) ───
+  // ─── Submit handler — posts to Wix CMS via Velo HTTP function ───
   document.getElementById('submitBtn').addEventListener('click', function() {
+    var btn = document.getElementById('submitBtn');
     var form = document.getElementById('surveyForm');
     var success = document.getElementById('successMsg');
-    // ─── PLACEHOLDER: Collect form data and send to your backend ───
-    // var formData = new FormData();
-    // ... collect all named inputs ...
-    // fetch('YOUR_ENDPOINT', { method: 'POST', body: formData });
-    form.style.display = 'none';
-    success.classList.add('show');
-    success.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    sendHeight();
+
+    // Collect radio values
+    function getRadio(name) {
+      var el = document.querySelector('input[name="' + name + '"]:checked');
+      return el ? el.value : '';
+    }
+
+    // Collect checkbox values as comma-separated string
+    function getCheckboxes(name) {
+      return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked'))
+        .map(function(el) { return el.value; }).join(', ');
+    }
+
+    // Collect text input value
+    function getText(name) {
+      var el = document.querySelector('[name="' + name + '"]');
+      return el ? el.value.trim() : '';
+    }
+
+    var payload = {
+      propertyType:  getRadio('property_type') || getText('property_type_other'),
+      storage:       getCheckboxes('storage') + (getText('storage_other') ? ' | ' + getText('storage_other') : ''),
+      challenge:     getRadio('challenge') + (getText('challenge_other') ? ' | ' + getText('challenge_other') : ''),
+      responder:     getCheckboxes('responder') + (getText('responder_other') ? ' | ' + getText('responder_other') : ''),
+      organized:     getRadio('organized') + (getText('organized_other') ? ' | ' + getText('organized_other') : ''),
+      visit:         getRadio('visit'),
+      propertyName:  getText('property_name'),
+      contactName:   getText('contact_name'),
+      contactEmail:  getText('contact_email'),
+      contactPhone:  getText('contact_phone'),
+    };
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    fetch('https://www.syt.fyi/_functions/submitStudy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.success) {
+        form.style.display = 'none';
+        success.classList.add('show');
+        success.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        sendHeight();
+      } else {
+        throw new Error(data.error || 'Submission failed');
+      }
+    })
+    .catch(function(err) {
+      btn.disabled = false;
+      btn.textContent = 'Submit';
+      alert('Something went wrong. Please try again.');
+      console.error(err);
+    });
   });
 
   // ─── Scroll fade-in ───
