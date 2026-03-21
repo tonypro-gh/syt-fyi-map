@@ -622,7 +622,7 @@
   <div class="success-message" id="successMsg">
     <div class="success-icon">✓</div>
     <h2>Thank You</h2>
-    <p>Thank you for contributing to the <strong>South Florida Building Safety Study</strong>.</p>
+    <p>Thank you for your participation in the study.</p>
   </div>
 </div>
 
@@ -631,7 +631,7 @@
   <div class="container">
     <h2>Schedule a Free SYT.360 Safety Visit</h2>
     <p>You can also request a free 20–30 minute walkthrough where we review how your property safety and infrastructure information is organized. No cost. No sales presentation.</p>
-    <a href="https://www.syt.fyi/service-page/syt-360" target="_blank" rel="noopener" data-cta class="btn-white">Schedule Free SYT.360 Safety Visit</a>
+    <a href="https://www.syt.fyi/book-online" target="_blank" rel="noopener" data-cta class="btn-white">Schedule Free SYT.360 Safety Visit</a>
   </div>
 </section>
 
@@ -716,28 +716,10 @@
     btn.disabled = true;
     btn.textContent = 'Submitting…';
 
-    fetch('https://www.syt.fyi/_functions/submitStudy', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      if (data.success) {
-        form.style.display = 'none';
-        success.classList.add('show');
-        success.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        sendHeight();
-      } else {
-        throw new Error(data.error || 'Submission failed');
-      }
-    })
-    .catch(function(err) {
-      btn.disabled = false;
-      btn.textContent = 'Submit';
-      alert('Something went wrong. Please try again.');
-      console.error(err);
-    });
+    form.style.display = 'none';
+    success.classList.add('show');
+    success.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    sendHeight();
   });
 
   // ─── Scroll fade-in ───
