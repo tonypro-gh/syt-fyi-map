@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <title>Consent — SYT.360</title>
+  <meta name="description" content="Consent and data authorization for SYT.360 documentation visits by SYT.FYI." />
+
+  <!-- Montserrat ONLY (LOCKED: 400, 500, 600) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* ===== LOCKED TOKENS (iPad Portrait Optimized) ===== */
+      --font-ui: "Montserrat", system-ui, -apple-system, sans-serif;
+
+      --fs-critical: 24px;
+      --fs-section:  20px;
+      --fs-body:     18px;
+      --fs-meta:     16px;
+
+      --lh-critical: 1.30;
+      --lh-section:  1.35;
+      --lh-body:     1.50;
+      --lh-meta:     1.40;
+
+      --fw-regular:  400;
+      --fw-medium:   500;
+      --fw-semibold: 600;
+
+      --pad-page: 16px;
+      --pad-section: 24px;
+      --pad-card: 20px;
+      --gap: 16px;
+      --radius: 0px; /* MANDATORY 90 DEGREE CORNERS */
+
+      --btn-h: 56px;
+      --maxw: 720px;
+
+      /* Safe areas */
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bot: env(safe-area-inset-bottom, 0px);
+
+      /* Colors (SYT Branding) */
+      --accent: #FF5733;        /* SYT Orange */
+      --hazard: #F50B0B;        /* SYT Red (Resets) */
+      --check-blue: #008AFC;    /* CUSTOM CHECK BLUE */
+      --bg: #FFFFFF;
+      --text: #000000;
+      --surface: #FFFFFF;
+      --border: #E6E6E6;
+      --muted: #666666;
+
+      --shadow: none;
+    }
+
+    /* (Theme toggle removed) - Keep optional dark tokens for future use without UI */
+    :root[data-theme="dark"]{
+      --bg: #000000;
+      --text: #FFFFFF;
+      --surface: #121212;
+      --border: #2A2A2A;
+      --muted: #A0A0A0;
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; -webkit-font-smoothing: antialiased; }
+    html, body{ height:100%; width:100%; overflow: hidden; overflow-x: hidden; }
+    html{ height: -webkit-fill-available; }
+    body{
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text);
+      line-height: var(--lh-body);
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+    button, input, textarea, select { font-family: inherit; font-weight: inherit; border-radius: 0 !important; }
+
+    /* ===== Iframe-safe Layout (One Scroll Container) ===== */
+    #shell{
+      height:100%;
+      height: 100dvh;
+      height: 100svh;
+      min-height: -webkit-fill-available;
+      display:flex;
+      flex-direction:column;
+      overflow: hidden;
+    }
+    #topbar{
+      flex:0 0 auto;
+      background: var(--bg);
+      border-bottom: 2px solid var(--text);
+      padding: 12px var(--pad-page);
+      z-index: 10;
+    }
+    #scroll{
+      flex:1 1 auto;
+      position: relative;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+      overscroll-behavior: auto;
+      transform: translate3d(0,0,0);
+      will-change: scroll-position;
+      padding: 0 var(--pad-page) calc(var(--pad-section) + var(--safe-bot));
+    }
+    .wrap{ max-width: var(--maxw); margin: 0 auto; width:100%; }
+    .row-between{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .row{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .stack{ display:flex; flex-direction:column; gap: var(--gap); }
+    .section{ padding: var(--pad-section) 0; }
+
+    /* Typography */
+    .t-critical{ font-size: var(--fs-critical); font-weight: var(--fw-semibold); line-height: var(--lh-critical); text-transform: uppercase; letter-spacing: 0.5px; }
+    .t-section { font-size: var(--fs-section);  font-weight: var(--fw-semibold); line-height: var(--lh-section); }
+    .t-body    { font-size: var(--fs-body);     font-weight: var(--fw-regular);  line-height: var(--lh-body); }
+    .t-meta    { font-size: var(--fs-meta);     font-weight: var(--fw-medium);   line-height: var(--lh-meta); color: var(--muted); }
+
+    /* ===== Scrollbar visibility & usability (iPad-friendly, non-invasive) ===== */
+    #scroll::-webkit-scrollbar { width: 14px; }
+    #scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.04); }
+    #scroll::-webkit-scrollbar-thumb {
+      background-color: rgba(0,0,0,0.35);
+      border-radius: 10px;
+      border: 3px solid rgba(255,255,255,0.6);
+    }
+    #scroll::-webkit-scrollbar-thumb:hover { background-color: rgba(0,0,0,0.5); }
+
+    #scroll { scrollbar-width: auto; scrollbar-color: rgba(0,0,0,0.4) rgba(0,0,0,0.05); }
+
+    .hidden{ display:none !important; }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      height: 30px;
+      padding: 0 10px;
+      font-size: 13px;
+      font-weight: var(--fw-semibold);
+      background: var(--accent);
+      color:#fff;
+      white-space: nowrap;
+    }
+
+    .card{
+      background: var(--surface);
+      border: 1px solid var(--text);
+      padding: var(--pad-card);
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .subtle{
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 16px;
+    }
+
+    /* Custom Checkbox/Radio Styling */
+    .checkbox-group label,
+    .radio-group label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      font-weight: var(--fw-medium);
+      font-size: var(--fs-body);
+      margin-bottom: 14px;
+      text-transform: none;
+    }
+
+    input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--text);
+      background: var(--surface);
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: inline-block;
+      transition: background 0.1s ease, border-color 0.1s ease;
+    }
+
+    input[type="checkbox"]:checked {
+      background-color: var(--check-blue);
+      border-color: var(--check-blue);
+    }
+
+    input[type="checkbox"]:checked::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 2px;
+      width: 6px;
+      height: 12px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+    }
+
+    input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--text);
+      border-radius: 50%;
+      background: var(--surface);
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: inline-block;
+      transition: background 0.1s ease, border-color 0.1s ease;
+    }
+
+    input[type="radio"]:checked { border-color: var(--accent); }
+
+    input[type="radio"]:checked::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* Buttons */
+    .btn{
+      height: var(--btn-h);
+      min-height: var(--btn-h);
+      border: 1px solid var(--text);
+      padding: 0 20px;
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      font-size: 15px;
+      font-weight: var(--fw-semibold);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      transition: background 0.1s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .btn:active { opacity: 0.8; }
+    .btn-primary{ background: var(--accent); color:#fff; width:100%; border:none; }
+    .btn-ghost{ background: transparent; border: 1px solid var(--text); color: var(--text); width: 100%; }
+    .btn-reset{ background: var(--hazard); color:#fff; border:none; width: 100%; }
+
+    .grid{ display:grid; gap: var(--gap); grid-template-columns: 1fr; }
+    @media(min-width: 900px){ .grid.two{ grid-template-columns: 1fr 1fr; } }
+
+    label{
+      display:block;
+      font-size: 14px;
+      font-weight: var(--fw-semibold);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .req{ display:inline-block; margin-left:4px; color: var(--hazard); }
+
+    input:not([type="checkbox"]):not([type="radio"]), textarea, select{
+      width:100%;
+      padding: 14px;
+      border: 1px solid var(--text);
+      background: var(--surface);
+      color: var(--text);
+      font-size: var(--fs-body);
+      outline: none;
+      appearance: none;
+    }
+    input:not([type="checkbox"]):not([type="radio"]):focus, textarea:focus, select:focus{
+      background: rgba(255,87,51,0.05);
+      border-color: var(--accent);
+    }
+    textarea{ min-height: 120px; resize: none; }
+
+    .hint{ margin-top: 6px; color: var(--muted); font-size: var(--fs-meta); font-weight: var(--fw-medium); }
+
+    /* ── Validation error ring ── */
+    .field-error {
+      border-color: var(--hazard) !important;
+      box-shadow: 0 0 0 2px rgba(245, 11, 11, 0.25);
+    }
+    .field-error-msg {
+      color: var(--hazard);
+      font-size: var(--fs-meta);
+      font-weight: var(--fw-semibold);
+      margin-top: 6px;
+    }
+
+    /* Toast */
+    #toastHost{
+      position: fixed;
+      left: 0; right: 0;
+      bottom: calc(20px + var(--safe-bot));
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    #toast{
+      background: var(--text);
+      color: var(--bg);
+      padding: 16px 24px;
+      display: none;
+      text-align: center;
+      font-weight: var(--fw-semibold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    #toast.show{ display:block; }
+
+    /* Modal */
+    .modal-host {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 10000;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .modal-host.open { opacity: 1; pointer-events: auto; }
+    .modal-box {
+      background: var(--surface);
+      border: 2px solid var(--text);
+      padding: 24px;
+      max-width: 440px; width: 90%;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .modal-title { font-size: var(--fs-section); font-weight: var(--fw-semibold); text-transform: uppercase; }
+    .modal-body { font-size: var(--fs-body); color: var(--muted); line-height: 1.5; white-space: pre-wrap; }
+    .modal-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+
+    /* ===== PRINT STYLES (ARCHIVE-QUALITY PDF) ===== */
+    @media print {
+      @page { size: Letter; margin: 0; }
+
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        -webkit-text-size-adjust: 100% !important;
+      }
+
+      html, body {
+        height: auto !important;
+        width: 100% !important;
+        overflow: visible !important;
+        background: #fff !important;
+        color: #000 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      #shell { display: block !important; height: auto !important; overflow: visible !important; position: static !important; }
+
+      #toastHost, #modalHost { display: none !important; }
+
+      body > *:not(#shell) {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+      }
+
+      #topbar, #scroll { padding-left: 12mm !important; padding-right: 12mm !important; }
+      #topbar {
+        padding-top: 12mm !important;
+        padding-bottom: 6mm !important;
+        margin: 0 !important;
+        background: #fff !important;
+        border-bottom: 2px solid #000 !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+      #scroll {
+        overflow: visible !important;
+        height: auto !important;
+        position: static !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+      }
+
+      .wrap { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+      .section.stack { display: block !important; }
+
+      .card, section.card, .subtle, .checkbox-group, .radio-group, .grid, footer {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      .t-critical, .t-section { page-break-after: avoid !important; break-after: avoid !important; }
+
+      .card {
+        border: 1px solid #000 !important;
+        background: #fff !important;
+        margin: 0 0 16px 0 !important;
+        padding: 14px !important;
+        display: block !important;
+      }
+
+      .subtle { border: 1px solid #ccc !important; background: #fafafa !important; }
+
+      .grid.two { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+
+      .t-critical, .t-section, .t-body, .t-meta, p, li, span, strong { color: #000 !important; }
+      .t-meta { color: #444 !important; }
+
+      input:not([type="checkbox"]):not([type="radio"]), textarea, select {
+        border: 1px solid #000 !important;
+        background: #fff !important;
+        color: #000 !important;
+        padding: 10px !important;
+      }
+      textarea { min-height: 80px !important; }
+
+      input[type="checkbox"] {
+        width: 18px !important;
+        height: 18px !important;
+        min-width: 18px !important;
+        min-height: 18px !important;
+        border: 2px solid #000 !important;
+        background: #fff !important;
+        position: relative !important;
+        flex-shrink: 0 !important;
+        padding: 0 !important;
+        margin-top: 2px !important;
+      }
+      input[type="checkbox"]:checked { background-color: #008AFC !important; border-color: #008AFC !important; }
+      input[type="checkbox"]:checked::after {
+        content: "" !important;
+        position: absolute !important;
+        left: 5px !important;
+        top: 1px !important;
+        width: 5px !important;
+        height: 10px !important;
+        border: solid white !important;
+        border-width: 0 2px 2px 0 !important;
+        transform: rotate(45deg) !important;
+      }
+
+      input[type="radio"] {
+        width: 18px !important;
+        height: 18px !important;
+        min-width: 18px !important;
+        min-height: 18px !important;
+        border: 2px solid #000 !important;
+        border-radius: 50% !important;
+        background: #fff !important;
+        position: relative !important;
+        flex-shrink: 0 !important;
+        padding: 0 !important;
+        margin-top: 2px !important;
+      }
+      input[type="radio"]:checked { border-color: #FF5733 !important; }
+      input[type="radio"]:checked::after {
+        content: "" !important;
+        position: absolute !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 10px !important;
+        height: 10px !important;
+        border-radius: 50% !important;
+        background: #FF5733 !important;
+      }
+
+      ul { margin: 8px 0 0 20px !important; }
+      li { margin-bottom: 4px !important; }
+
+      footer {
+        border-top: 1px solid #ccc !important;
+        padding-top: 12px !important;
+        padding-bottom: 0 !important;
+        margin-top: 12px !important;
+        margin-bottom: 0 !important;
+        page-break-after: auto !important;
+        break-after: auto !important;
+      }
+
+      #root { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+      .card { margin-bottom: 14px !important; }
+      .card:last-of-type { margin-bottom: 0 !important; }
+
+      /* ── PRINT: Force-hide action block (buttons) ── */
+      #actionBlock { display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; }
+
+      /* ── PRINT: Suppress validation error styling ── */
+      .field-error { border-color: #000 !important; box-shadow: none !important; }
+      .field-error-msg { display: none !important; }
+
+      p, li { orphans: 3; widows: 3; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="shell">
+    <header id="topbar">
+      <div class="wrap row-between">
+        <div class="row" style="gap:12px;">
+          <span class="badge">SYT.360</span>
+          <div style="display:flex; flex-direction:column;">
+            <div class="t-section">Consent</div>
+            <div class="t-meta">Complete before any walkthrough</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div id="scroll">
+      <div class="wrap">
+
+        <form id="consentForm" novalidate>
+          <input type="hidden" id="consent_form_version" value="" />
+          <input type="hidden" id="consent_signed_at_utc" value="" />
+          <input type="hidden" id="consent_device_tz" value="" />
+          <input type="hidden" id="consent_user_agent" value="" />
+          <input type="hidden" id="consent_page_url" value="" />
+          <input type="hidden" id="consent_record_hash_sha256" value="" />
+
+          <main class="section stack" id="root">
+
+            <section class="card">
+              <div class="t-critical">Consent & Authorization</div>
+              <div style="height:12px;"></div>
+              <div class="t-body">
+                <strong>This form should be completed first, seated with the authorized property representative, before any walkthrough begins.</strong>
+              </div>
+              <div style="height:16px;"></div>
+              <div class="subtle">
+                <div class="t-meta"><strong>Purpose:</strong> SYT.FYI collects property-provided and on-site information to create preparedness reference profiles and pages. These materials are structured to support OSHA 29 CFR 1910.38 (EAP) documentation and NFPA-style PIP reference formats.</div>
+                <div style="height:8px;"></div>
+                <div class="t-meta"><strong>Roles:</strong> SYT.FYI is a private documentation provider. If authorized, limited responder reference information may be made available through FireTactic.com, operated by the First In Safety Foundation (501(c)(3)) for verified first responders.</div>
+                <div style="height:8px;"></div>
+                <div class="t-meta"><strong>Limits:</strong> This is not an inspection, certification, monitoring service, or emergency response system. In emergencies, call 911.</div>
+                <div style="height:8px;"></div>
+                <div class="t-meta">No audio recording is conducted in school environments. <a href="https://www.syt.fyi/360schoolrider" target="_blank" rel="noopener noreferrer">View School Facility Rider</a></div>
+                <div style="height:8px;"></div>
+                <div class="t-meta"><strong>Offline-first:</strong> This form autosaves to this device. Use <strong>Save Data</strong> or <strong>Save Word</strong> to export a backup anytime.</div>
+              </div>
+            </section>
+
+            <!-- ═══ PROPERTY & PARTIES ═══ -->
+            <section class="card">
+              <div class="t-section">Property & Parties</div>
+              <div style="height:16px;"></div>
+              <div class="grid two">
+                <div>
+                  <label for="prop_id">Property ID (PID) <span class="req">*</span></label>
+                  <input id="prop_id" name="prop_id" placeholder="REST-0001" pattern="[A-Z]{3,6}-\d{4}" maxlength="12" autocapitalize="characters" spellcheck="false" autocomplete="off" required />
+                  <div class="hint">Must match Intake + Review to link all deliverables.</div>
+                  <div class="t-meta" style="margin-top:6px;">This authorization applies to the property identified by the Property ID (PID) listed above.</div>
+                </div>
+                <div>
+                  <label for="consent_prop_name">Property Name <span class="req">*</span></label>
+                  <input id="consent_prop_name" name="consent_prop_name" placeholder="Joe's Stone Crab" autocomplete="organization" />
+                </div>
+                <div>
+                  <label for="consent_org_name">Organization / Legal Entity</label>
+                  <input id="consent_org_name" name="consent_org_name" placeholder="Joe's Stone Crab, Inc." autocomplete="organization" />
+                </div>
+                <div>
+                  <label for="consent_visit_date">Visit Date <span class="req">*</span></label>
+                  <input id="consent_visit_date" name="consent_visit_date" type="date" />
+                </div>
+                <div style="grid-column: 1 / -1;">
+                  <label for="consent_prop_addr1">Address Line 1 <span class="req">*</span></label>
+                  <input id="consent_prop_addr1" name="consent_prop_addr1" placeholder="11 Washington Ave" autocomplete="address-line1" />
+                </div>
+                <div style="grid-column: 1 / -1;">
+                  <label for="consent_prop_addr2">Address Line 2 (optional)</label>
+                  <input id="consent_prop_addr2" name="consent_prop_addr2" placeholder="Suite, floor, or building" autocomplete="address-line2" />
+                </div>
+                <div>
+                  <label for="consent_prop_city">City</label>
+                  <input id="consent_prop_city" name="consent_prop_city" placeholder="Miami Beach" autocomplete="address-level2" />
+                </div>
+                <div>
+                  <label for="consent_prop_state">State</label>
+                  <input id="consent_prop_state" name="consent_prop_state" placeholder="FL" maxlength="2" autocapitalize="characters" autocomplete="address-level1" />
+                </div>
+                <div>
+                  <label for="consent_prop_zip">ZIP Code</label>
+                  <input id="consent_prop_zip" name="consent_prop_zip" placeholder="33139" inputmode="numeric" autocomplete="postal-code" />
+                </div>
+                <div>
+                  <label for="consent_visit_type">Visit Type</label>
+                  <select id="consent_visit_type" name="consent_visit_type">
+                    <option value=""></option>
+                    <option value="initial">Initial SYT.360 visit</option>
+                    <option value="followup">Follow-up / update visit</option>
+                    <option value="revisit">Revisit (re-scan / re-survey)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="height:16px;"></div>
+              <div class="t-section">SYT.FYI Safety Tech</div>
+              <div style="height:12px;"></div>
+              <div class="grid two">
+                <div>
+                  <label for="consent_safety_tech_name">Safety Tech Name</label>
+                  <input id="consent_safety_tech_name" name="consent_safety_tech_name" placeholder="Tony Prol" autocomplete="name" />
+                </div>
+                <div>
+                  <label for="consent_safety_tech_email">Safety Tech Email</label>
+                  <input id="consent_safety_tech_email" name="consent_safety_tech_email" type="email" placeholder="tech@syt.fyi" autocomplete="email" />
+                </div>
+                <div>
+                  <label for="consent_safety_tech_phone">Safety Tech Phone</label>
+                  <input id="consent_safety_tech_phone" name="consent_safety_tech_phone" type="tel" placeholder="(305) 555-1234" autocomplete="tel" />
+                </div>
+              </div>
+            </section>
+
+            <!-- ═══ SHARING PREFERENCES — data-sharing="responder" ═══ -->
+            <section class="card" data-sharing="responder">
+              <div class="t-section">Sharing Preferences (Governance) <span class="req">*</span></div>
+              <div style="height:12px;"></div>
+              <div class="t-meta">All profiles are generated. Public and responder access are optional and occur only if authorized below.</div>
+              <div style="height:12px;"></div>
+
+              <div class="t-section">Responder Profile (FireTactic)</div>
+              <div style="height:8px;"></div>
+              <div class="radio-group" data-sharing="responder">
+                <label for="consent_share_level_responder_yes">
+                  <input type="radio" name="consent_share_level" value="firetactic_yes" id="consent_share_level_responder_yes" data-sharing="responder" />
+                  <span><strong>Yes:</strong> Authorize responder, read-only reference access.</span>
+                </label>
+                <label for="consent_share_level_responder_no">
+                  <input type="radio" name="consent_share_level" value="firetactic_no" id="consent_share_level_responder_no" data-sharing="responder" />
+                  <span><strong>No:</strong> Do not authorize responder access.</span>
+                </label>
+              </div>
+
+              <div style="height:16px;"></div>
+              <div class="t-section">Public Profile</div>
+              <div style="height:8px;"></div>
+              <div class="t-meta">Public profiles exclude sensitive access details, system locations, and tactical information.</div>
+              <div style="height:12px;"></div>
+              <div class="radio-group" data-sharing="responder">
+                <label for="consent_authorize_public_profile_yes">
+                  <input type="radio" name="consent_authorize_public_profile" value="yes" id="consent_authorize_public_profile_yes" data-sharing="responder" />
+                  <span><strong>Yes:</strong> Authorize a public safety profile.</span>
+                </label>
+                <label for="consent_authorize_public_profile_no">
+                  <input type="radio" name="consent_authorize_public_profile" value="no" id="consent_authorize_public_profile_no" data-sharing="responder" />
+                  <span><strong>No:</strong> Do not authorize a public safety profile.</span>
+                </label>
+              </div>
+
+              <label for="consent_share_notes">Sharing Notes (Optional)</label>
+              <textarea id="consent_share_notes" name="consent_share_notes" data-sharing="responder" placeholder="Example: 'Responder access after board approval' or 'Public profile OK, no responder share'"></textarea>
+
+              <div class="t-meta">Learn more about <a href="https://www.syt.fyi/shareoptions" target="_blank" rel="noopener noreferrer">sharing options</a>.</div>
+            </section>
+
+            <!-- ═══ SCOPE OF COLLECTION ═══ -->
+            <section class="card">
+              <div class="t-section">Scope of Collection</div>
+              <div style="height:12px;"></div>
+              <div class="t-meta">Read each item out loud. Only check what the representative agrees to.</div>
+              <div style="height:12px;"></div>
+              <div class="checkbox-group">
+                <label for="consent_scope_interior"><input type="checkbox" id="consent_scope_interior" name="consent_scope_interior" /> Interior walkthrough of agreed areas (common areas, corridors, stairs, lobbies, typical rooms as approved).</label>
+                <label for="consent_scope_roof"><input type="checkbox" id="consent_scope_roof" name="consent_scope_roof" /> Roof access for photos/video of roof surfaces, equipment, and access points (only where safely permitted).</label>
+                <label for="consent_scope_drone"><input type="checkbox" id="consent_scope_drone" name="consent_scope_drone" /> Drone / aerial capture of exterior/roof/site (optional, requires explicit authorization, and may be discontinued at any time for safety or legal reasons; subject to FAA, property, and local rules).</label>
+                <label for="consent_scope_photo_int"><input type="checkbox" id="consent_scope_photo_int" name="consent_scope_photo_int" /> Photos / short videos of interior life safety features (panels, risers, exits, signage, extinguishers, lighting).</label>
+                <label for="consent_scope_photo_ext"><input type="checkbox" id="consent_scope_photo_ext" name="consent_scope_photo_ext" /> Photos / short videos of exterior features (FDCs, hydrants, access roads, gates, entry points, staging).</label>
+                <label for="consent_scope_system_data"><input type="checkbox" id="consent_scope_system_data" name="consent_scope_system_data" /> Collection of life safety system information (tags, permits, inspection dates, labels, service provider information).</label>
+
+                <div class="t-meta">Unless separately authorized in writing, all video or visual capture is conducted without audio recording.</div>
+              </div>
+              <label for="consent_scope_notes">Scope Notes / Limitations <span class="req">Required if anything is limited</span></label>
+              <textarea id="consent_scope_notes" name="consent_scope_notes" placeholder="Example: 'No roof access', 'No resident units', 'No video in back office', 'Photos OK but no 3D scans'"></textarea>
+              <div class="hint">If they decline anything above, document it here so capture + any authorized sharing stays consistent.</div>
+
+              <div style="height:16px;"></div>
+              <div class="t-section">Areas Excluded from Capture (Optional)</div>
+              <div style="height:8px;"></div>
+              <div class="t-meta">Check any areas the property prefers we do not photograph/scan.</div>
+              <div style="height:12px;"></div>
+              <div class="checkbox-group">
+                <label for="consent_exclude_it_server"><input type="checkbox" id="consent_exclude_it_server" name="consent_exclude_it_server" /> IT / Server rooms</label>
+                <label for="consent_exclude_cash_office"><input type="checkbox" id="consent_exclude_cash_office" name="consent_exclude_cash_office" /> Cash handling / back office</label>
+                <label for="consent_exclude_guest_rooms"><input type="checkbox" id="consent_exclude_guest_rooms" name="consent_exclude_guest_rooms" /> Guest room interiors (hotel)</label>
+                <label for="consent_exclude_resident_units"><input type="checkbox" id="consent_exclude_resident_units" name="consent_exclude_resident_units" /> Resident unit interiors (condo)</label>
+                <label for="consent_exclude_security_room"><input type="checkbox" id="consent_exclude_security_room" name="consent_exclude_security_room" /> Security control room</label>
+              </div>
+              <label for="consent_exclude_other">Other exclusions (optional)</label>
+              <input id="consent_exclude_other" name="consent_exclude_other" placeholder="Describe any other restricted areas" />
+            </section>
+
+            <!-- ═══ PURPOSE & DOCUMENT AUTHORIZATION ═══ -->
+            <section class="card">
+              <div class="t-section">Purpose & Document Authorization</div>
+              <div style="height:12px;"></div>
+              <p class="t-body">Data collected under this consent may be used to generate:</p>
+              <ul style="margin:12px 0 0 20px; line-height: 1.6;">
+                <li class="t-body"><strong>Emergency Action Plan (EAP)</strong> — structured to support OSHA 29 CFR 1910.38 documentation (SYT.FYI deliverable)</li>
+                <li class="t-body"><strong>Pre-Incident Plan (PIP)</strong> — NFPA-style reference baseline for authorized responder access (FireTactic deliverable, if authorized)</li>
+                <li class="t-body"><strong>SYT.360 Compliance Snapshot</strong> — property-friendly readiness/risk snapshot (SYT.FYI deliverable)</li>
+                <li class="t-body"><strong>Public Safety Profile</strong> — limited, non-sensitive occupant guidance (optional)</li>
+              </ul>
+
+              <div style="height:16px;"></div>
+              <div class="checkbox-group">
+                <label for="consent_auth_generate_docs"><input type="checkbox" id="consent_auth_generate_docs" name="consent_auth_generate_docs" /> I authorize SYT.FYI to generate and store these preparedness profiles and pages for this property.</label>
+              </div>
+
+              <div style="height:16px;"></div>
+              <div class="t-section">Demo / Education Media Use (Optional)</div>
+              <div style="height:8px;"></div>
+              <div class="t-meta">Choose one. This does not affect responder sharing.</div>
+              <div style="height:12px;"></div>
+              <div class="radio-group">
+                <label for="consent_media_use_none"><input type="radio" name="consent_media_use" value="none" id="consent_media_use_none" /> <span><strong>No media used</strong> for demos/education.</span></label>
+                <label for="consent_media_use_exterior"><input type="radio" name="consent_media_use" value="exterior_only" id="consent_media_use_exterior" /> <span><strong>De-identified exterior visuals only</strong> (no interior).</span></label>
+                <label for="consent_media_use_common"><input type="radio" name="consent_media_use" value="common_areas" id="consent_media_use_common" /> <span><strong>De-identified common areas allowed</strong> (no sensitive areas, no identifying details).</span></label>
+              </div>
+              <label for="consent_media_use_notes">Media Use Notes (Optional)</label>
+              <textarea id="consent_media_use_notes" name="consent_media_use_notes" placeholder="Example: 'Exterior only; avoid signage with property name'"></textarea>
+            </section>
+
+            <!-- ═══ AUTHORIZATION & DATA HANDLING — data-sharing="internal" ═══ -->
+            <section class="card" data-sharing="internal">
+              <div class="t-section">Authorization & Data Handling <span class="req">*</span></div>
+              <div style="height:12px;"></div>
+              <div class="t-meta">Read each line slowly. Only check after they agree. Ongoing accuracy depends on information provided or confirmed by the property and its authorized representatives.</div>
+              <div style="height:12px;"></div>
+
+              <div class="checkbox-group">
+                <label for="consent_collect"><input type="checkbox" id="consent_collect" name="consent_collect" data-sharing="internal" /> I authorize on-site photography, mapping, and digital capture <strong>only as selected in the Scope of Collection</strong> for this property.</label>
+                <label for="consent_3d"><input type="checkbox" id="consent_3d" name="consent_3d" data-sharing="internal" /> I separately authorize <strong>3D scanning / digital twin capture</strong> <em>(only if selected in the Scope of Collection)</em>.</label>
+                <label for="consent_store"><input type="checkbox" id="consent_store" name="consent_store" data-sharing="internal" /> I authorize SYT.FYI to store this data digitally and use it to generate preparedness and documentation materials for this property.</label>
+                <label for="consent_share"><input type="checkbox" id="consent_share" name="consent_share" data-sharing="internal" /> I authorize limited pre-incident reference information to be made available to verified responders through FireTactic.com (as governed by "Sharing Preferences" above).</label>
+
+                <label for="consent_ownership_license"><input type="checkbox" id="consent_ownership_license" name="consent_ownership_license" data-sharing="internal" /> I understand that all information and media collected remains the Property's information. I grant SYT.FYI a non-exclusive, revocable license to capture, store, process, organize, and display the materials solely for documentation and preparedness reference purposes and, if authorized above, to provide limited read-only access through FireTactic.com for verified first responders.</label>
+
+                <label for="consent_accuracy_nov"><input type="checkbox" id="consent_accuracy_nov" name="consent_accuracy_nov" data-sharing="internal" /> I understand the Property is solely responsible for the accuracy, completeness, and timeliness of all information provided or authorized. SYT.FYI and First In Safety Foundation do not verify, audit, certify, or guarantee accuracy and may rely entirely on property-provided information.</label>
+
+                <label for="consent_noemergency"><input type="checkbox" id="consent_noemergency" name="consent_noemergency" data-sharing="internal" /> I understand profiles and pages are informational only, may be incomplete or outdated, and must not be relied upon for emergency response, life-safety decisions, or regulatory compliance.</label>
+                <label for="consent_noreliance"><input type="checkbox" id="consent_noreliance" name="consent_noreliance" data-sharing="internal" /> I understand that the materials and information generated are informational in nature and do not replace required inspections, professional engineering review, legal advice, or regulatory compliance obligations, which remain the responsibility of the property.</label>
+
+                <label for="consent_indemnity"><input type="checkbox" id="consent_indemnity" name="consent_indemnity" data-sharing="internal" /> I agree that the Property will defend, indemnify, and hold harmless SYT.FYI and First In Safety Foundation (and their directors, officers, staff, volunteers, contractors, and affiliates) from claims arising out of inaccurate, incomplete, outdated, or unauthorized information provided or approved by the Property, or the Property's use or reliance on informational materials.</label>
+
+                <label for="consent_rep_authority"><input type="checkbox" id="consent_rep_authority" name="consent_rep_authority" data-sharing="internal" /> I represent and warrant that I have full authority to grant site access, authorize capture, and approve optional sharing on behalf of the property owner or organization.</label>
+
+                <label for="consent_esign_consent"><input type="checkbox" id="consent_esign_consent" name="consent_esign_consent" data-sharing="internal" /> <strong>Electronic Signature Consent:</strong> I agree to use an electronic signature and intend that my typed name, checked acknowledgements, and submission/printing of this record constitute my legally binding signature, with the same legal effect as a handwritten signature under applicable state and federal law.</label>
+              </div>
+
+              <div style="height:16px;"></div>
+              <div class="subtle">
+                <p class="t-meta" style="margin-top:0;"><strong>Updates & reaffirmation:</strong> All records reflect conditions as observed and documented at the time of the visit and as subsequently updated by the property or authorized users. Profiles and pages may be reaffirmed periodically (e.g., every <strong>24 months</strong>) to confirm accuracy. The property may request updates or removal of specific media at any time. If not reaffirmed, profiles may be archived or marked as not recently reaffirmed.</p>
+              </div>
+
+              <div style="height:16px;"></div>
+              <div class="subtle">
+                <p class="t-meta" style="margin-top:0;">
+                  <strong>Withdrawal of Consent:</strong> The property may withdraw any authorization granted in this form at any time by providing written notice to SYT.FYI, including by email to <strong><a href="mailto:info@syt.fyi">info@syt.fyi</a></strong>, or by other written communication. Upon processing a valid withdrawal request, any responder-facing information previously authorized for display through FireTactic.com will be removed from responder access within a reasonable processing period. Withdrawal does not affect materials already generated for the property's internal records, and does not retroactively alter lawful uses made prior to withdrawal.
+                </p>
+              </div>
+
+              <div style="height:16px;"></div>
+              <div class="t-meta">Once information is shared with third parties, including governmental responders, SYT.FYI and First In Safety Foundation cannot control third-party retention, disclosure, or use.</div>
+            </section>
+
+            <!-- ═══ REPRESENTATIVE & SIGNATURE ═══ -->
+            <section class="card">
+              <div class="t-section">Representative & Signature</div>
+              <div style="height:16px;"></div>
+              <div class="grid two">
+                <div>
+                  <label for="consent_rep_name">Property Representative Name <span class="req">*</span></label>
+                  <input id="consent_rep_name" name="consent_rep_name" placeholder="Full legal name" autocomplete="name" />
+                </div>
+                <div>
+                  <label for="consent_rep_title">Title / Role</label>
+                  <input id="consent_rep_title" name="consent_rep_title" placeholder="Owner, GM, Board President, Director..." />
+                </div>
+                <div>
+                  <label for="consent_rep_email">Email</label>
+                  <input id="consent_rep_email" name="consent_rep_email" type="email" placeholder="manager@property.com" autocomplete="email" />
+                </div>
+                <div>
+                  <label for="consent_rep_phone">Phone</label>
+                  <input id="consent_rep_phone" name="consent_rep_phone" type="tel" placeholder="(305) 555-1234" autocomplete="tel" />
+                </div>
+                <div>
+                  <label for="consent_sig_name">Electronic Signature (Type Full Name) <span class="req">*</span></label>
+                  <input id="consent_sig_name" name="consent_sig_name" placeholder="Type full name to sign" autocomplete="name" />
+                  <div class="hint">By typing my full name below, I intend to sign this form electronically and acknowledge it is legally binding for this visit.</div>
+                </div>
+                <div>
+                  <label for="consent_sig_date">Signature Date <span class="req">*</span></label>
+                  <input id="consent_sig_date" name="consent_sig_date" type="date" />
+                </div>
+              </div>
+
+              <div style="height:12px;"></div>
+              <div class="t-meta" id="bindingNotice">By signing, I specifically agree to: Ownership &amp; License, Accuracy / No Verification, No Reliance, and Indemnification.</div>
+
+              <div style="height:16px;"></div>
+              <p class="t-meta"><strong>Next step for tech:</strong> After signature, proceed to <strong>SYT.360 Intake</strong> and begin outside (frontage/access/FDC/hydrants/GPS).</p>
+
+              <div style="height:12px;"></div>
+              <p class="t-meta"><strong>Record fingerprint:</strong> <span id="hashPreview">(generated when saved/printed)</span></p>
+            </section>
+
+            <section class="card" id="actionBlock" style="border: none; padding: 0;">
+              <div class="grid two">
+                <button class="btn btn-primary" id="submitBtn" type="button">Submit to CMS</button>
+                <button class="btn btn-ghost" id="exportBtn" type="button">Save Data (JSON)</button>
+                <button class="btn btn-ghost" id="exportDocBtn" type="button">Save Word</button>
+                <button class="btn btn-ghost" id="printBtn" type="button">Print PDF</button>
+                <button class="btn btn-reset" id="resetBtn" type="button">Reset Form</button>
+              </div>
+              <div class="hint" style="text-align: center; margin-top: 12px;">Submit sends to CMS. Save JSON or Word for backup. Print PDF when complete.</div>
+            </section>
+
+            <footer class="t-meta" style="text-align:center; padding: 24px 0; border-top: 1px solid var(--border); margin-top: 20px;">
+              CONSENT FORM • SYT.360 SERIES • © 2026 SYT.FYI
+            </footer>
+
+          </main>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastHost"><div id="toast"></div></div>
+
+  <div id="modalHost" class="modal-host">
+    <div class="modal-box">
+      <div class="modal-title" id="modalTitle">Confirm Action</div>
+      <div class="modal-body" id="modalBody">Are you sure?</div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="modalConfirm">Confirm</button>
+        <button class="btn btn-ghost" id="modalCancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  const CORE_KEY = "syt360_property_core_v1";
+  const KEY = "syt360_consent_v4_hardened";
+
+  // Bump this any time the text changes.
+  const FORM_VERSION = "SYT360-CONSENT-2026-02-11B";
+
+  const $ = (id) => document.getElementById(id);
+  let suppressAutosave = false;
+
+  // ── Wix ACK handshake state (minimal) ──
+  let pendingNonce = null;
+  let ackTimer = null;
+  let waitingSubmit = false;
+
+  function setSubmitWaiting(isWaiting){
+    waitingSubmit = !!isWaiting;
+    const btn = $("submitBtn");
+    if(btn) btn.disabled = waitingSubmit;
+  }
+
+  function newNonce(){
+    try {
+      // 128-bit nonce
+      const a = new Uint8Array(16);
+      crypto.getRandomValues(a);
+      return Array.from(a).map(b=>b.toString(16).padStart(2,"0")).join("");
+    } catch(e){
+      return String(Date.now()) + "_" + Math.random().toString(16).slice(2);
+    }
+  }
+
+  function clearAckWait(){
+    pendingNonce = null;
+    if(ackTimer) { clearTimeout(ackTimer); ackTimer = null; }
+    setSubmitWaiting(false);
+  }
+
+  // Listen for parent ACK. Accept BOTH legacy + new types.
+  window.addEventListener("message", (event) => {
+    const msg = event?.data;
+    if(!msg) return;
+
+    const isNewAck = (msg.type === "CONSENT_ACK");
+    const isLegacyAck = (msg.type === "ACK_CONSENT");
+    if(!isNewAck && !isLegacyAck) return;
+
+    // Nonce matching (strict for new contract, tolerant for legacy)
+    if(isNewAck){
+      if(pendingNonce && msg.nonce !== pendingNonce) return;
+    } else {
+      // Only handle legacy ACKs if we are actually waiting on a submit
+      if(!waitingSubmit) return;
+      // If legacy includes a nonce, honor it
+      if(pendingNonce && msg.nonce && msg.nonce !== pendingNonce) return;
+    }
+
+    const ok = msg.ok === true;
+    const status = msg.status || (ok ? "SUBMITTED" : "FAILED");
+    const ts = msg.timestamp || msg.atISO || new Date().toISOString();
+
+    if(ok){
+      showToast(`SUBMITTED • ${ts}`);
+    } else {
+      const err = msg.error ? (" • " + String(msg.error)) : "";
+      showToast(`SUBMIT FAILED • ${ts}${err}`);
+    }
+
+    clearAckWait();
+  });
+
+  // Toast
+  let toastTimer;
+  function showToast(msg){
+    const t = $("toast");
+    if(!t) return;
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove("show"), 3000);
+  }
+
+  // Modal
+  function customConfirm(msg, onYes) {
+    const host = $("modalHost");
+    if(!host) return;
+    $("modalBody").textContent = msg;
+    host.classList.add("open");
+    $("modalConfirm").onclick = () => { host.classList.remove("open"); onYes(); };
+    $("modalCancel").onclick = () => host.classList.remove("open");
+  }
+
+  // PID Rule: Auto-Uppercase
+  const pidInput = $("prop_id");
+  if(pidInput){
+    pidInput.addEventListener("input", () => {
+      let v = pidInput.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
+      if (v !== pidInput.value) pidInput.value = v;
+    });
+  }
+
+  // Helper to get selected radio value
+  function selectedRadioValue(name){
+    const r = document.querySelector(`input[name="${name}"]:checked`);
+    return r ? r.value : '';
+  }
+
+  // Legal hardening: audit fields
+  function setAuditFields(){
+    if($("consent_form_version")) $("consent_form_version").value = FORM_VERSION;
+    if($("consent_signed_at_utc")) $("consent_signed_at_utc").value = new Date().toISOString();
+    if($("consent_device_tz")) $("consent_device_tz").value = (Intl.DateTimeFormat().resolvedOptions().timeZone || "");
+    if($("consent_user_agent")) $("consent_user_agent").value = (navigator.userAgent || "");
+    if($("consent_page_url")) $("consent_page_url").value = (location.href || "");
+  }
+
+  async function sha256Hex(str) {
+    const enc = new TextEncoder();
+    const bytes = enc.encode(str);
+    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  // Collect all form data
+  function collect(){
+    const data = { _form: "consent", _ts: new Date().toISOString(), _version: FORM_VERSION };
+
+    document.querySelectorAll("#root input[id], #root textarea[id], #root select[id], #consentForm input[id]").forEach(el => {
+      if (el.type === "checkbox") {
+        data[el.id] = el.checked;
+      } else if (el.type !== "radio") {
+        data[el.id] = el.value;
+      }
+    });
+
+    const radioGroups = new Set();
+    document.querySelectorAll("#root input[type='radio']").forEach(el => {
+      if (el.name) radioGroups.add(el.name);
+    });
+
+    radioGroups.forEach(name => {
+      data[name] = selectedRadioValue(name);
+    });
+
+    return data;
+  }
+
+  // Apply saved data to form
+  function apply(data){
+    if(!data) return;
+
+    document.querySelectorAll("#root input[id], #root textarea[id], #root select[id]").forEach(el => {
+      if (el.type === "checkbox") {
+        el.checked = !!data[el.id];
+      } else if (el.type !== "radio") {
+        if (data[el.id] !== undefined) el.value = data[el.id];
+      }
+    });
+
+    document.querySelectorAll("#root input[type='radio']").forEach(el => {
+      if (el.name && data[el.name] !== undefined) el.checked = (data[el.name] === el.value);
+    });
+
+    ["consent_form_version","consent_signed_at_utc","consent_device_tz","consent_user_agent","consent_page_url","consent_record_hash_sha256"].forEach(id => {
+      const el = $(id);
+      if(el && data[id] !== undefined) el.value = data[id];
+    });
+
+    if($("hashPreview") && data.consent_record_hash_sha256) $("hashPreview").textContent = data.consent_record_hash_sha256;
+  }
+
+  // Unified Mapping for Core Sync
+  // Left side = consent form ID → Right side = shared core key (unchanged)
+  const fieldToCoreMap = {
+    "prop_id": "pid",
+    "consent_prop_name": "property_name",
+    "consent_prop_addr1": "address_street",
+    "consent_prop_addr2": "address_line2",
+    "consent_prop_city": "address_city",
+    "consent_prop_state": "address_state",
+    "consent_prop_zip": "address_zip",
+    "consent_org_name": "organization",
+    "consent_rep_name": "rep_name",
+    "consent_rep_title": "rep_title",
+    "consent_safety_tech_name": "tech_name",
+    "consent_safety_tech_email": "tech_email",
+    "consent_visit_date": "visit_date",
+    "consent_visit_type": "visit_type"
+  };
+
+  function syncToCore(){
+    const current = collect();
+    const core = JSON.parse(localStorage.getItem(CORE_KEY) || "{}");
+    Object.keys(fieldToCoreMap).forEach(localId => {
+      const coreKey = fieldToCoreMap[localId];
+      if (current[localId]) core[coreKey] = current[localId];
+    });
+    core._updated = new Date().toISOString();
+    localStorage.setItem(CORE_KEY, JSON.stringify(core));
+  }
+
+  function loadFromCore(){
+    const core = JSON.parse(localStorage.getItem(CORE_KEY) || "{}");
+    Object.keys(fieldToCoreMap).forEach(localId => {
+      const coreKey = fieldToCoreMap[localId];
+      const el = $(localId);
+      if(el && !el.value && core[coreKey]) el.value = core[coreKey];
+    });
+  }
+
+  function autosave(){
+    if(suppressAutosave) return;
+    syncToCore();
+    localStorage.setItem(KEY, JSON.stringify(collect()));
+  }
+
+  if($("root")){
+    $("root").addEventListener("input", autosave);
+    $("root").addEventListener("change", autosave);
+  }
+
+  // Governance helper: Responder Profile = Yes/No governs consent_share
+  function syncResponderConsentShare(){
+    const share = selectedRadioValue('consent_share_level');
+    const cs = $("consent_share");
+    if(!cs) return;
+    cs.checked = (share === 'firetactic_yes');
+    cs.disabled = true;
+  }
+
+  document.querySelectorAll('input[name="consent_share_level"]').forEach(r=>{
+    r.addEventListener('change', ()=>{ syncResponderConsentShare(); autosave(); });
+  });
+
+  /* ─────────────────────────────────────────────────
+     CHANGE 3 — PID VALIDATION GATE
+     ───────────────────────────────────────────────── */
+  function validatePID(){
+    const el = $("prop_id");
+    if(!el) return false;
+    const val = String(el.value || "").trim();
+    const pattern = /^[A-Z]{3,6}-\d{4}$/;
+
+    // Clear previous error state
+    el.classList.remove("field-error");
+    const prev = el.parentElement.querySelector(".field-error-msg");
+    if(prev) prev.remove();
+
+    if(!val){
+      el.classList.add("field-error");
+      const msg = document.createElement("div");
+      msg.className = "field-error-msg";
+      msg.textContent = "Property ID is required before saving.";
+      el.parentElement.appendChild(msg);
+      el.focus();
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      return false;
+    }
+    if(!pattern.test(val)){
+      el.classList.add("field-error");
+      const msg = document.createElement("div");
+      msg.className = "field-error-msg";
+      msg.textContent = "Format required: 3-6 letters, dash, 4 digits (e.g. REST-0001)";
+      el.parentElement.appendChild(msg);
+      el.focus();
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      return false;
+    }
+    return true;
+  }
+
+  // Clear PID error on next input
+  if(pidInput){
+    pidInput.addEventListener("input", () => {
+      pidInput.classList.remove("field-error");
+      const prev = pidInput.parentElement.querySelector(".field-error-msg");
+      if(prev) prev.remove();
+    });
+  }
+
+  function getMissingKeyItems(){
+    const missing = [];
+    const mustText = [
+      ['prop_id','Property ID'],
+      ['consent_prop_name','Property Name'],
+      ['consent_visit_date','Visit Date'],
+      ['consent_prop_addr1','Address Line 1'],
+      ['consent_rep_name','Representative Name'],
+      ['consent_sig_name','Signature Name'],
+      ['consent_sig_date','Signature Date']
+    ];
+    mustText.forEach(([id,label])=>{
+      const el = $(id);
+      if(el && !String(el.value||'').trim()) missing.push(label);
+    });
+
+    const share = selectedRadioValue('consent_share_level');
+    if(!share) missing.push('Sharing Preference (Responder Access Yes or No)');
+
+    const pubProfile = selectedRadioValue('consent_authorize_public_profile');
+    if(!pubProfile) missing.push('Public Profile Authorization (Yes or No)');
+
+    const mustChecks = [
+      ['consent_collect','Authorize capture'],
+      ['consent_store','Authorize storage'],
+      ['consent_ownership_license','Ownership & license acknowledgement'],
+      ['consent_accuracy_nov','Accuracy responsibility / no verification acknowledgement'],
+      ['consent_indemnity','Indemnification acknowledgement'],
+      ['consent_rep_authority','Confirm authority'],
+      ['consent_auth_generate_docs','Authorize document generation'],
+      ['consent_esign_consent','Electronic Signature Consent']
+    ];
+    mustChecks.forEach(([id,label])=>{
+      const el = $(id);
+      if(el && !el.checked) missing.push(label);
+    });
+
+    return missing;
+  }
+
+  function buildStamp(prefix){
+    const n = new Date();
+    const pad = v => String(v).padStart(2,"0");
+    return `${prefix}${pad(n.getMonth()+1)}${pad(n.getDate())}${String(n.getFullYear()).slice(2)}${pad(n.getHours())}${pad(n.getMinutes())}`;
+  }
+
+  async function computeAndSetRecordHash(){
+    setAuditFields();
+    const data = collect();
+
+    const keys = Object.keys(data).sort();
+    const canonicalObj = {};
+    keys.forEach(k => canonicalObj[k] = data[k]);
+    const canonical = JSON.stringify(canonicalObj);
+
+    const hash = await sha256Hex(canonical);
+    if($("consent_record_hash_sha256")) $("consent_record_hash_sha256").value = hash;
+    if($("hashPreview")) $("hashPreview").textContent = hash;
+    return hash;
+  }
+
+  function escapeHtml(str){
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  async function buildExportPayload(){
+    const hash = await computeAndSetRecordHash();
+    const data = collect();
+
+    data.consent_record_hash_sha256 = hash;
+    data.consent_form_version = FORM_VERSION;
+    data.consent_signed_at_utc = $("consent_signed_at_utc") ? $("consent_signed_at_utc").value : "";
+    data.consent_device_tz = $("consent_device_tz") ? $("consent_device_tz").value : "";
+    data.consent_user_agent = $("consent_user_agent") ? $("consent_user_agent").value : "";
+    data.consent_page_url = $("consent_page_url") ? $("consent_page_url").value : "";
+
+    // Explicit legal authorization booleans (for CMS + audit clarity)
+    data.firetactic_authorized = (data.consent_share_level === "firetactic_yes");
+    data.public_authorized = (data.consent_authorize_public_profile === "yes");
+
+    return { data, hash };
+  }
+
+  function confirmIfMissing(missing, actionLabel, onProceed){
+    if(!missing.length) return onProceed();
+    const msg = `Recommended items missing:\n\n- ${missing.join('\n- ')}\n\n${actionLabel} anyway?`;
+    customConfirm(msg, onProceed);
+  }
+
+  /* ─────────────────────────────────────────────────
+     CHANGE 1 — DATA BRIDGE (postMessage to Wix Velo)
+     CHANGE 3 — PID validation gate enforced here
+     ───────────────────────────────────────────────── */
+  // SUBMIT (to Wix/Velo only) — no local download
+  async function doSubmitVelo(){
+    // Hard gate: PID must be valid before anything fires
+    if(!validatePID()) return;
+
+    const missing = getMissingKeyItems();
+    confirmIfMissing(missing, 'Submit', async () => {
+      const { data } = await buildExportPayload();
+
+      // ── Wix Velo Data Bridge with ACK handshake ──
+      try {
+        // Prevent double-click / double-submit
+        clearAckWait();
+        pendingNonce = newNonce();
+        setSubmitWaiting(true);
+
+        window.parent.postMessage({
+          type: "SUBMIT_CONSENT",
+          payload: data,
+          nonce: pendingNonce
+        }, "*");
+
+        // Fail-safe timeout (15s)
+        ackTimer = setTimeout(() => {
+          if(!pendingNonce) return;
+          showToast("SUBMIT FAILED");
+          clearAckWait();
+        }, 15000);
+      } catch(e) {
+        console.warn("postMessage to parent failed (may be standalone):", e);
+        showToast("SUBMIT FAILED");
+        clearAckWait();
+      }
+    });
+  }
+
+  async function doExportJson(){
+    // Hard gate: PID must be valid before anything fires
+    if(!validatePID()) return;
+
+    const missing = getMissingKeyItems();
+    confirmIfMissing(missing, 'Save', async () => {
+      const { data, hash } = await buildExportPayload();
+      const pid = data.prop_id || "NO-PID";
+
+      // ── Optional Wix Velo Data Bridge (fire-and-forget). Do NOT block the download.
+      try {
+        window.parent.postMessage({
+          type: "SUBMIT_CONSENT",
+          payload: data,
+          nonce: newNonce()
+        }, "*");
+      } catch(e) {
+        console.warn("postMessage to parent failed (may be standalone):", e);
+      }
+
+      // Local JSON download (always fires as backup)
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = buildStamp('360CF') + "_" + pid + "_" + hash.slice(0,8) + ".json";
+      a.click();
+      showToast("DATA SAVED");
+    });
+  }
+
+  async function doExportDoc(){
+    // Hard gate: PID must be valid before anything fires
+    if(!validatePID()) return;
+
+    const missing = getMissingKeyItems();
+    confirmIfMissing(missing, 'Save', async () => {
+      const { data, hash } = await buildExportPayload();
+      const pid = data.prop_id || "NO-PID";
+      const json = JSON.stringify(data, null, 2);
+
+      const docHtml = `<!doctype html><html><head><meta charset="utf-8"></head><body><pre>${escapeHtml(json)}</pre></body></html>`;
+      const blob = new Blob([docHtml], { type: "application/msword" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = buildStamp('360CF') + "_" + pid + "_" + hash.slice(0,8) + ".doc";
+      a.click();
+      showToast("WORD SAVED");
+    });
+  }
+
+  /* ─────────────────────────────────────────────────
+     CHANGE 2 — PRINT INTEGRITY (iframe-safe)
+     ───────────────────────────────────────────────── */
+  async function doPrint(blank){
+    blank = !!blank;
+
+    // Hard gate: PID must be valid before anything fires (non-blank only)
+    if(!blank && !validatePID()) return;
+
+    const originalData = collect();
+    const missing = getMissingKeyItems();
+
+    const proceed = async () => {
+      if(!blank){
+        await computeAndSetRecordHash();
+      }
+
+      if(blank) {
+        suppressAutosave = true;
+        document.querySelectorAll("#root input, #root textarea, #root select").forEach(el => {
+          if(el.type === "checkbox" || el.type === "radio") el.checked = false;
+          else el.value = "";
+        });
+      }
+
+      const actionBlock = $("actionBlock");
+      if (actionBlock) actionBlock.style.display = "none";
+
+      const scrollEl = $("scroll");
+      const shellEl = $("shell");
+      if(scrollEl){
+        scrollEl.style.overflow = "visible";
+        scrollEl.style.height = "auto";
+        scrollEl.style.position = "static";
+      }
+      if(shellEl){
+        shellEl.style.overflow = "visible";
+        shellEl.style.height = "auto";
+        shellEl.style.display = "block";
+      }
+
+      const oldTitle = document.title;
+      document.title = (blank ? "Blank_" : "") + "Consent_SYT360_" + (originalData.prop_id || "Unset");
+
+      window.print();
+
+      document.title = oldTitle;
+      if (actionBlock) actionBlock.style.display = "";
+      if(scrollEl){
+        scrollEl.style.overflow = "";
+        scrollEl.style.height = "";
+        scrollEl.style.position = "";
+      }
+      if(shellEl){
+        shellEl.style.overflow = "";
+        shellEl.style.height = "";
+        shellEl.style.display = "";
+      }
+
+      if(blank) {
+        apply(originalData);
+        suppressAutosave = false;
+      }
+    };
+
+    if(!blank) confirmIfMissing(missing, 'Print', proceed);
+    else await proceed();
+  }
+
+  function doReset(){
+    customConfirm("Clear all local data for this consent form?", () => {
+      localStorage.removeItem(KEY);
+      location.reload();
+    });
+  }
+
+  // --- Self-tests (only run when ?test=1) ---
+  function assert(cond, msg){ if(!cond) throw new Error(msg || "Assertion failed"); }
+  function runSelfTests(){
+    assert(escapeHtml('<&>"\'') === "&lt;&amp;&gt;&quot;&#39;", "escapeHtml broken");
+    const stamp = buildStamp('X');
+    assert(/^X\d{10}$/.test(stamp), "buildStamp format unexpected");
+    // Authorization derivations
+    const fake = { consent_share_level: 'firetactic_yes', consent_authorize_public_profile: 'yes' };
+    assert((fake.consent_share_level === 'firetactic_yes') === true, "firetactic_yes boolean wrong");
+    assert((fake.consent_authorize_public_profile === 'yes') === true, "public yes boolean wrong");
+    // PID validation
+    $("prop_id").value = "";
+    assert(validatePID() === false, "Empty PID should fail");
+    $("prop_id").value = "REST-0001";
+    assert(validatePID() === true, "Valid PID should pass");
+    $("prop_id").value = "AB-0001";
+    assert(validatePID() === false, "2-letter prefix should fail");
+    $("prop_id").value = "";
+    // data-sharing attribute checks
+    assert(document.querySelectorAll('[data-sharing="internal"]').length > 0, "No internal data-sharing tags found");
+    assert(document.querySelectorAll('[data-sharing="responder"]').length > 0, "No responder data-sharing tags found");
+    console.log("SYT Consent self-tests: PASS");
+  }
+
+  // Wire buttons
+  if($("exportBtn")) $("exportBtn").onclick = () => { doExportJson(); };
+  if($("exportDocBtn")) $("exportDocBtn").onclick = () => { doExportDoc(); };
+  if($("printBtn")) $("printBtn").onclick = () => doPrint(false);
+  if($("submitBtn")) $("submitBtn").onclick = () => doSubmitVelo();
+  if($("resetBtn")) $("resetBtn").onclick = () => doReset();
+
+  window.onload = () => {
+    loadFromCore();
+    const saved = localStorage.getItem(KEY);
+    if(saved) apply(JSON.parse(saved));
+
+    if($("consent_sig_date") && !$("consent_sig_date").value) $("consent_sig_date").valueAsDate = new Date();
+    if($("consent_visit_date") && !$("consent_visit_date").value) $("consent_visit_date").valueAsDate = new Date();
+
+    if($("consent_form_version") && !$("consent_form_version").value) $("consent_form_version").value = FORM_VERSION;
+    if($("consent_page_url") && !$("consent_page_url").value) $("consent_page_url").value = (location.href || "");
+    if($("consent_user_agent") && !$("consent_user_agent").value) $("consent_user_agent").value = (navigator.userAgent || "");
+    if($("consent_device_tz") && !$("consent_device_tz").value) $("consent_device_tz").value = (Intl.DateTimeFormat().resolvedOptions().timeZone || "");
+
+    syncResponderConsentShare();
+
+    // Self-tests
+    if(/\btest=1\b/.test(location.search)){
+      try { runSelfTests(); } catch(e){ console.error(e); }
+    }
+  };
+})();
+</script>
+</body>
+</html>
