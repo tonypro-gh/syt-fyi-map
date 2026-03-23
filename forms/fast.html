@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title> — SYT.360</title>
+  <title> — SYT.FAST</title>
   <meta name="description" content="SYT.360 Unified Intake (system-grouped) for property information capture and preparedness documentation aligned with OSHA EAP concepts and NFPA-style guidance. Informational use only." />
 
   <!-- Montserrat ONLY (LOCKED: 400, 500, 600) -->
@@ -382,7 +382,7 @@
         <div class="row" style="gap:12px;">
           <span class="badge">SYT.360</span>
           <div style="display:flex; flex-direction:column;">
-            <div class="t-section">Intake</div>
+            <div class="t-section">FAST</div>
             <div class="t-meta"></div>
           </div>
         </div>
@@ -561,25 +561,6 @@
               </div>
             </div>
 
-            <div style="height:16px;"></div>
-            <div class="t-section" style="font-size:18px;">Secondary Entrance / Egress #2</div>
-            <div style="height:8px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_entrance_sec2_notes">Location / Notes</label>
-                <textarea id="intake_entrance_sec2_notes" data-sharing="responder" placeholder="Service entrance, garage access, or emergency-use door."></textarea>
-              </div>
-              <div>
-                <label for="intake_entrance_sec2_knox_present">Knox Box / Key Access Present?</label>
-                <select id="intake_entrance_sec2_knox_present" data-sharing="responder">
-                  <option value=""></option><option>Yes</option><option>No</option><option>Unknown</option>
-                </select>
-              </div>
-              <div style="grid-column: 1 / -1;">
-                <label for="intake_entrance_sec2_knox_notes">Knox / Key Location Notes</label>
-                <textarea id="intake_entrance_sec2_knox_notes" data-sharing="responder" placeholder="Exact location relative to this entrance; include landmarks."></textarea>
-              </div>
-            </div>
 
             <div class="divider"></div>
 
@@ -722,35 +703,6 @@
               </div>
             </div>
 
-            <div style="height:16px;"></div>
-            <div class="t-section" style="font-size:18px;">Life Safety Snapshot — Fire Alarm</div>
-            <div style="height:8px;"></div>
-            <div class="hint">Select status + docs (observed only). Only write notes for Issue/Unknown.</div>
-            <div style="height:12px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_lsa_alarm_status">Status</label>
-                <select id="intake_lsa_alarm_status">
-                  <option value=""></option>
-                  <option>OK – no issues observed (not verified)</option>
-                  <option>Issue – needs follow-up</option>
-                  <option>Unknown – no info</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_alarm_docs">Docs</label>
-                <select id="intake_lsa_alarm_docs">
-                  <option value=""></option>
-                  <option>Docs / tags observed current</option>
-                  <option>Docs observed expired</option>
-                  <option>No docs visible</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_alarm_notes">Notes</label>
-                <textarea id="intake_lsa_alarm_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
-              </div>
-            </div>
           </section>
 
           <!-- ═══ SECTION 5: WATER SUPPLY & SUPPRESSION — data-sharing="responder" ═══ -->
@@ -851,33 +803,6 @@
               </div>
             </div>
 
-            <div style="height:16px;"></div>
-            <div class="t-section" style="font-size:18px;">Life Safety Snapshot — Standpipe</div>
-            <div style="height:8px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_lsa_standpipe_status">Status</label>
-                <select id="intake_lsa_standpipe_status">
-                  <option value=""></option>
-                  <option>OK – no issues observed (not verified)</option>
-                  <option>Issue – needs follow-up</option>
-                  <option>Unknown – no info</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_standpipe_docs">Docs</label>
-                <select id="intake_lsa_standpipe_docs">
-                  <option value=""></option>
-                  <option>Docs / tags observed current</option>
-                  <option>Docs observed expired</option>
-                  <option>No docs visible</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_standpipe_notes">Notes</label>
-                <textarea id="intake_lsa_standpipe_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
-              </div>
-            </div>
 
             <div class="divider"></div>
 
@@ -924,33 +849,6 @@
               </div>
             </div>
 
-            <div style="height:16px;"></div>
-            <div class="t-section" style="font-size:18px;">Life Safety Snapshot — Sprinklers</div>
-            <div style="height:8px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_lsa_sprinkler_status">Status</label>
-                <select id="intake_lsa_sprinkler_status">
-                  <option value=""></option>
-                  <option>OK – no issues observed (not verified)</option>
-                  <option>Issue – needs follow-up</option>
-                  <option>Unknown – no info</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_sprinkler_docs">Docs</label>
-                <select id="intake_lsa_sprinkler_docs">
-                  <option value=""></option>
-                  <option>Docs / tags observed current</option>
-                  <option>Docs observed expired</option>
-                  <option>No docs visible</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_sprinkler_notes">Notes</label>
-                <textarea id="intake_lsa_sprinkler_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
-              </div>
-            </div>
 
             <div class="divider"></div>
 
@@ -969,60 +867,6 @@
               </div>
             </div>
 
-            <div class="divider"></div>
-
-            <div class="t-section" style="font-size:18px;">Backflow</div>
-            <div style="height:8px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_vendor_backflow_name">Backflow Vendor — Name</label>
-                <input id="intake_vendor_backflow_name" placeholder="Company name" />
-              </div>
-              <div>
-                <label for="intake_vendor_backflow_phone">Vendor — Phone</label>
-                <input id="intake_vendor_backflow_phone" type="tel" placeholder="(305) 123-4567" />
-              </div>
-              <div>
-                <label for="intake_vendor_backflow_email">Vendor — Email</label>
-                <input id="intake_vendor_backflow_email" type="email" placeholder="service@backflowco.com" />
-              </div>
-              <div>
-                <label for="intake_vendor_backflow_website">Vendor — Website</label>
-                <input id="intake_vendor_backflow_website" type="url" placeholder="https://" />
-              </div>
-              <div style="grid-column: 1 / -1;">
-                <label for="intake_backflow_loc">Backflow Location / Notes</label>
-                <textarea id="intake_backflow_loc" data-sharing="responder" placeholder="Exact location + access notes."></textarea>
-              </div>
-            </div>
-
-            <div style="height:16px;"></div>
-            <div class="t-section" style="font-size:18px;">Life Safety Snapshot — Backflow</div>
-            <div style="height:8px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_lsa_backflow_status">Status</label>
-                <select id="intake_lsa_backflow_status">
-                  <option value=""></option>
-                  <option>OK – no issues observed (not verified)</option>
-                  <option>Issue – needs follow-up</option>
-                  <option>Unknown – no info</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_backflow_docs">Docs</label>
-                <select id="intake_lsa_backflow_docs">
-                  <option value=""></option>
-                  <option>Documentation observed current</option>
-                  <option>Documentation observed expired</option>
-                  <option>No documentation visible</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_backflow_notes">Notes</label>
-                <textarea id="intake_lsa_backflow_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
-              </div>
-            </div>
 
             <div class="divider"></div>
 
@@ -1059,33 +903,6 @@
               </div>
             </div>
 
-            <div style="height:16px;"></div>
-            <div class="t-section" style="font-size:18px;">Life Safety Snapshot — Generator</div>
-            <div style="height:8px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_lsa_gen_status">Status</label>
-                <select id="intake_lsa_gen_status">
-                  <option value=""></option>
-                  <option>OK – appears operational (not verified)</option>
-                  <option>Issue – concerns noted</option>
-                  <option>Unknown – not verified</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_gen_docs">Docs / Logs</label>
-                <select id="intake_lsa_gen_docs">
-                  <option value=""></option>
-                  <option>Test logs observed</option>
-                  <option>Logs expired / missing</option>
-                  <option>No logs visible</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_gen_notes">Notes</label>
-                <textarea id="intake_lsa_gen_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
-              </div>
-            </div>
           </section>
 
           <!-- ═══ SECTION 6: LIFE SAFETY EQUIPMENT ═══ -->
@@ -1129,33 +946,6 @@
               </div>
             </div>
 
-            <div style="height:16px;"></div>
-            <div class="t-section" style="font-size:18px;">Life Safety Snapshot — Fire Extinguishers</div>
-            <div style="height:8px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_lsa_ext_status">Status</label>
-                <select id="intake_lsa_ext_status">
-                  <option value=""></option>
-                  <option>OK – tags observed in date</option>
-                  <option>Issue – missing / out of date</option>
-                  <option>Unknown – not checked</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_ext_docs">Documentation</label>
-                <select id="intake_lsa_ext_docs">
-                  <option value=""></option>
-                  <option>Tags observed current</option>
-                  <option>Tags observed expired</option>
-                  <option>Some missing tags</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_ext_notes">Notes</label>
-                <textarea id="intake_lsa_ext_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
-              </div>
-            </div>
 
             <div class="divider"></div>
 
@@ -1186,33 +976,6 @@
               </div>
             </div>
 
-            <div style="height:16px;"></div>
-            <div class="t-section" style="font-size:18px;">Life Safety Snapshot — AEDs</div>
-            <div style="height:8px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_lsa_aed_status">Status</label>
-                <select id="intake_lsa_aed_status">
-                  <option value=""></option>
-                  <option>OK – accessible & visible (not verified)</option>
-                  <option>Issue – inaccessible / unclear</option>
-                  <option>Unknown – not verified</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_aed_maint">Maintenance / Readiness</label>
-                <select id="intake_lsa_aed_maint">
-                  <option value=""></option>
-                  <option>Pads & battery observed in date</option>
-                  <option>Expired / unknown</option>
-                  <option>No records visible</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_aed_notes">Notes</label>
-                <textarea id="intake_lsa_aed_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
-              </div>
-            </div>
 
             <div class="divider"></div>
 
@@ -1461,218 +1224,9 @@
               </div>
             </div>
 
-            <div style="height:16px;"></div>
-            <div class="t-section" style="font-size:18px;">Life Safety Snapshot — Elevators</div>
-            <div style="height:8px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_lsa_elev_status">Status</label>
-                <select id="intake_lsa_elev_status">
-                  <option value=""></option>
-                  <option>OK – no issues observed (not verified)</option>
-                  <option>Issue – concerns / needs follow-up</option>
-                  <option>Unknown – no info</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_elev_docs">Documentation (posted, if any)</label>
-                <select id="intake_lsa_elev_docs">
-                  <option value=""></option>
-                  <option>Certificate posted (observed)</option>
-                  <option>Certificate posted (observed) – expired/unclear</option>
-                  <option>No certificate visible</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_lsa_elev_notes">Notes</label>
-                <textarea id="intake_lsa_elev_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
-              </div>
-            </div>
           </section>
 
-          <!-- ═══ SECTION 10: EAP CONTACTS & ROLES — data-sharing="internal" ═══ -->
-          <section class="card" data-sharing="internal">
-            <div class="t-section">Section 10: EAP Contacts & Roles</div>
-            <div style="height:8px;"></div>
-            <div class="hint">Keep emergency contacts and roles together. OSHA 29 CFR 1910.38(a)–(e).</div>
 
-            <div style="height:12px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_owner_rep">Plan Administrator / Owner Rep</label>
-                <input id="intake_owner_rep" data-sharing="internal" placeholder="Name + title" />
-              </div>
-              <div>
-                <label for="intake_owner_rep_email">Email</label>
-                <input id="intake_owner_rep_email" data-sharing="internal" type="email" placeholder="owner@property.com" />
-              </div>
-              <div>
-                <label for="intake_coordinator">EAP Coordinator (OSHA)</label>
-                <input id="intake_coordinator" data-sharing="internal" placeholder="Primary EAP contact" />
-              </div>
-              <div>
-                <label for="intake_coord_phone">Coordinator Phone</label>
-                <input id="intake_coord_phone" data-sharing="internal" type="tel" placeholder="(305) 123-4567" />
-              </div>
-              <div>
-                <label for="intake_coord_email">Coordinator Email</label>
-                <input id="intake_coord_email" data-sharing="internal" type="email" placeholder="eap@property.com" />
-              </div>
-              <div>
-                <label for="intake_reporting_procedure">How to Report Emergency (Staff)</label>
-                <textarea id="intake_reporting_procedure" data-sharing="internal" placeholder="Who calls 911, how to activate alarms, internal notification steps."></textarea>
-              </div>
-              <div>
-                <label for="intake_drill_freq">Drill Frequency</label>
-                <select id="intake_drill_freq" data-sharing="internal">
-                  <option value=""></option><option>Quarterly</option><option>Semiannual</option><option>Annual</option><option>Unknown</option>
-                </select>
-              </div>
-              <div>
-                <label for="intake_last_drill">Last Drill Date</label>
-                <input id="intake_last_drill" data-sharing="internal" type="date" />
-              </div>
-            </div>
-
-            <div style="height:16px;"></div>
-            <div class="t-section" style="font-size:18px;">Roles & Responsibilities (Names + backups)</div>
-            <div style="height:8px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_role_floor_wardens">Floor/Area Wardens</label>
-                <textarea id="intake_role_floor_wardens" data-sharing="internal" placeholder="List by floor/area: names, titles, shift coverage."></textarea>
-              </div>
-              <div>
-                <label for="intake_role_assembly_lead">Assembly Area Leader(s)</label>
-                <textarea id="intake_role_assembly_lead" data-sharing="internal" placeholder="Who runs roll-call at assembly points."></textarea>
-              </div>
-              <div>
-                <label for="intake_role_shutdown">Shutdown Personnel</label>
-                <textarea id="intake_role_shutdown" data-sharing="internal" placeholder="Who stays briefly + what they shut down (facts)."></textarea>
-              </div>
-              <div>
-                <label for="intake_role_reunification">Reunification Leader (if applicable)</label>
-                <textarea id="intake_role_reunification" data-sharing="internal" placeholder="Schools/large venues: who coordinates reunification."></textarea>
-              </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="t-section" style="font-size:18px;">EAP Administration (OSHA 29 CFR 1910.38)</div>
-            <div style="height:8px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_eap_accountability">Accountability Method</label>
-                <select id="intake_eap_accountability" data-sharing="internal">
-                  <option value=""></option>
-                  <option>Physical Roster</option>
-                  <option>Digital App</option>
-                  <option>Supervisor Headcount</option>
-                </select>
-                <div class="hint">Employee accounting after evacuation.</div>
-              </div>
-              <div>
-                <label for="intake_shutdown_limit">Shutdown Time Limit</label>
-                <input id="intake_shutdown_limit" data-sharing="internal" placeholder="e.g., 2 minutes max before full evacuation" />
-              </div>
-              <div>
-                <label for="intake_eap_buddy_system">Buddy System</label>
-                <select id="intake_eap_buddy_system" data-sharing="internal">
-                  <option value=""></option>
-                  <option>Assigned</option>
-                  <option>Informal</option>
-                  <option>None</option>
-                </select>
-              </div>
-            </div>
-          </section>
-
-          <!-- ═══ SECTION 11: EVACUATION & ASSEMBLY — data-sharing="internal" ═══ -->
-          <section class="card" data-sharing="internal">
-            <div class="t-section">Section 11: Evacuation & Assembly</div>
-
-            <div style="height:12px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_routes_primary">Primary Routes</label>
-                <textarea id="intake_routes_primary" data-sharing="internal" placeholder="Main exit stairs, corridors, etc."></textarea>
-              </div>
-              <div>
-                <label for="intake_routes_secondary">Secondary Routes</label>
-                <textarea id="intake_routes_secondary" data-sharing="internal" placeholder="Alternates if primaries blocked."></textarea>
-              </div>
-              <div>
-                <label for="intake_assembly_sites">Assembly Areas (Name/GPS)</label>
-                <textarea id="intake_assembly_sites" data-sharing="internal" placeholder="e.g., Parking Lot A — 25.77,-80.13"></textarea>
-              </div>
-              <div>
-                <label for="intake_accountability">Occupant Accountability</label>
-                <textarea id="intake_accountability" data-sharing="internal" placeholder="Roll-call, supervisors, tracking method."></textarea>
-              </div>
-              <div>
-                <label for="intake_special_needs">Special Needs Support</label>
-                <textarea id="intake_special_needs" data-sharing="internal" placeholder="Mobility, hearing, vision, language."></textarea>
-              </div>
-              <div>
-                <label for="intake_shelter_in_place">Shelter-in-Place Locations / Procedures</label>
-                <textarea id="intake_shelter_in_place" data-sharing="internal" placeholder="Storms, hazmat, violence: where and how."></textarea>
-              </div>
-            </div>
-
-            <div class="divider"></div>
-            <div id="rescuePriorityBlock">
-              <div class="t-section" style="font-size:18px;">Rescue Priority — Areas of Refuge</div>
-              <div style="height:8px;"></div>
-              <div class="hint">Designated safe-waiting areas for occupants unable to self-evacuate.</div>
-              <div style="height:12px;"></div>
-              <div>
-                <label for="intake_area_of_refuge">Area(s) of Refuge — Location & Details</label>
-                <textarea id="intake_area_of_refuge" data-sharing="responder" placeholder="Floor/stair, signage, two-way communication, capacity, access route from exterior."></textarea>
-              </div>
-            </div>
-
-            <div class="divider"></div>
-            <div id="specialNeedsBlock">
-              <div class="t-section" style="font-size:18px;">Special Needs — Ventilation & PPV</div>
-              <div style="height:8px;"></div>
-              <div class="hint">Positive pressure ventilation (PPV) fan support details for responder pre-planning.</div>
-              <div style="height:12px;"></div>
-              <div class="grid two">
-                <div>
-                  <label for="intake_fan_count">PPV / Ventilation Fan Count</label>
-                  <input id="intake_fan_count" type="number" min="0" data-sharing="responder" placeholder="0" />
-                </div>
-                <div>
-                  <label for="intake_responder_fan_notes">Fan Staging / Ventilation Notes</label>
-                  <textarea id="intake_responder_fan_notes" data-sharing="responder" placeholder="Stored location, access, stairwell that supports PPV, openable roof vents, etc."></textarea>
-                </div>
-              </div>
-            </div>
-
-            <div style="height:16px;"></div>
-            <div class="t-section" style="font-size:18px;">Public Quick Steps (Non-sensitive)</div>
-            <div style="height:8px;"></div>
-            <div class="hint">Keep each to 2–4 bullets.</div>
-            <div style="height:12px;"></div>
-            <div class="grid two">
-              <div>
-                <label for="intake_pub_quick_fire">Fire/Smoke</label>
-                <textarea id="intake_pub_quick_fire" placeholder="Leave if safe • Use stairs • Follow exit signs • Call 911"></textarea>
-              </div>
-              <div>
-                <label for="intake_pub_quick_medical">Medical</label>
-                <textarea id="intake_pub_quick_medical" placeholder="Call 911 • Notify staff • Start CPR/AED if trained"></textarea>
-              </div>
-              <div>
-                <label for="intake_pub_quick_weather">Severe Weather</label>
-                <textarea id="intake_pub_quick_weather" placeholder="Move inside • Away from windows • Follow staff directions"></textarea>
-              </div>
-              <div>
-                <label for="intake_pub_quick_security">Security Emergency</label>
-                <textarea id="intake_pub_quick_security" placeholder="Move away from danger • Follow staff • Call 911"></textarea>
-              </div>
-            </div>
-          </section>
 
           <!-- ═══ SECTION 12: HAZARDS & SPECIAL SUPPRESSION ═══ -->
           <section class="card">
@@ -1735,17 +1289,6 @@
             </div>
           </section>
 
-          <!-- ═══ DELIVERABLES & PROFILES (NO SECTION LABEL) ═══ -->
-          <section class="card">
-            <div class="t-section">Any deliverables prepared using this Intake are compiled reference materials derived from property-provided and visually observed information, and do not constitute inspections, certifications, or professional determinations.</div>
-            <div style="height:12px;"></div>
-            <p class="t-body">This Intake, combined with Consent (same Property ID), may support preparation of:</p>
-            <ul style="margin:12px 0 0 20px; line-height: 1.6;">
-              <li class="t-body"><strong>Internal Property Profile (SYT.FYI) — A private page for your team with your full Emergency Action Plan, Compliance Snapshot, system maps, and internal contacts — all securely stored and versioned.</strong></li>
-              <li class="t-body"><strong>Public Property Safety Profile (SYT.FYI) — An optional public-facing page with general safety info, exits, and assembly points — designed for guests, visitors, and the surrounding community.</strong></li>
-              <li class="t-body"><strong>First Responder Profile (FireTactic.com) — A secure, responder-only page with your Pre-Incident Plan, site access details, and emergency system maps — visible only if you authorize it.</strong></li>
-            </ul>
-          </section>
 
           <!-- ═══ ACTION BLOCK ═══ -->
           <section class="card" id="actionBlock" style="border: none; padding: 0;">
@@ -1760,7 +1303,7 @@
           </section>
 
           <footer class="t-meta" style="text-align:center; padding: 24px 0; border-top: 1px solid var(--border); margin-top: 20px;">
-            INFORMATIONAL DOCUMENTATION ONLY • SYT.360 SERIES • SYT.FYI (PRIVATE FOR-PROFIT VENDOR) • FIRETACTIC.COM OPERATED SEPARATELY BY FIRST IN SAFETY FOUNDATION • © 2026 SYT.FYI
+            INFORMATIONAL DOCUMENTATION ONLY • SYT.FAST SERIES • SYT.FYI (PRIVATE FOR-PROFIT VENDOR) • FIRETACTIC.COM OPERATED SEPARATELY BY FIRST IN SAFETY FOUNDATION • © 2026 SYT.FYI
           </footer>
 
         </main>
