@@ -114,6 +114,95 @@
   .intro strong {
     font-weight: 800;
   }
+  /* ─── CONSENT ─── */
+  .consent-section {
+    padding: 28px 0 40px;
+  }
+  .consent-box {
+    border: 2px solid rgba(0,0,0,0.1);
+    padding: 28px;
+    background: var(--light);
+    margin-bottom: 24px;
+  }
+  .consent-box h2 {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .consent-box h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 18px 0 6px;
+    opacity: 0.6;
+  }
+  .consent-box p,
+  .consent-box li {
+    font-size: 0.88rem;
+    color: #333;
+    line-height: 1.65;
+  }
+  .consent-box ul {
+    padding-left: 18px;
+    margin-top: 4px;
+  }
+  .consent-box li {
+    margin-bottom: 4px;
+  }
+  .consent-check-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px;
+    border: 2px solid rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .consent-check-row:hover {
+    border-color: var(--syt-red);
+  }
+  .consent-check-row input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0,0,0,0.25);
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+    margin-top: 2px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .consent-check-row input[type="checkbox"]:checked {
+    border-color: var(--syt-red);
+    background: var(--syt-red);
+  }
+  .consent-check-row input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
+    background: var(--white);
+  }
+  .consent-check-row span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  #consentError {
+    display: none;
+    font-size: 0.82rem;
+    color: var(--syt-red);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  #consentError.show {
+    display: block;
+  }
   /* ─── FORM ─── */
   .form-section {
     padding: 24px 0 48px;
@@ -481,8 +570,50 @@
   <p>We are gathering feedback from property owners, managers, and facility teams to understand how properties organize safety and operational information today. Participation takes about <strong>2 minutes</strong>.</p>
 </div>
 
+<!-- ═══════ CONSENT ═══════ -->
+<div class="consent-section container fade-up" id="consentSection">
+
+  <div class="consent-box">
+    <h2>Informed Consent — South Florida Building Safety Study</h2>
+
+    <h3>Purpose</h3>
+    <p>This study is conducted by SYT.FYI to better understand how property owners, managers, and facility teams organize safety and operational information, and to identify opportunities to improve how that information is shared with first responders.</p>
+
+    <h3>What Participation Involves</h3>
+    <ul>
+      <li>Completing a short survey of approximately 6 questions</li>
+      <li>Participation takes roughly <strong>2 minutes</strong></li>
+      <li>You may skip any question you prefer not to answer</li>
+    </ul>
+
+    <h3>Voluntary Participation</h3>
+    <p>Your participation is entirely voluntary. You may stop at any time without penalty. There is no compensation for participation.</p>
+
+    <h3>Confidentiality</h3>
+    <p>Contact information you provide is optional and used solely for follow-up if you request a free SYT.360 Safety Visit. Survey responses are used only for internal research purposes and are not sold or shared with third parties.</p>
+
+    <h3>Risks</h3>
+    <p>There are no known risks associated with participating in this study. No personally identifiable information is required to complete the survey.</p>
+
+    <h3>Questions</h3>
+    <p>If you have questions about this study, contact us at <strong>info@syt.fyi</strong>.</p>
+  </div>
+
+  <label class="consent-check-row" for="consentCheck">
+    <input type="checkbox" id="consentCheck">
+    <span>I have read and understood the information above, and I voluntarily agree to participate in this study.</span>
+  </label>
+
+  <p id="consentError">Please check the box above to continue.</p>
+
+  <div style="text-align:center;">
+    <button class="btn-submit" id="consentBtn" type="button">Continue to Survey</button>
+  </div>
+
+</div>
+
 <!-- ═══════ FORM ═══════ -->
-<div class="form-section container" id="surveyForm">
+<div class="form-section container" id="surveyForm" style="display:none;">
 
   <!-- Q1 — Property Type -->
   <div class="question-block fade-up">
@@ -643,6 +774,22 @@
 </footer>
 
 <script>
+  // ─── Consent gate ───
+  document.getElementById('consentBtn').addEventListener('click', function() {
+    var checked = document.getElementById('consentCheck').checked;
+    var err = document.getElementById('consentError');
+    if (!checked) {
+      err.classList.add('show');
+      return;
+    }
+    err.classList.remove('show');
+    document.getElementById('consentSection').style.display = 'none';
+    var form = document.getElementById('surveyForm');
+    form.style.display = 'block';
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    sendHeight();
+  });
+
   // ─── Force all CTA links to open in new tab ───
   document.querySelectorAll('a[data-cta]').forEach(function(a) {
     a.target = '_blank';

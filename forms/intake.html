@@ -9,12 +9,13 @@
   <!-- Montserrat ONLY (LOCKED: 400, 500, 600) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
       /* ===== LOCKED TOKENS (iPad Portrait Optimized) ===== */
       --font-ui: "Montserrat", system-ui, -apple-system, sans-serif;
+      --font-display: 'Anton', 'Arial Black', 'Arial Bold', Gadget, sans-serif;
 
       --fs-critical: 24px;
       --fs-section:  20px;
@@ -44,7 +45,7 @@
       --safe-bot: env(safe-area-inset-bottom, 0px);
 
       /* Colors (SYT Branding) */
-      --accent: #FF5733;        /* SYT Orange */
+      --accent: #F50B0B;        /* SYT Red */
       --hazard: #F50B0B;        /* SYT Red (Resets) */
       --check-blue: #008AFC;    /* CUSTOM CHECK BLUE */
       --bg: #FFFFFF;
@@ -99,8 +100,11 @@
       align-items:center;
       height: 30px;
       padding: 0 10px;
+      font-family: var(--font-display);
       font-size: 13px;
-      font-weight: var(--fw-semibold);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       background: var(--accent);
       color:#fff;
       white-space: nowrap;
@@ -108,7 +112,7 @@
 
     .card{
       background: var(--surface);
-      border: 1px solid var(--text);
+      border: 1.5px solid var(--text);
       padding: var(--pad-card);
       page-break-inside: avoid;
       break-inside: avoid;
