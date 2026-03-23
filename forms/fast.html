@@ -1290,6 +1290,384 @@
           </section>
 
 
+          <!-- ═══ SECTION 10: STRUCTURAL & CONSTRUCTION INTELLIGENCE ═══ -->
+          <section class="card" data-sharing="responder">
+            <div class="t-section">Section 10: Structural & Construction Intelligence</div>
+            <div style="height:8px;"></div>
+            <div class="hint">Captured by SYT.fyi Associate — visual observation during walk. This is the #1 category for predicting structural behavior under fire conditions.</div>
+
+            <div style="height:16px;"></div>
+            <div class="t-section" style="font-size:18px;">Truss Construction Type</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label>Construction Type (observed)</label>
+                <div class="checkbox-group" style="margin-top:6px;">
+                  <label><input id="fast_truss_lightweight_wood" type="checkbox" /><span>Lightweight Wood Truss</span></label>
+                  <label><input id="fast_truss_lightweight_steel" type="checkbox" /><span>Lightweight Steel Truss</span></label>
+                  <label><input id="fast_truss_heavy_timber" type="checkbox" /><span>Heavy Timber</span></label>
+                  <label><input id="fast_truss_conventional_wood" type="checkbox" /><span>Conventional Wood Frame</span></label>
+                  <label><input id="fast_truss_unknown" type="checkbox" /><span>Unknown</span></label>
+                </div>
+                <div class="hint">Lightweight truss is the #1 predictor of early roof/floor collapse under fire.</div>
+              </div>
+              <div>
+                <label for="fast_truss_notes">Construction Notes</label>
+                <textarea id="fast_truss_notes" placeholder="Location of exposed trusses, concealed spaces, basement ceiling, etc."></textarea>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Void Spaces & Plenums</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="fast_void_present">Hidden Void Spaces Present?</label>
+                <select id="fast_void_present">
+                  <option value=""></option><option>Yes</option><option>No</option><option>Unknown</option>
+                </select>
+                <div class="hint">Large hidden spaces above ceilings or below floors where fire can hide and travel undetected.</div>
+              </div>
+              <div>
+                <label for="fast_void_notes">Location / Notes</label>
+                <textarea id="fast_void_notes" placeholder="e.g., Drop ceiling throughout, large plenum above 3rd floor, raised floor in server room."></textarea>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Roof Deck Material</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label>Roof Deck Material (observed or reported)</label>
+                <div class="checkbox-group" style="margin-top:6px;">
+                  <label><input id="fast_roof_metal" type="checkbox" /><span>Metal</span></label>
+                  <label><input id="fast_roof_wood" type="checkbox" /><span>Wood</span></label>
+                  <label><input id="fast_roof_poured_concrete" type="checkbox" /><span>Poured Concrete</span></label>
+                  <label><input id="fast_roof_unknown" type="checkbox" /><span>Unknown</span></label>
+                </div>
+                <div class="hint">Critical for vertical ventilation decision. Wood and lightweight metal roofs fail fastest.</div>
+              </div>
+              <div>
+                <label for="fast_roof_notes">Roof Access / Notes</label>
+                <textarea id="fast_roof_notes" placeholder="Rooftop HVAC, skylights, access hatch location, slope, membrane type if known."></textarea>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- ═══ SECTION 11: OPERATIONAL WORKAROUNDS ═══ -->
+          <section class="card">
+            <div class="t-section">Section 11: Operational Workarounds</div>
+            <div style="height:8px;"></div>
+            <div class="hint">Captured by Property Representative — institutional knowledge not visible from the street. These are the "tricks" buried in the building manager's head.</div>
+
+            <div style="height:16px;"></div>
+            <div class="t-section" style="font-size:18px;">Manual Fire Pump Override</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="fast_pump_override_loc">Override Location</label>
+                <textarea id="fast_pump_override_loc" placeholder="e.g., Pump room east wall, red panel, behind boiler."></textarea>
+              </div>
+              <div>
+                <label for="fast_pump_override_notes">Start Procedure / Known Quirks</label>
+                <textarea id="fast_pump_override_notes" placeholder="e.g., Requires 3-second hold before engaging, primes automatically after 10s."></textarea>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Elevator — Best Stretcher / EMS Car</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="fast_elev_ems_car">Best Car for Medical Stretcher</label>
+                <input id="fast_elev_ems_car" placeholder="e.g., Car #3 (service elevator, widest door — 42in)" />
+                <div class="hint">Deepest car, widest door, or most accessible for a loaded stretcher.</div>
+              </div>
+              <div>
+                <label for="fast_elev_ems_notes">EMS / Operational Notes</label>
+                <textarea id="fast_elev_ems_notes" placeholder="EMS key location, override mode, any known clearance restrictions."></textarea>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">HVAC Smoke Purge / Manual Exhaust</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="fast_hvac_purge_present">Manual Smoke Purge Mode Available?</label>
+                <select id="fast_hvac_purge_present">
+                  <option value=""></option><option>Yes</option><option>No</option><option>Unknown</option>
+                </select>
+              </div>
+              <div>
+                <label for="fast_hvac_purge_loc">Switch / Control Location</label>
+                <input id="fast_hvac_purge_loc" placeholder="e.g., Fire Command Center, mechanical room panel, Lobby BAS terminal." />
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <label for="fast_hvac_purge_notes">Operational Notes</label>
+                <textarea id="fast_hvac_purge_notes" placeholder="Which zones, activation sequence, auto or manual reset, any interlocks."></textarea>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Generator Load (What Stays On)</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="fast_gen_load_notes">Confirmed Load on Generator</label>
+                <textarea id="fast_gen_load_notes" placeholder="e.g., Emergency lighting, fire pump, elevator #1 recall, stairwell lighting. Does NOT power kitchen, walk-ins, or HVAC."></textarea>
+                <div class="hint">Exact list as confirmed by property representative — not assumptions.</div>
+              </div>
+              <div>
+                <label for="fast_gen_transfer_notes">Transfer Switch Location / Notes</label>
+                <textarea id="fast_gen_transfer_notes" placeholder="e.g., Main electric room, automatic transfer — 10s delay after utility loss."></textarea>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- ═══ SECTION 12: ENHANCED ACCESS & SECURITY ═══ -->
+          <section class="card" data-sharing="responder">
+            <div class="t-section">Section 12: Enhanced Access & Security</div>
+            <div style="height:8px;"></div>
+            <div class="hint">Captured by associate and property representative. Critical for firefighter safety and command situational awareness.</div>
+
+            <div style="height:16px;"></div>
+            <div class="t-section" style="font-size:18px;">Radio / Cell Signal Dead Zones</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="fast_radio_dead_present">Dead Zones Identified?</label>
+                <select id="fast_radio_dead_present">
+                  <option value=""></option><option>Yes</option><option>No</option><option>Not Tested</option>
+                </select>
+                <div class="hint">Associate: test radio/cell in basement, stairwells, and elevator lobbies during walk.</div>
+              </div>
+              <div>
+                <label for="fast_radio_dead_notes">Location(s) with Zero Signal</label>
+                <textarea id="fast_radio_dead_notes" placeholder="e.g., Sub-basement parking (B2), back stairwell Stair B, elevator lobby floors 6–8."></textarea>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Fence / Gate Fail State (Power Loss)</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="fast_gate_fail_state">Gate Behavior on Power Loss</label>
+                <select id="fast_gate_fail_state">
+                  <option value=""></option>
+                  <option>Fail-Safe (gates open automatically)</option>
+                  <option>Fail-Secure (gates stay locked)</option>
+                  <option>Mixed (varies by gate)</option>
+                  <option>No Powered Gates</option>
+                  <option>Unknown</option>
+                </select>
+                <div class="hint">Fail-Secure requires manual override or forcible entry during power outage.</div>
+              </div>
+              <div>
+                <label for="fast_gate_fail_notes">Manual Override Location / Notes</label>
+                <textarea id="fast_gate_fail_notes" placeholder="e.g., Manual release lever inside right pillar, requires standard gate key."></textarea>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Interior Magnetic Hold-Open Fire Doors</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="fast_mag_holdopen_present">Mag Hold-Opens Present?</label>
+                <select id="fast_mag_holdopen_present">
+                  <option value=""></option><option>Yes</option><option>No</option><option>Unknown</option>
+                </select>
+                <div class="hint">These doors hold open during normal operations and release (close) automatically when the fire alarm activates.</div>
+              </div>
+              <div>
+                <label for="fast_mag_holdopen_notes">Location / Notes</label>
+                <textarea id="fast_mag_holdopen_notes" placeholder="e.g., All corridor fire doors floors 2–5, lobby-to-garage door. Release confirmed on alarm test."></textarea>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- ═══ SECTION 13: MOBILITY ASSISTANCE (RESPONDER PRIORITY) ═══ -->
+          <section class="card" data-sharing="internal">
+            <div class="t-section">Section 13: Mobility Assistance (Responder Priority)</div>
+            <div style="height:8px;"></div>
+            <div class="hint">Identify up to two occupants who may require assistance evacuating. Capture only responder-useful, non-sensitive information. Do not include personal identifiers beyond unit/location.</div>
+
+            <div style="height:12px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="fast_mobility_confirmed">Confirmed by Property Representative</label>
+                <select id="fast_mobility_confirmed">
+                  <option value=""></option><option>Yes</option><option>No</option>
+                </select>
+              </div>
+              <div>
+                <label for="fast_mobility_updated">Last Updated</label>
+                <input id="fast_mobility_updated" type="date" />
+              </div>
+            </div>
+
+            <div style="height:16px;"></div>
+            <div class="t-section" style="font-size:18px;">Occupant 1</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="fast_mob1_location">Location (Unit / Office)</label>
+                <input id="fast_mob1_location" placeholder="e.g., Unit 4B, 3rd Floor East Wing" />
+              </div>
+              <div>
+                <label>Mobility Limitation</label>
+                <div class="checkbox-group" style="margin-top:6px;">
+                  <label><input id="fast_mob1_wheelchair" type="checkbox" /><span>Wheelchair</span></label>
+                  <label><input id="fast_mob1_bedridden" type="checkbox" /><span>Bedridden</span></label>
+                  <label><input id="fast_mob1_limited" type="checkbox" /><span>Limited Mobility</span></label>
+                  <label><input id="fast_mob1_visual" type="checkbox" /><span>Visual Impairment</span></label>
+                  <label><input id="fast_mob1_other" type="checkbox" /><span>Other</span></label>
+                </div>
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <label for="fast_mob1_assist_notes">Quick Assist Instructions</label>
+                <textarea id="fast_mob1_assist_notes" placeholder="e.g., Uses manual wheelchair, requires 2 responders on stairs, family member typically present."></textarea>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Occupant 2 <span style="font-weight:400; font-size:15px;">(Optional)</span></div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="fast_mob2_location">Location (Unit / Office)</label>
+                <input id="fast_mob2_location" placeholder="e.g., Office 210, 2nd Floor" />
+              </div>
+              <div>
+                <label>Mobility Limitation</label>
+                <div class="checkbox-group" style="margin-top:6px;">
+                  <label><input id="fast_mob2_wheelchair" type="checkbox" /><span>Wheelchair</span></label>
+                  <label><input id="fast_mob2_bedridden" type="checkbox" /><span>Bedridden</span></label>
+                  <label><input id="fast_mob2_limited" type="checkbox" /><span>Limited Mobility</span></label>
+                  <label><input id="fast_mob2_visual" type="checkbox" /><span>Visual Impairment</span></label>
+                  <label><input id="fast_mob2_other" type="checkbox" /><span>Other</span></label>
+                </div>
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <label for="fast_mob2_assist_notes">Quick Assist Instructions</label>
+                <textarea id="fast_mob2_assist_notes" placeholder="e.g., Ambulates slowly with walker, independent on flat surfaces, needs assistance on stairs."></textarea>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- ═══ SECTION 14: TACTICAL LOGISTICS & PHOTO CHECKLIST ═══ -->
+          <section class="card" data-sharing="responder">
+            <div class="t-section">Section 14: Tactical Logistics & Photo Checklist</div>
+            <div style="height:8px;"></div>
+            <div class="hint">Captured by associate during walk. Command-layer intelligence for the incident commander and second-arriving crews.</div>
+
+            <div style="height:16px;"></div>
+            <div class="t-section" style="font-size:18px;">Hydrant Flow Colors (Bonnet)</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label>Hydrant Bonnet Color(s) at This Property</label>
+                <div class="checkbox-group" style="margin-top:6px;">
+                  <label><input id="fast_hydrant_blue" type="checkbox" /><span>Blue (1,500+ GPM)</span></label>
+                  <label><input id="fast_hydrant_green" type="checkbox" /><span>Green (1,000–1,499 GPM)</span></label>
+                  <label><input id="fast_hydrant_orange" type="checkbox" /><span>Orange (500–999 GPM)</span></label>
+                  <label><input id="fast_hydrant_red" type="checkbox" /><span>Red (&lt;500 GPM)</span></label>
+                </div>
+                <div class="hint">NFPA 291 color coding. Record observed bonnet color on nearest hydrant(s).</div>
+              </div>
+              <div>
+                <label for="fast_hydrant_color_notes">Hydrant / Color Notes</label>
+                <textarea id="fast_hydrant_color_notes" placeholder="e.g., Two blue hydrants on Side A, one orange on Side C near alley gate."></textarea>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Secondary Staging Area</div>
+            <div style="height:8px;"></div>
+            <div>
+              <label for="fast_staging_notes">Secondary Staging — 5+ Engines</label>
+              <textarea id="fast_staging_notes" placeholder="e.g., Municipal lot at NW corner of property, does not block Side A hydrants or primary entrance. Approx. 8-vehicle capacity."></textarea>
+              <div class="hint">Identify a secondary staging area that will not block primary hydrants or Side A (front) access.</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Exposure Risks</div>
+            <div style="height:8px;"></div>
+            <div>
+              <label for="fast_exposure_notes">Adjacent Building Exposures</label>
+              <textarea id="fast_exposure_notes" placeholder="e.g., Side B: 2-story wood-frame residential 10ft to the north. Side C: 1-story commercial (masonry) 4ft to rear. Side D: parking structure, concrete, 6ft."></textarea>
+              <div class="hint">Brief notes on buildings directly touching or within 20ft of the property on each side.</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Photo Checklist</div>
+            <div style="height:8px;"></div>
+            <div class="hint">These photos are captured on a separate device during the walk and uploaded to the property record. Use this checklist as a field reminder.</div>
+            <div style="height:12px;"></div>
+
+            <div class="grid two">
+              <div style="border: 1.5px solid var(--border); padding: 14px;">
+                <div style="font-weight: 600; font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted);">Photo Reminder</div>
+                <div style="font-weight: 600; margin-top: 6px;">Hero / Overhead Image</div>
+                <div class="hint" style="margin-top:4px;">Aerial or street-level overview of the full property footprint. Capture on separate device and attach to property record.</div>
+                <div style="margin-top:8px;">
+                  <label><input id="fast_photo_hero_done" type="checkbox" /><span style="font-weight:500;">Taken</span></label>
+                </div>
+              </div>
+              <div style="border: 1.5px solid var(--border); padding: 14px;">
+                <div style="font-weight: 600; font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted);">Photo Reminder</div>
+                <div style="font-weight: 600; margin-top: 6px;">Rear / Side C View</div>
+                <div class="hint" style="margin-top:4px;">Photo of the rear/alley (Side C) access. First responders often arrive at the front — this is critical for second-arriving crews. Capture on separate device.</div>
+                <div style="margin-top:8px;">
+                  <label><input id="fast_photo_side_c_done" type="checkbox" /><span style="font-weight:500;">Taken</span></label>
+                </div>
+              </div>
+              <div style="border: 1.5px solid var(--border); padding: 14px;">
+                <div style="font-weight: 600; font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted);">Photo Reminder</div>
+                <div style="font-weight: 600; margin-top: 6px;">FACP Zone Map</div>
+                <div class="hint" style="margin-top:4px;">Close-up of the paper zone map typically taped inside the fire alarm control panel. Allows responders to pinpoint the exact detector that tripped. Capture on separate device.</div>
+                <div style="margin-top:8px;">
+                  <label><input id="fast_photo_facp_done" type="checkbox" /><span style="font-weight:500;">Taken</span></label>
+                </div>
+              </div>
+              <div style="border: 1.5px solid var(--border); padding: 14px;">
+                <div style="font-weight: 600; font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted);">Photo Reminder</div>
+                <div style="font-weight: 600; margin-top: 6px;">FDC Thread Detail</div>
+                <div class="hint" style="margin-top:4px;">Photo looking into the Fire Department Connection inlet to confirm it is clear of debris and threads are undamaged. Capture on separate device.</div>
+                <div style="margin-top:8px;">
+                  <label><input id="fast_photo_fdc_done" type="checkbox" /><span style="font-weight:500;">Taken</span></label>
+                </div>
+              </div>
+              <div style="grid-column: 1 / -1; border: 1.5px solid var(--border); padding: 14px;">
+                <div style="font-weight: 600; font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted);">Photo Reminder</div>
+                <div style="font-weight: 600; margin-top: 6px;">Floor Plans / Site Plans</div>
+                <div class="hint" style="margin-top:4px;">Photograph any posted floor plans, evacuation maps, or site plans visible during the walk (lobby, stairwells, elevator lobbies). Capture on separate device and attach to property record.</div>
+                <div style="margin-top:8px;">
+                  <label><input id="fast_photo_plans_done" type="checkbox" /><span style="font-weight:500;">Taken</span></label>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
           <!-- ═══ ACTION BLOCK ═══ -->
           <section class="card" id="actionBlock" style="border: none; padding: 0;">
             <div class="grid two">
