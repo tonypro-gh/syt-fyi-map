@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title> — SYT.FAST</title>
-  <meta name="description" content="SYT.360 Unified Intake (system-grouped) for property information capture and preparedness documentation aligned with OSHA EAP concepts and NFPA-style guidance. Informational use only." />
+  <title>SYT.360 — FAST | Responder Record (PIP-Support)</title>
+  <meta name="description" content="SYT.360 Series — FAST Responder Record. Pre-Incident Plan (PIP) support form capturing building systems, access, life safety equipment, and responder intelligence. Informational use only." />
 
   <!-- Montserrat ONLY (LOCKED: 400, 500, 600) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -383,7 +383,7 @@
           <span class="badge">SYT.360</span>
           <div style="display:flex; flex-direction:column;">
             <div class="t-section">FAST</div>
-            <div class="t-meta"></div>
+            <div class="t-meta">Responder Record (PIP-Support)</div>
           </div>
         </div>
       </div>
@@ -561,6 +561,25 @@
               </div>
             </div>
 
+            <div style="height:16px;"></div>
+            <div class="t-section" style="font-size:18px;">Secondary Entrance / Egress #2</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="intake_entrance_sec2_notes">Location / Notes</label>
+                <textarea id="intake_entrance_sec2_notes" data-sharing="responder" placeholder="Service entrance, garage access, or emergency-use door."></textarea>
+              </div>
+              <div>
+                <label for="intake_entrance_sec2_knox_present">Knox Box / Key Access Present?</label>
+                <select id="intake_entrance_sec2_knox_present" data-sharing="responder">
+                  <option value=""></option><option>Yes</option><option>No</option><option>Unknown</option>
+                </select>
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <label for="intake_entrance_sec2_knox_notes">Knox / Key Location Notes</label>
+                <textarea id="intake_entrance_sec2_knox_notes" data-sharing="responder" placeholder="Exact location relative to this entrance; include landmarks."></textarea>
+              </div>
+            </div>
 
             <div class="divider"></div>
 
@@ -703,6 +722,37 @@
               </div>
             </div>
 
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Life Safety Snapshot — Fire Alarm</div>
+            <div style="height:8px;"></div>
+            <div class="hint">Select status + docs (observed only). Only write notes for Issue/Unknown.</div>
+            <div style="height:12px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="intake_lsa_alarm_status">Status</label>
+                <select id="intake_lsa_alarm_status">
+                  <option value=""></option>
+                  <option>OK – no issues observed (not verified)</option>
+                  <option>Issue – needs follow-up</option>
+                  <option>Unknown – no info</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_alarm_docs">Docs</label>
+                <select id="intake_lsa_alarm_docs">
+                  <option value=""></option>
+                  <option>Docs / tags observed current</option>
+                  <option>Docs observed expired</option>
+                  <option>No docs visible</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_alarm_notes">Notes</label>
+                <textarea id="intake_lsa_alarm_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
+              </div>
+            </div>
+
           </section>
 
           <!-- ═══ SECTION 4: WATER SUPPLY & SUPPRESSION — data-sharing="responder" ═══ -->
@@ -803,6 +853,31 @@
               </div>
             </div>
 
+            <div style="height:12px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="intake_lsa_standpipe_status">LSA — Standpipe Status</label>
+                <select id="intake_lsa_standpipe_status">
+                  <option value=""></option>
+                  <option>OK – no issues observed (not verified)</option>
+                  <option>Issue – needs follow-up</option>
+                  <option>Unknown – no info</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_standpipe_docs">LSA — Docs</label>
+                <select id="intake_lsa_standpipe_docs">
+                  <option value=""></option>
+                  <option>Docs / tags observed current</option>
+                  <option>Docs observed expired</option>
+                  <option>No docs visible</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_standpipe_notes">LSA — Notes</label>
+                <textarea id="intake_lsa_standpipe_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
+              </div>
+            </div>
 
             <div class="divider"></div>
 
@@ -849,6 +924,31 @@
               </div>
             </div>
 
+            <div style="height:12px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="intake_lsa_sprinkler_status">LSA — Sprinkler Status</label>
+                <select id="intake_lsa_sprinkler_status">
+                  <option value=""></option>
+                  <option>OK – no issues observed (not verified)</option>
+                  <option>Issue – needs follow-up</option>
+                  <option>Unknown – no info</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_sprinkler_docs">LSA — Docs</label>
+                <select id="intake_lsa_sprinkler_docs">
+                  <option value=""></option>
+                  <option>Docs / tags observed current</option>
+                  <option>Docs observed expired</option>
+                  <option>No docs visible</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_sprinkler_notes">LSA — Notes</label>
+                <textarea id="intake_lsa_sprinkler_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
+              </div>
+            </div>
 
             <div class="divider"></div>
 
@@ -867,6 +967,58 @@
               </div>
             </div>
 
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Backflow Prevention</div>
+            <div style="height:8px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="intake_vendor_backflow_name">Backflow Vendor — Name</label>
+                <input id="intake_vendor_backflow_name" placeholder="Company name" />
+              </div>
+              <div>
+                <label for="intake_vendor_backflow_phone">Vendor — Phone</label>
+                <input id="intake_vendor_backflow_phone" type="tel" placeholder="(305) 123-4567" />
+              </div>
+              <div>
+                <label for="intake_vendor_backflow_email">Vendor — Email</label>
+                <input id="intake_vendor_backflow_email" type="email" placeholder="service@backflowco.com" />
+              </div>
+              <div>
+                <label for="intake_vendor_backflow_website">Vendor — Website</label>
+                <input id="intake_vendor_backflow_website" type="url" placeholder="https://" />
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <label for="intake_backflow_loc">Backflow Location / Notes</label>
+                <textarea id="intake_backflow_loc" data-sharing="responder" placeholder="Exact location + access notes."></textarea>
+              </div>
+            </div>
+
+            <div style="height:12px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="intake_lsa_backflow_status">LSA — Backflow Status</label>
+                <select id="intake_lsa_backflow_status">
+                  <option value=""></option>
+                  <option>OK – no issues observed (not verified)</option>
+                  <option>Issue – needs follow-up</option>
+                  <option>Unknown – no info</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_backflow_docs">LSA — Docs</label>
+                <select id="intake_lsa_backflow_docs">
+                  <option value=""></option>
+                  <option>Documentation observed current</option>
+                  <option>Documentation observed expired</option>
+                  <option>No documentation visible</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_backflow_notes">LSA — Notes</label>
+                <textarea id="intake_lsa_backflow_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
+              </div>
+            </div>
 
             <div class="divider"></div>
 
@@ -900,6 +1052,32 @@
               <div>
                 <label for="intake_gen_fuel_capacity">Fuel Source / Capacity</label>
                 <input id="intake_gen_fuel_capacity" placeholder="Fuel type, run-time estimate, tank location." />
+              </div>
+            </div>
+
+            <div style="height:12px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="intake_lsa_gen_status">LSA — Generator Status</label>
+                <select id="intake_lsa_gen_status">
+                  <option value=""></option>
+                  <option>OK – appears operational (not verified)</option>
+                  <option>Issue – concerns noted</option>
+                  <option>Unknown – not verified</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_gen_docs">LSA — Docs / Logs</label>
+                <select id="intake_lsa_gen_docs">
+                  <option value=""></option>
+                  <option>Test logs observed</option>
+                  <option>Logs expired / missing</option>
+                  <option>No logs visible</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_gen_notes">LSA — Notes</label>
+                <textarea id="intake_lsa_gen_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
               </div>
             </div>
 
@@ -946,6 +1124,31 @@
               </div>
             </div>
 
+            <div style="height:12px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="intake_lsa_ext_status">LSA — Extinguisher Status</label>
+                <select id="intake_lsa_ext_status">
+                  <option value=""></option>
+                  <option>OK – tags observed in date</option>
+                  <option>Issue – missing / out of date</option>
+                  <option>Unknown – not checked</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_ext_docs">LSA — Documentation</label>
+                <select id="intake_lsa_ext_docs">
+                  <option value=""></option>
+                  <option>Tags observed current</option>
+                  <option>Tags observed expired</option>
+                  <option>Some missing tags</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_ext_notes">LSA — Notes</label>
+                <textarea id="intake_lsa_ext_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
+              </div>
+            </div>
 
             <div class="divider"></div>
 
@@ -976,6 +1179,31 @@
               </div>
             </div>
 
+            <div style="height:12px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="intake_lsa_aed_status">LSA — AED Status</label>
+                <select id="intake_lsa_aed_status">
+                  <option value=""></option>
+                  <option>OK – accessible & visible (not verified)</option>
+                  <option>Issue – inaccessible / unclear</option>
+                  <option>Unknown – not verified</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_aed_maint">LSA — Maintenance / Readiness</label>
+                <select id="intake_lsa_aed_maint">
+                  <option value=""></option>
+                  <option>Pads & battery observed in date</option>
+                  <option>Expired / unknown</option>
+                  <option>No records visible</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_aed_notes">LSA — Notes</label>
+                <textarea id="intake_lsa_aed_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
+              </div>
+            </div>
 
             <div class="divider"></div>
 
@@ -1221,6 +1449,37 @@
               <div style="grid-column: 1 / -1;">
                 <label for="intake_elevator_notes_2">Fire Service / Operational Notes (facts only)</label>
                 <textarea id="intake_elevator_notes_2" placeholder="Car numbers, recall behavior (if known), best stretcher car, restrictions, known issues (facts only)."></textarea>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="t-section" style="font-size:18px;">Life Safety Snapshot — Elevators</div>
+            <div style="height:8px;"></div>
+            <div class="hint">Select status + docs (observed only). Only write notes for Issue/Unknown.</div>
+            <div style="height:12px;"></div>
+            <div class="grid two">
+              <div>
+                <label for="intake_lsa_elev_status">Status</label>
+                <select id="intake_lsa_elev_status">
+                  <option value=""></option>
+                  <option>OK – no issues observed (not verified)</option>
+                  <option>Issue – concerns / needs follow-up</option>
+                  <option>Unknown – no info</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_elev_docs">Documentation (posted, if any)</label>
+                <select id="intake_lsa_elev_docs">
+                  <option value=""></option>
+                  <option>Certificate posted (observed)</option>
+                  <option>Certificate posted (observed) – expired/unclear</option>
+                  <option>No certificate visible</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake_lsa_elev_notes">Notes</label>
+                <textarea id="intake_lsa_elev_notes" placeholder="Notes (only if Issue/Unknown)."></textarea>
               </div>
             </div>
 
@@ -1681,7 +1940,7 @@
           </section>
 
           <footer class="t-meta" style="text-align:center; padding: 24px 0; border-top: 1px solid var(--border); margin-top: 20px;">
-            INFORMATIONAL DOCUMENTATION ONLY • SYT.360 SERIES • SYT.FYI (PRIVATE FOR-PROFIT VENDOR) • FIRETACTIC.COM OPERATED SEPARATELY BY FIRST IN SAFETY FOUNDATION • © 2026 SYT.FYI
+            SYT.360 Series — Page 1 of 2 (FAST) &nbsp;•&nbsp; INFORMATIONAL DOCUMENTATION ONLY &nbsp;•&nbsp; SYT.FYI (PRIVATE FOR-PROFIT VENDOR) &nbsp;•&nbsp; FIRETACTIC.COM OPERATED SEPARATELY BY FIRST IN SAFETY FOUNDATION &nbsp;•&nbsp; © 2026 SYT.FYI
           </footer>
 
         </main>
