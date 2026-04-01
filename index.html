@@ -410,19 +410,12 @@
       <p class="hero-desc">Organize your property information in one place and activate your property through a free on-site safety visit.</p>
     </section>
     <section class="cta-strip">
-      <h2>Choose How You'd Like to Start</h2>
       <div class="cta-grid">
         <div class="cta-card fade-up">
           <h3>Book Free Safety Visit</h3>
           <p>Book a free SYT.360 visit to activate your property.</p>
           <div class="meta">20–30 min · No cost</div>
           <a href="https://www.syt.fyi/book-online" target="_blank" rel="noopener" data-cta class="btn-primary">Book Free Safety Visit</a>
-        </div>
-        <div class="cta-card fade-up">
-          <h3>South Florida Property Safety Study</h3>
-          <p>Quick 2-minute property questionnaire.</p>
-          <div class="meta">~2 minutes</div>
-          <a href="https://www.syt.fyi/safetystudy" target="_blank" rel="noopener" data-cta class="btn-secondary">Safety Study</a>
         </div>
       </div>
     </section>
@@ -497,13 +490,12 @@
 <div class="bottom-bar">
   <div class="container">
     <div class="bottom-bar-inner">
-      <a href="https://www.syt.fyi/map" target="_blank" rel="noopener">
+      <a href="https://www.syt.fyi/book-online" target="_blank" rel="noopener">
         <div class="qr-block">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=https://www.syt.fyi/map" alt="Scan to open property map">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=https://www.syt.fyi/book-online" alt="Scan to book a free safety visit">
         </div>
       </a>
       <div class="bottom-bar-btns">
-        <a href="https://www.syt.fyi/map" target="_blank" rel="noopener" data-cta class="btn-white-sm">Explore Properties</a>
         <a href="https://www.syt.fyi/book-online" target="_blank" rel="noopener" data-cta class="btn-ghost-sm">Book Free Safety Visit</a>
         <button class="sms-sm" id="smsBtn">Share via SMS</button>
       </div>
@@ -534,7 +526,7 @@
     window.location.href = 'mai' + 'lto:' + 'info' + '@' + 'syt.fyi';
   });
   document.getElementById('smsBtn').addEventListener('click', function() {
-    var msg = encodeURIComponent('Explore SYT.FYI properties and book a free on-site safety visit: https://www.syt.fyi/map');
+    var msg = encodeURIComponent('Book a free SYT.FYI on-site safety visit: https://www.syt.fyi/book-online');
     var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     window.location.href = isIOS ? 'sms:&body=' + msg : 'sms:?&body=' + msg;
   });
