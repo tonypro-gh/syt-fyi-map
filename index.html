@@ -398,6 +398,50 @@
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* Narrative section */
+  .narrative { padding: 32px 24px 24px; border-top: 1px solid rgba(0,0,0,0.12); }
+  .narrative-problem,.narrative-diagnosis,.narrative-solution,.narrative-geo,.narrative-uses,.narrative-plans { margin-bottom: 24px; }
+  .narrative-close { margin-bottom: 0; }
+  .narrative-label { font-family: var(--font-body); font-size: 0.62rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--syt-red); margin-bottom: 6px; }
+  .narrative-impact { font-family: var(--font-display); font-size: 1.45rem; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.05; color: var(--syt-ink); margin-bottom: 6px; }
+  .narrative-impact--red { color: var(--syt-red); margin-bottom: 12px; }
+  .narrative-body { font-family: var(--font-body); font-size: 0.81rem; font-weight: 400; color: var(--syt-ink); line-height: 1.6; margin-bottom: 8px; }
+  .narrative-body:last-child { margin-bottom: 0; }
+  .narrative-body--strong { font-weight: 800; }
+  .narrative-body--geo { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.03em; opacity: 0.7; border-left: 2px solid var(--syt-red); padding-left: 10px; }
+  .narrative-brand { font-weight: 800; color: var(--syt-red); }
+  .narrative-list { list-style: none; margin: 10px 0 0; padding: 0 0 0 12px; border-left: 2px solid var(--syt-ink); }
+  .narrative-list li { font-family: var(--font-body); font-size: 0.81rem; font-weight: 600; color: var(--syt-ink); line-height: 1.5; padding: 3px 0; }
+  .narrative-list li::before { content: '—'; color: var(--syt-red); font-weight: 800; margin-right: 8px; font-size: 0.7rem; }
+  .narrative-list__item--accent { color: var(--syt-red); }
+  .narrative-closing { font-family: var(--font-display); font-size: 1.45rem; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.05; color: var(--syt-red); border-top: 1.5px solid var(--syt-ink); padding-top: 16px; }
+  @media (min-width: 600px) and (max-width: 1099px) {
+    .narrative { padding: 52px 40px 40px; }
+    .narrative-problem,.narrative-diagnosis,.narrative-solution,.narrative-geo,.narrative-uses,.narrative-plans { margin-bottom: 36px; }
+    .narrative-label { font-size: 0.88rem; }
+    .narrative-impact { font-size: 2.4rem; }
+    .narrative-body { font-size: 1.08rem; margin-bottom: 12px; }
+    .narrative-body--geo { font-size: 0.98rem; }
+    .narrative-list { margin-top: 14px; }
+    .narrative-list li { font-size: 1.08rem; }
+    .narrative-closing { font-size: 2.4rem; padding-top: 22px; }
+  }
+  @media (min-width: 1100px) {
+    .narrative { padding: 60px 60px 48px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 80px; align-items: start; }
+    .narrative-problem { grid-column: 1 / -1; margin-bottom: 48px; }
+    .narrative-diagnosis { grid-column: 1; margin-bottom: 40px; }
+    .narrative-solution { grid-column: 2; margin-bottom: 40px; }
+    .narrative-geo { grid-column: 1 / -1; margin-bottom: 40px; }
+    .narrative-uses { grid-column: 1; margin-bottom: 40px; }
+    .narrative-plans { grid-column: 2; margin-bottom: 40px; }
+    .narrative-close { grid-column: 1 / -1; }
+    .narrative-label { font-size: 0.75rem; }
+    .narrative-impact { font-size: 2.8rem; }
+    .narrative-body { font-size: 0.96rem; line-height: 1.65; }
+    .narrative-list li { font-size: 0.96rem; }
+    .narrative-closing { font-size: 2.8rem; padding-top: 24px; }
+  }
 </style>
 </head>
 <body>
@@ -425,8 +469,7 @@
   <div class="acc-item fade-up">
     <button class="acc-trigger">Why Properties Find This Useful <span class="acc-arrow">▼</span></button>
     <div class="acc-content"><div class="acc-inner">
-      <p>Property information is often scattered across files, drives, and vendor systems, making it hard to find when needed.</p>
-      <p>SYT.FYI organizes it into one structured system for quick access and stronger property profiles.</p>
+      <p>Property information is often scattered — hard to find when it matters most. SYT.FYI organizes it into one structured system, before something goes wrong.</p>
     </div></div>
   </div>
   <div class="acc-item fade-up">
@@ -478,15 +521,54 @@
       </div>
     </div></div>
   </div>
-  <div class="acc-item fade-up">
-    <button class="acc-trigger">Additional Services <span class="acc-arrow">▼</span></button>
-    <div class="acc-content"><div class="acc-inner">
-      <p><strong style="font-weight:800;">Emergency Planning —</strong> Organize EAP and pre-incident planning references when applicable.</p>
-      <p><strong style="font-weight:800;">Visual Documentation —</strong> 3D scans, drone imagery, and digital mapping available separately.</p>
-      <p><strong style="font-weight:800;">Responder Path —</strong> If authorized by the property owner, selected property information may support responder access through FireTactic.</p>
-    </div></div>
-  </div>
 </div>
+
+<section class="narrative container">
+
+  <div class="narrative-problem fade-up">
+    <p class="narrative-impact">Most properties believe they're prepared.</p>
+    <p class="narrative-impact narrative-impact--red">Until something actually happens.</p>
+    <p class="narrative-body">That's when delays, confusion, and missing information cost time, money, and safety.</p>
+  </div>
+
+  <div class="narrative-diagnosis fade-up">
+    <p class="narrative-label">The Problem</p>
+    <p class="narrative-body">The problem isn't that the information doesn't exist.</p>
+    <p class="narrative-body narrative-body--strong">It's that it's not organized, accessible, or ready when it matters most.</p>
+  </div>
+
+  <div class="narrative-solution fade-up">
+    <p class="narrative-label">The Solution</p>
+    <p class="narrative-body"><strong class="narrative-brand">SYT.FYI</strong> was created to change that.</p>
+    <p class="narrative-body">We help properties organize critical information so they're prepared before something goes wrong — not figuring it out during.</p>
+    <p class="narrative-body">And when authorized, that information can be shared with first responders before they arrive.</p>
+  </div>
+
+  <div class="narrative-geo fade-up">
+    <p class="narrative-body narrative-body--geo">Starting in Miami Beach and now expanding into Downtown Miami.</p>
+  </div>
+
+  <div class="narrative-uses fade-up">
+    <p class="narrative-body">Beyond safety, properties can also create digital twins of their space for:</p>
+    <ul class="narrative-list">
+      <li>Promotional use</li>
+      <li>Operational efficiency</li>
+      <li>Security planning</li>
+      <li class="narrative-list__item--accent">And most importantly, safety</li>
+    </ul>
+  </div>
+
+  <div class="narrative-plans fade-up">
+    <p class="narrative-body">Unified with your property's <strong>Emergency Action Plan (EAP)</strong> and <strong>Pre-Incident Plan (PIP)</strong>.</p>
+    <p class="narrative-body">Exterior digital twins can also be created using the latest 3D technology.</p>
+  </div>
+
+  <div class="narrative-close fade-up">
+    <p class="narrative-closing">This is how properties should be prepared.</p>
+  </div>
+
+</section>
+
 <div class="bottom-bar">
   <div class="container">
     <div class="bottom-bar-inner">
