@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>SYT.360 — School PIP | Property Data Collection</title>
+  <meta name="description" content="SYT.360 School Pre-Incident Plan — Form 1 of 2. Property data collection form filled during on-site walkthrough." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-ui: "Montserrat", system-ui, -apple-system, sans-serif;
+      --font-display: 'Anton', 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+      --fs-critical: 24px;
+      --fs-section:  20px;
+      --fs-body:     16px;
+      --fs-meta:     14px;
+      --lh-critical: 1.30;
+      --lh-section:  1.35;
+      --lh-body:     1.50;
+      --lh-meta:     1.40;
+      --fw-regular:  400;
+      --fw-medium:   500;
+      --fw-semibold: 600;
+      --pad-page: 16px;
+      --pad-section: 24px;
+      --pad-card: 20px;
+      --gap: 16px;
+      --radius: 0px;
+      --btn-h: 52px;
+      --maxw: 720px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bot: env(safe-area-inset-bottom, 0px);
+      --accent: #F50B0B;
+      --check-blue: #008AFC;
+      --bg: #FFFFFF;
+      --text: #000000;
+      --surface: #FFFFFF;
+      --border: #E6E6E6;
+      --muted: #666666;
+      --shadow: none;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    html, body { height: 100%; width: 100%; overflow: hidden; }
+    body { font-family: var(--font-ui); background: var(--bg); color: var(--text); line-height: var(--lh-body); }
+    button, input, textarea, select { font-family: inherit; font-weight: inherit; border-radius: 0 !important; }
+
+    #shell { height: 100%; display: flex; flex-direction: column; }
+    #topbar {
+      flex: 0 0 auto;
+      background: var(--bg);
+      border-bottom: 2px solid var(--text);
+      padding: 12px var(--pad-page);
+      z-index: 10;
+    }
+    #scroll {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 var(--pad-page) calc(var(--pad-section) + var(--safe-bot));
+    }
+    .wrap { max-width: var(--maxw); margin: 0 auto; width: 100%; }
+    .row-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .stack { display: flex; flex-direction: column; gap: var(--gap); }
+    .section { padding: var(--pad-section) 0; }
+
+    .t-critical { font-size: var(--fs-critical); font-weight: var(--fw-semibold); line-height: var(--lh-critical); text-transform: uppercase; letter-spacing: 0.5px; }
+    .t-section  { font-size: var(--fs-section);  font-weight: var(--fw-semibold); line-height: var(--lh-section); }
+    .t-body     { font-size: var(--fs-body);     font-weight: var(--fw-regular);  line-height: var(--lh-body); }
+    .t-meta     { font-size: var(--fs-meta);     font-weight: var(--fw-medium);   line-height: var(--lh-meta); color: var(--muted); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 10px;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1.5px solid var(--text);
+      padding: var(--pad-card);
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .card-header {
+      border-bottom: 1.5px solid var(--text);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card-num {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      color: var(--text);
+    }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: var(--fw-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text);
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]),
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--text);
+      background: var(--surface);
+      color: var(--text);
+      font-size: var(--fs-body);
+      outline: none;
+      appearance: none;
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]):focus,
+    textarea:focus,
+    select:focus {
+      background: rgba(245,11,11,0.03);
+      border-color: var(--accent);
+    }
+
+    textarea { min-height: 90px; resize: vertical; }
+
+    .hint { margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: var(--fw-medium); }
+    .divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+    .grid { display: grid; gap: var(--gap); grid-template-columns: 1fr; }
+    @media (min-width: 600px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+
+    .btn {
+      height: var(--btn-h);
+      min-height: var(--btn-h);
+      border: 1px solid var(--text);
+      padding: 0 20px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      font-size: 14px;
+      font-weight: var(--fw-semibold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.1s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .btn:active { opacity: 0.8; }
+    .btn-primary { background: var(--accent); color: #fff; width: 100%; border: none; }
+    .btn-ghost   { background: transparent; border: 1px solid var(--text); color: var(--text); width: 100%; }
+    .btn-reset   { background: #111; color: #fff; border: none; width: 100%; }
+
+    .actions { display: flex; flex-direction: column; gap: 10px; padding: var(--pad-section) 0 calc(var(--pad-section) + var(--safe-bot)); }
+    .actions-note { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.5; }
+
+    #toastHost {
+      position: fixed;
+      left: 0; right: 0;
+      bottom: calc(20px + var(--safe-bot));
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    #toast {
+      background: var(--text);
+      color: var(--bg);
+      padding: 14px 24px;
+      display: none;
+      text-align: center;
+      font-weight: var(--fw-semibold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 13px;
+    }
+    #toast.show { display: block; }
+
+    @media print {
+      #topbar, .actions { display: none !important; }
+      html, body { height: auto !important; overflow: visible !important; }
+      #shell { height: auto; }
+      #scroll { overflow: visible; height: auto; }
+      .card { border: 1px solid #000; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+<div id="shell">
+
+  <div id="topbar">
+    <div class="wrap">
+      <div class="row-between">
+        <div class="row">
+          <span class="badge">SYT.360</span>
+          <div>
+            <div style="font-family:var(--font-display);font-size:20px;letter-spacing:0.04em;text-transform:uppercase;line-height:1.1;">SCHOOL PIP</div>
+            <div class="t-meta" style="margin-top:2px;">Form 1 of 2 — Property Data Collection</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="scroll">
+    <div class="wrap">
+
+      <form id="pipForm">
+
+        <!-- Section 1 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 1</div>
+              <div class="card-title">Property &amp; Site Access</div>
+              <div class="t-meta" style="margin-top:6px;">Filled during on-site walkthrough</div>
+            </div>
+            <div class="grid two">
+              <div class="field" style="grid-column:1/-1;">
+                <label>School Name</label>
+                <input name="schoolName" placeholder="Full legal name of school" />
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Address</label>
+                <input name="address" placeholder="Street address, city, state, zip" />
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Primary Access Point</label>
+                <textarea name="primaryAccess" placeholder="Main entrance location, road approach, gate details"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Secondary Access Points</label>
+                <textarea name="secondaryAccess" placeholder="Additional entrances, side gates, rear access"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Gates / Access Control</label>
+                <textarea name="gatesAccess" placeholder="Gate types, keypad codes, intercom, card reader, manual override"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Campus Layout Description</label>
+                <textarea name="campusLayout" placeholder="Describe building arrangement, courtyards, open areas, portables, fencing"></textarea>
+              </div>
+              <div class="field">
+                <label>Number of Buildings</label>
+                <input name="buildingCount" placeholder="e.g. 4 main + 6 portables" />
+              </div>
+              <div class="field">
+                <label>Fire Alarm Control Panel Location</label>
+                <input name="facp" placeholder="Building, room, floor" />
+              </div>
+              <div class="field">
+                <label>Riser Room Location</label>
+                <input name="riserRoom" placeholder="Building and room" />
+              </div>
+              <div class="field">
+                <label>Fire Department Connection (FDC)</label>
+                <input name="fdc" placeholder="Location on building exterior" />
+              </div>
+              <div class="field">
+                <label>Sprinkler System Type</label>
+                <input name="sprinklerType" placeholder="Wet / Dry / None / Partial" />
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Utility Shutoffs (Gas / Electric / Water)</label>
+                <textarea name="utilityShutoffs" placeholder="Location of each main shutoff — building, exterior wall, room, or pad"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Hydrant Locations (Visual Only)</label>
+                <textarea name="hydrantLocations" placeholder="Describe nearby hydrant positions relative to buildings and access roads"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Hazards (Labs, Kitchens, Storage, etc.)</label>
+                <textarea name="hazards" placeholder="Chemical storage, commercial kitchen, science labs, fuel storage, etc."></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Camera System / Panic System Present</label>
+                <textarea name="cameraSystem" placeholder="System type, coverage areas, control room location, panic alert program details"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Special Areas (Gym, Auditorium, Cafeteria)</label>
+                <textarea name="specialAreas" placeholder="Location and notable features of large assembly or high-occupancy spaces"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Maps / Floor Plans Available</label>
+                <textarea name="mapsAvailable" placeholder="Are floor plans on site? Digital or printed? Location of posted egress maps."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 2</div>
+              <div class="card-title">Occupancy &amp; Daily Operations</div>
+            </div>
+            <div class="grid two">
+              <div class="field">
+                <label>Total Student Population (Daytime)</label>
+                <input name="studentPop" type="number" min="0" placeholder="e.g. 850" />
+              </div>
+              <div class="field">
+                <label>Total Staff Count</label>
+                <input name="staffCount" type="number" min="0" placeholder="e.g. 120" />
+              </div>
+              <div class="field">
+                <label>After-Hours / Night Occupancy</label>
+                <input name="afterHoursOccupancy" placeholder="Evening programs, custodial, events, etc." />
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Students / Occupants with Mobility or Special Needs</label>
+                <textarea name="specialNeeds" placeholder="Estimated count, locations during school day, staff assigned, assist plans"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Typical School Schedule (Arrival, Lunch, Dismissal)</label>
+                <textarea name="schoolSchedule" placeholder="Key time windows when occupant movement peaks"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 3</div>
+              <div class="card-title">Evacuation &amp; Shelter Planning</div>
+            </div>
+            <div class="grid two">
+              <div class="field" style="grid-column:1/-1;">
+                <label>Primary Evacuation Routes</label>
+                <textarea name="evacPrimary" placeholder="Main routes from each building or area to assembly zones"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Secondary Evacuation Routes</label>
+                <textarea name="evacSecondary" placeholder="Alternate routes if primary is blocked or unsafe"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Designated Assembly Areas</label>
+                <textarea name="assemblyAreas" placeholder="Outdoor assembly points by building, grade, or zone"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Shelter-in-Place Locations (Lockdown Areas)</label>
+                <textarea name="shelterLocations" placeholder="Designated rooms or areas for lockdown or weather shelter"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Reunification Area (Post-Incident)</label>
+                <textarea name="reunificationArea" placeholder="Where parents/guardians go, how students are released, staging area"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 4</div>
+              <div class="card-title">Emergency Contacts &amp; Command</div>
+            </div>
+            <div class="grid two">
+              <div class="field">
+                <label>Primary School Contact (Principal / Admin)</label>
+                <input name="principalName" placeholder="Full name and title" />
+              </div>
+              <div class="field">
+                <label>Phone Number</label>
+                <input name="principalPhone" type="tel" placeholder="Direct / 24-hr number" />
+              </div>
+              <div class="field">
+                <label>On-Site Safety Officer / Security Lead</label>
+                <input name="securityLead" placeholder="Name, role, radio channel if applicable" />
+              </div>
+              <div class="field">
+                <label>After-Hours Emergency Contact</label>
+                <input name="afterHoursContact" placeholder="Name and number" />
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Key / Access Control Responsibility (Who Has Master Access)</label>
+                <textarea name="masterAccess" placeholder="Who holds master keys or codes, where they are during and after school hours"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 5</div>
+              <div class="card-title">Medical &amp; Safety Resources</div>
+            </div>
+            <div class="grid two">
+              <div class="field" style="grid-column:1/-1;">
+                <label>AED Locations</label>
+                <textarea name="aedLocations" placeholder="Exact location of each AED on campus"></textarea>
+              </div>
+              <div class="field">
+                <label>Nurse Office Location</label>
+                <input name="nurseLocation" placeholder="Building, room number, floor" />
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Medical Risk Areas / Programs</label>
+                <textarea name="medicalRisk" placeholder="Rooms with oxygen, insulin storage, epi-pens, medical programs, dialysis, etc."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 6</div>
+              <div class="card-title">Apparatus &amp; Site Access Considerations</div>
+            </div>
+            <div class="grid two">
+              <div class="field" style="grid-column:1/-1;">
+                <label>Best Apparatus Staging Areas</label>
+                <textarea name="stagingAreas" placeholder="Where engines, ladder trucks, EMS, and command vehicles can position on campus"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Access Limitations (Narrow Roads, Gates, Obstacles)</label>
+                <textarea name="accessLimitations" placeholder="Any features that may restrict large vehicle access or apparatus positioning"></textarea>
+              </div>
+              <div class="field" style="grid-column:1/-1;">
+                <label>Helicopter Landing Area (if applicable)</label>
+                <textarea name="heloLZ" placeholder="Nearest viable LZ, approximate size, surface, obstacles"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 7</div>
+              <div class="card-title">Critical Infrastructure &amp; Compliance</div>
+            </div>
+            <div class="grid two">
+              <div class="field">
+                <label>Knox Box Location</label>
+                <input name="knoxBox" placeholder="Mounted location on building" />
+              </div>
+              <div class="field">
+                <label>Flood / Storm Surge Zone (Miami-Dade)</label>
+                <input name="floodZone" placeholder="e.g. Zone A, Zone X" />
+              </div>
+              <div class="field">
+                <label>Building Construction Type (if known)</label>
+                <input name="constructionType" placeholder="Type I, II, III, IV, V — or describe materials" />
+              </div>
+              <div class="field">
+                <label>Year Built / Renovated</label>
+                <input name="yearBuilt" placeholder="e.g. 1978 / Renovated 2015" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 8 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 8</div>
+              <div class="card-title">Documentation &amp; Verification</div>
+            </div>
+            <div class="grid two">
+              <div class="field" style="grid-column:1/-1;">
+                <label>Photos Taken (Yes / No + Notes)</label>
+                <textarea name="photosTaken" placeholder="Note what was photographed: access points, FACP, FDC, hazards, staging areas, etc."></textarea>
+              </div>
+              <div class="field">
+                <label>Walkthrough Completed By (Name / Date)</label>
+                <input name="walkthroughBy" placeholder="Name, title, date" />
+              </div>
+              <div class="field">
+                <label>Property Representative Present (Name / Role)</label>
+                <input name="propertyRep" placeholder="Name and role of school contact during walkthrough" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" onclick="window.print()">Print / Save PDF</button>
+          <button type="reset" class="btn btn-reset">Reset Form</button>
+          <button type="submit" class="btn btn-primary">Save Form</button>
+          <p class="actions-note">Pair this form with campus photos and site map for the School PIP deliverable.</p>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="toastHost"><div id="toast">Form saved</div></div>
+
+<script>
+  document.getElementById('pipForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 2800);
+  });
+</script>
+</body>
+</html>
