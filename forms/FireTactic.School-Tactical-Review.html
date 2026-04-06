@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>FireTactic — School Tactical Review</title>
+  <meta name="description" content="FireTactic School Tactical Review — Responder tactical preplan review completed during on-site visit. Not for use during an emergency." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-ui: "Montserrat", system-ui, -apple-system, sans-serif;
+      --font-display: 'Anton', 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+      --fs-section:  20px;
+      --fs-body:     16px;
+      --fs-meta:     14px;
+      --lh-section:  1.35;
+      --lh-body:     1.50;
+      --lh-meta:     1.40;
+      --fw-regular:  400;
+      --fw-medium:   500;
+      --fw-semibold: 600;
+      --pad-page: 16px;
+      --pad-section: 24px;
+      --pad-card: 20px;
+      --gap: 16px;
+      --btn-h: 52px;
+      --maxw: 720px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bot: env(safe-area-inset-bottom, 0px);
+      --accent: #008AFC;
+      --accent-dark: #0070d4;
+      --bg: #FFFFFF;
+      --text: #000000;
+      --surface: #FFFFFF;
+      --border: #E6E6E6;
+      --muted: #666666;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    html, body { height: 100%; width: 100%; overflow: hidden; }
+    body { font-family: var(--font-ui); background: var(--bg); color: var(--text); line-height: var(--lh-body); }
+    button, input, textarea, select { font-family: inherit; font-weight: inherit; border-radius: 0 !important; }
+
+    #shell { height: 100%; display: flex; flex-direction: column; }
+    #topbar {
+      flex: 0 0 auto;
+      background: var(--bg);
+      border-bottom: 2px solid var(--text);
+      padding: 12px var(--pad-page);
+      z-index: 10;
+    }
+    #scroll {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 var(--pad-page) calc(var(--pad-section) + var(--safe-bot));
+    }
+    .wrap { max-width: var(--maxw); margin: 0 auto; width: 100%; }
+    .row-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .stack { display: flex; flex-direction: column; gap: var(--gap); }
+    .section { padding: var(--pad-section) 0; }
+
+    .t-meta { font-size: var(--fs-meta); font-weight: var(--fw-medium); line-height: var(--lh-meta); color: var(--muted); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 10px;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1.5px solid var(--text);
+      padding: var(--pad-card);
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .card-header {
+      border-bottom: 1.5px solid var(--text);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card-num {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      color: var(--text);
+    }
+
+    .alert-bar {
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: var(--fw-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: var(--fw-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text);
+    }
+
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--text);
+      background: var(--surface);
+      color: var(--text);
+      font-size: var(--fs-body);
+      outline: none;
+      appearance: none;
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    textarea:focus {
+      background: rgba(0,138,252,0.03);
+      border-color: var(--accent);
+    }
+
+    .hint { margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: var(--fw-medium); }
+    .divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+    .grid { display: grid; gap: var(--gap); grid-template-columns: 1fr; }
+    @media (min-width: 600px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+
+    .btn {
+      height: var(--btn-h);
+      min-height: var(--btn-h);
+      border: 1px solid var(--text);
+      padding: 0 20px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      font-size: 14px;
+      font-weight: var(--fw-semibold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.1s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .btn:active { opacity: 0.8; }
+    .btn-primary { background: var(--accent); color: #fff; width: 100%; border: none; }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-ghost   { background: transparent; border: 1px solid var(--text); color: var(--text); width: 100%; }
+    .btn-reset   { background: #111; color: #fff; border: none; width: 100%; }
+
+    .actions { display: flex; flex-direction: column; gap: 10px; padding: var(--pad-section) 0 calc(var(--pad-section) + var(--safe-bot)); }
+    .actions-note { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.5; }
+
+    #toastHost {
+      position: fixed;
+      left: 0; right: 0;
+      bottom: calc(20px + var(--safe-bot));
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    #toast {
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 24px;
+      display: none;
+      text-align: center;
+      font-weight: var(--fw-semibold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 13px;
+    }
+    #toast.show { display: block; }
+
+    @media print {
+      #topbar, .actions, .alert-bar { display: none !important; }
+      html, body { height: auto !important; overflow: visible !important; }
+      #shell { height: auto; }
+      #scroll { overflow: visible; height: auto; }
+      .card { border: 1px solid #000; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+<div id="shell">
+
+  <div id="topbar">
+    <div class="wrap">
+      <div class="row-between">
+        <div class="row">
+          <span class="badge">FireTactic</span>
+          <div>
+            <div style="font-family:var(--font-display);font-size:20px;letter-spacing:0.04em;text-transform:uppercase;line-height:1.1;">School Tactical Review</div>
+            <div class="t-meta" style="margin-top:2px;">Responder Preplan Review — Post-PIP Site Visit</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="scroll">
+    <div class="wrap">
+
+      <div class="section" style="padding-bottom:0;">
+        <div class="alert-bar">Completed during site visit only — NOT for use during an active emergency</div>
+      </div>
+
+      <form id="tacticalForm">
+
+        <!-- Section 1 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 1</div>
+              <div class="card-title">Apparatus Positioning &amp; Water Supply</div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label>Best Apparatus Positioning (Engine / Truck)</label>
+                <textarea name="apparatusPositioning" placeholder="Preferred positions for engine and ladder/truck companies relative to buildings and access roads"></textarea>
+              </div>
+              <div class="field">
+                <label>Primary Hydrant &amp; Backup Hydrant</label>
+                <textarea name="hydrants" placeholder="Location and flow notes for primary and backup hydrants serving this campus"></textarea>
+              </div>
+              <div class="field">
+                <label>Water Supply Approach (General Considerations)</label>
+                <textarea name="waterSupply" placeholder="Relay, forward lay, tanker shuttle, standpipe use — considerations specific to this site"></textarea>
+              </div>
+              <div class="field">
+                <label>Aerial / Ladder Access Limitations</label>
+                <textarea name="aerialLimitations" placeholder="Overhead wires, canopies, trees, setback issues, surface weight restrictions"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 2</div>
+              <div class="card-title">Staging &amp; Command</div>
+              <div class="t-meta" style="margin-top:6px;">Pre-incident recommendations only</div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label>Recommended Fire Staging Area</label>
+                <textarea name="fireStagingArea" placeholder="Best location for incoming engine and truck companies to stage without blocking access"></textarea>
+              </div>
+              <div class="field">
+                <label>Recommended EMS / Triage Area</label>
+                <textarea name="emsTriageArea" placeholder="Area with clear access for ambulances and patient treatment away from fire operations"></textarea>
+              </div>
+              <div class="field">
+                <label>Recommended Command Post Location</label>
+                <textarea name="commandPost" placeholder="Position with visibility and communications — away from hazard zone"></textarea>
+              </div>
+              <div class="field">
+                <label>Responder Access Flow (Best Routes for Units)</label>
+                <textarea name="accessFlow" placeholder="Recommended approach routes for arriving units to avoid congestion and maintain egress"></textarea>
+              </div>
+              <div class="field">
+                <label>Radio / Communication Issues (Dead Zones, Interference)</label>
+                <textarea name="radioIssues" placeholder="Known dead zones, repeater needs, interference from building materials or location"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 3</div>
+              <div class="card-title">Fireground Considerations</div>
+              <div class="t-meta" style="margin-top:6px;">Pre-incident observations</div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label>Likely Fire Attack Challenges (Layout, Access, Construction)</label>
+                <textarea name="fireAttackChallenges" placeholder="Long stretches, narrow corridors, multiple buildings, construction type concerns, limited access sides"></textarea>
+              </div>
+              <div class="field">
+                <label>Ventilation Considerations (Roof Access, Window Types)</label>
+                <textarea name="ventilation" placeholder="Roof construction, access points for VES, window types, HVAC location, high-bay areas"></textarea>
+              </div>
+              <div class="field">
+                <label>Exposure Risks (Adjacent Structures / Areas)</label>
+                <textarea name="exposureRisks" placeholder="Nearby buildings, vehicles, propane storage, adjacent properties that could be threatened"></textarea>
+              </div>
+              <div class="field">
+                <label>Utility Control Observations (Ease of Access)</label>
+                <textarea name="utilityControl" placeholder="Notes on ease of locating and operating gas, electric, and water shutoffs observed during walkthrough"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 4</div>
+              <div class="card-title">Rescue &amp; Life Safety Considerations</div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label>Primary Search Priorities</label>
+                <textarea name="searchPriorities" placeholder="Areas with highest likely occupancy during peak school hours — classrooms, labs, cafeteria, gym, portables"></textarea>
+              </div>
+              <div class="field">
+                <label>High-Risk Areas for Rescue</label>
+                <textarea name="highRiskAreas" placeholder="Special needs classrooms, nurse office, locker rooms, roof areas, sub-grade spaces, science labs"></textarea>
+              </div>
+              <div class="field">
+                <label>Evacuation / Movement Challenges (Operational)</label>
+                <textarea name="evacuationChallenges" placeholder="Bottlenecks, stairwell limitations, locked zones, crowd flow issues during large-scale evacuation"></textarea>
+              </div>
+              <div class="field">
+                <label>Special Needs / Assisted Evacuation Challenges Observed</label>
+                <textarea name="specialNeedsChallenges" placeholder="Practical challenges observed during walkthrough for moving assisted-evacuation occupants"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 5</div>
+              <div class="card-title">Law Enforcement Considerations</div>
+              <div class="t-meta" style="margin-top:6px;">Pre-incident observations only</div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label>Police Perimeter Strategy (Inner / Outer Feasibility)</label>
+                <textarea name="perimeterStrategy" placeholder="Road network, natural boundaries, fence lines, and vehicle access points that support perimeter control"></textarea>
+              </div>
+              <div class="field">
+                <label>Police Entry / Contact Team Routes</label>
+                <textarea name="entryRoutes" placeholder="Recommended entry points and approach routes for contact teams based on campus layout"></textarea>
+              </div>
+              <div class="field">
+                <label>Reunification Traffic Control Considerations</label>
+                <textarea name="reunificationTraffic" placeholder="Road bottlenecks, parent vehicle flow, pedestrian crossings, and staging for family reunification"></textarea>
+              </div>
+              <div class="field">
+                <label>Observed Security Vulnerabilities</label>
+                <textarea name="securityVulnerabilities" placeholder="Physical access gaps, camera blind spots, unsecured entry points, fence gaps — noted during walkthrough"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 6</div>
+              <div class="card-title">Access &amp; Control</div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label>Knox Box / Master Key Access Notes</label>
+                <textarea name="knoxBoxNotes" placeholder="Knox box location confirmed, contents verified, key or code issues noted"></textarea>
+              </div>
+              <div class="field">
+                <label>Best Entry Points Confirmed by Crews</label>
+                <textarea name="bestEntryPoints" placeholder="Entry points crews verified during walkthrough as most useful for rapid access under various scenarios"></textarea>
+              </div>
+              <div class="field">
+                <label>Restricted / Locked Zones</label>
+                <textarea name="restrictedZones" placeholder="Areas that may be locked or inaccessible without master key — server rooms, storage, portables, mechanical rooms"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 7</div>
+              <div class="card-title">Operational Context Enhancements</div>
+              <div class="t-meta" style="margin-top:6px;">High-value tactical intelligence</div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label>Time of Day Considerations (Arrival, Lunch, Dismissal, Events)</label>
+                <textarea name="timeOfDayConsiderations" placeholder="How occupancy distribution, access routes, and response complexity change at different times of day or during scheduled events"></textarea>
+              </div>
+              <div class="field">
+                <label>Worst-Case Scenario Notes</label>
+                <textarea name="worstCaseScenarios" placeholder="e.g. Fire during assembly, active threat at lunch, after-hours event, hurricane shelter scenario — tactical notes for each"></textarea>
+              </div>
+              <div class="field">
+                <label>Recommended Updates to PIP (Corrections, Missing Data, Improvements)</label>
+                <textarea name="pipUpdates" placeholder="Any errors, gaps, or improvements identified during this tactical review that should be fed back into the property PIP"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 8 -->
+        <div class="section">
+          <div class="card stack">
+            <div class="card-header">
+              <div class="card-num">Section 8</div>
+              <div class="card-title">Responder Verification</div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label>Name / Rank / Department / Date</label>
+                <textarea name="responderVerification" placeholder="Full name, rank or title, department or agency, and date of this tactical review walkthrough"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" onclick="window.print()">Print / Save PDF</button>
+          <button type="reset" class="btn btn-reset">Reset Form</button>
+          <button type="submit" class="btn btn-primary">Save Review</button>
+          <p class="actions-note">This tactical review is completed during a pre-incident site visit and feeds into the FireTactic school preplan record.</p>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="toastHost"><div id="toast">Tactical review saved</div></div>
+
+<script>
+  document.getElementById('tacticalForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 2800);
+  });
+</script>
+</body>
+</html>
