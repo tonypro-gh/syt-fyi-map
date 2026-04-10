@@ -49,7 +49,7 @@
     }
 
     .container {
-      width: min(var(--max), calc(100% - 32px));
+      width: min(var(--max), calc(100% - 20px));
       margin: 0 auto;
     }
 
@@ -96,7 +96,7 @@
       font-weight: 900;
       letter-spacing: 0.03em;
       text-transform: uppercase;
-      font-size: 14px;
+      font-size: 13px;
       flex-wrap: wrap;
     }
 
@@ -137,19 +137,18 @@
     }
 
     .hero {
-      padding: 64px 0 40px;
+      padding: 42px 0 32px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
+      grid-template-columns: 1fr;
       gap: 28px;
-      align-items: center;
     }
 
     .hero-copy h1 {
       margin: 18px 0 16px;
-      font-size: clamp(40px, 6vw, 74px);
+      font-size: 38px;
       line-height: 0.96;
       letter-spacing: -0.04em;
       text-transform: uppercase;
@@ -159,7 +158,7 @@
     .hero-copy p.lead {
       margin: 0 0 24px;
       color: var(--muted);
-      font-size: clamp(18px, 2.2vw, 24px);
+      font-size: 18px;
       max-width: 720px;
     }
 
@@ -176,6 +175,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
       min-height: 54px;
       padding: 0 22px;
       font-weight: 900;
@@ -209,7 +209,7 @@
         linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
         linear-gradient(135deg, rgba(0,138,252,0.10), rgba(245,11,11,0.05));
       box-shadow: var(--shadow);
-      min-height: 560px;
+      min-height: auto;
       padding: 18px;
       display: grid;
       grid-template-rows: auto 1fr auto;
@@ -230,15 +230,19 @@
 
     .visual-main {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: 1fr;
       gap: 12px;
       align-items: center;
+    }
+
+    .flow-arrow {
+      transform: rotate(90deg);
     }
 
     .phone {
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
-      min-height: 370px;
+      min-height: 280px;
       padding: 14px;
       display: grid;
       grid-template-rows: auto auto 1fr auto;
@@ -285,6 +289,7 @@
       color: var(--blue);
       font-weight: 900;
       text-align: center;
+      transform: rotate(90deg);
     }
 
     .visual-bottom {
@@ -324,14 +329,14 @@
 
     .section-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 18px;
     }
 
     .panel {
       border: 1px solid var(--panel-border);
       background: var(--panel);
-      padding: 22px;
+      padding: 18px;
       box-shadow: var(--shadow);
     }
 
@@ -389,7 +394,7 @@
 
     .features-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 18px;
     }
 
@@ -430,15 +435,15 @@
 
     .steps {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr;
       gap: 18px;
     }
 
     .step {
       border: 1px solid var(--panel-border);
       background: var(--panel);
-      padding: 20px;
-      min-height: 180px;
+      padding: 18px;
+      min-height: auto;
     }
 
     .step-num {
@@ -469,19 +474,19 @@
 
     .trust-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr;
       gap: 18px;
     }
 
     .trust-box {
       border: 1px solid var(--panel-border);
       background: rgba(255,255,255,0.03);
-      padding: 20px;
+      padding: 18px;
       text-align: center;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.03em;
-      min-height: 104px;
+      min-height: auto;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -496,7 +501,7 @@
       background:
         linear-gradient(180deg, rgba(245,11,11,0.12), rgba(245,11,11,0.04)),
         rgba(255,255,255,0.03);
-      padding: 28px;
+      padding: 18px;
       box-shadow: var(--shadow);
     }
 
@@ -539,71 +544,72 @@
       flex-wrap: wrap;
     }
 
-    @media (max-width: 980px) {
-      .hero-grid,
-      .section-grid,
-      .features-grid,
-      .steps,
-      .trust-row {
-        grid-template-columns: 1fr;
-      }
-
-      .visual-main {
-        grid-template-columns: 1fr;
-      }
-
-      .flow-arrow {
-        transform: rotate(90deg);
-      }
-
-      .hero {
-        padding-top: 42px;
-      }
-
-      .hero-visual {
-        min-height: auto;
-      }
-
-      .phone {
-        min-height: 280px;
-      }
-    }
-
-    @media (max-width: 640px) {
+    @media (min-width: 640px) {
       .container {
-        width: min(var(--max), calc(100% - 20px));
+        width: min(var(--max), calc(100% - 32px));
       }
-
-      .nav {
-        min-height: 68px;
-      }
-
-      .nav-cta {
-        width: 100%;
-      }
-
-      .brand {
-        font-size: 13px;
-      }
-
       .hero-copy h1 {
-        font-size: 38px;
+        font-size: clamp(40px, 6vw, 74px);
       }
-
       .hero-copy p.lead {
-        font-size: 18px;
+        font-size: clamp(18px, 2.2vw, 24px);
       }
-
       .primary-btn,
       .secondary-btn {
-        width: 100%;
+        width: auto;
       }
-
       .panel,
       .step,
       .trust-box,
       .cta-shell {
-        padding: 18px;
+        padding: 22px;
+      }
+      .step {
+        min-height: 180px;
+      }
+      .trust-box {
+        min-height: 104px;
+      }
+    }
+
+    @media (min-width: 980px) {
+      .brand {
+        font-size: 14px;
+      }
+      .hero {
+        padding: 64px 0 40px;
+      }
+      .hero-grid {
+        grid-template-columns: 1.08fr 0.92fr;
+        align-items: center;
+      }
+      .hero-visual {
+        min-height: 560px;
+      }
+      .visual-main {
+        grid-template-columns: 1fr auto 1fr;
+      }
+      .flow-arrow {
+        transform: none;
+      }
+      .phone {
+        min-height: 370px;
+      }
+      .section-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .features-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .trust-row {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .panel,
+      .cta-shell {
+        padding: 28px;
       }
     }
   </style>
