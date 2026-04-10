@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYT.FYI → FireTactic.com | Free On-Site Safety Assessment</title>
+  <meta
+    name="description"
+    content="SYT.FYI helps properties organize critical information, reduce chaos, and improve preparedness before an emergency happens."
+  />
+  <style>
+    :root {
+      --bg: #06080d;
+      --bg-2: #0b1220;
+      --panel: rgba(255,255,255,0.04);
+      --panel-border: rgba(255,255,255,0.10);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.76);
+      --soft: rgba(255,255,255,0.54);
+      --red: #F50B0B;
+      --blue: #008AFC;
+      --line: rgba(255,255,255,0.10);
+      --max: 1180px;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 85% 15%, rgba(0,138,252,0.18), transparent 18%),
+        radial-gradient(circle at 12% 72%, rgba(245,11,11,0.12), transparent 14%),
+        linear-gradient(180deg, #09111c 0%, #06080d 34%, #0b1220 100%);
+      line-height: 1.4;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border: 1px solid var(--panel-border);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .eyebrow .arrow {
+      color: var(--blue);
+      font-size: 14px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(6,8,13,0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+
+    .brand .syt {
+      color: #fff;
+    }
+
+    .brand .arrow {
+      color: var(--blue);
+      font-size: 16px;
+    }
+
+    .brand .fire {
+      color: var(--red);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      background: var(--red);
+      color: #fff;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover,
+    .primary-btn:hover,
+    .secondary-btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .hero {
+      padding: 64px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      margin: 18px 0 16px;
+      font-size: clamp(40px, 6vw, 74px);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      max-width: 780px;
+    }
+
+    .hero-copy p.lead {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: clamp(18px, 2.2vw, 24px);
+      max-width: 720px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .primary-btn {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .secondary-btn {
+      background: rgba(255,255,255,0.03);
+      color: #fff;
+    }
+
+    .micro-copy {
+      color: var(--soft);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .hero-visual {
+      border: 1px solid var(--panel-border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(0,138,252,0.10), rgba(245,11,11,0.05));
+      box-shadow: var(--shadow);
+      min-height: 560px;
+      padding: 18px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+    }
+
+    .visual-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .visual-main {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .phone {
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      min-height: 370px;
+      padding: 14px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 12px;
+    }
+
+    .phone .label {
+      font-size: 11px;
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+    }
+
+    .phone .title {
+      font-size: 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.05;
+    }
+
+    .screen-card {
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      min-height: 64px;
+      padding: 12px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .screen-card strong {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .screen-card span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .flow-arrow {
+      font-size: 34px;
+      color: var(--blue);
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .visual-bottom {
+      display: grid;
+      gap: 10px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 14px;
+    }
+
+    .visual-bottom .system-line {
+      font-size: 15px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .visual-bottom .system-line .arrow {
+      color: var(--blue);
+      margin: 0 6px;
+    }
+
+    .visual-bottom .sub {
+      color: var(--muted);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    section {
+      padding: 26px 0;
+    }
+
+    .problem-solution {
+      padding-top: 18px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .kicker {
+      margin: 0 0 10px;
+      font-size: 11px;
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: clamp(26px, 3vw, 42px);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+    }
+
+    .panel p,
+    .panel li {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .stack-lines {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .stack-lines div {
+      border-left: 3px solid var(--red);
+      padding-left: 12px;
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .solution-line {
+      margin-top: 16px;
+      font-size: 24px;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.05;
+    }
+
+    .solution-sub {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 18px;
+      font-style: italic;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .feature-item {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.025);
+      padding: 14px;
+    }
+
+    .feature-item strong {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .feature-item span {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .optional-line {
+      border: 1px solid rgba(0,138,252,0.24);
+      background: rgba(0,138,252,0.06);
+      padding: 18px 20px;
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      padding: 20px;
+      min-height: 180px;
+    }
+
+    .step-num {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      font-weight: 900;
+      color: var(--red);
+      margin-bottom: 14px;
+    }
+
+    .step h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      text-transform: uppercase;
+      line-height: 1.05;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .trust-box {
+      border: 1px solid var(--panel-border);
+      background: rgba(255,255,255,0.03);
+      padding: 20px;
+      text-align: center;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      min-height: 104px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .final-cta {
+      padding: 34px 0 60px;
+    }
+
+    .cta-shell {
+      border: 1px solid rgba(245,11,11,0.30);
+      background:
+        linear-gradient(180deg, rgba(245,11,11,0.12), rgba(245,11,11,0.04)),
+        rgba(255,255,255,0.03);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-shell h2 {
+      margin-bottom: 10px;
+    }
+
+    .cta-shell p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 760px;
+    }
+
+    .legal {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: var(--soft);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+    }
+
+    footer {
+      padding: 0 0 28px;
+    }
+
+    .footer-line {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 18px;
+      color: var(--soft);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .section-grid,
+      .features-grid,
+      .steps,
+      .trust-row {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-main {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-arrow {
+        transform: rotate(90deg);
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero-visual {
+        min-height: auto;
+      }
+
+      .phone {
+        min-height: 280px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(var(--max), calc(100% - 20px));
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .nav-cta {
+        width: 100%;
+      }
+
+      .brand {
+        font-size: 13px;
+      }
+
+      .hero-copy h1 {
+        font-size: 38px;
+      }
+
+      .hero-copy p.lead {
+        font-size: 18px;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        width: 100%;
+      }
+
+      .panel,
+      .step,
+      .trust-box,
+      .cta-shell {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand" aria-label="Brand">
+        <span class="syt">SYT.FYI</span>
+        <span class="arrow">→</span>
+        <span class="fire">FireTactic.com</span>
+      </div>
+      <a class="nav-cta" href="https://www.syt.fyi/book-online" target="_blank" rel="noopener">
+        Book Your Free Assessment
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span>SYT.FYI</span>
+            <span class="arrow">→</span>
+            <span>FireTactic.com</span>
+          </div>
+
+          <h1>See Your Property Clearly—Before Anything Goes Wrong</h1>
+
+          <p class="lead">
+            SYT.FYI helps properties organize critical information, reduce chaos,
+            and improve preparedness—before an emergency happens.
+          </p>
+
+          <div class="hero-actions">
+            <a class="primary-btn" href="https://www.syt.fyi/book-online" target="_blank" rel="noopener">
+              Book Your Free On-Site Safety Assessment
+            </a>
+            <a class="secondary-btn" href="#how-it-works">
+              See How It Works
+            </a>
+          </div>
+
+          <div class="micro-copy">
+            Takes 30–45 minutes. No cost. No obligation.
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="System preview">
+          <div class="visual-top">
+            <span>Property Intelligence</span>
+            <span>First Responder Access</span>
+          </div>
+
+          <div class="visual-main">
+            <div class="phone">
+              <div class="label">SYT.FYI</div>
+              <div class="title">Property View</div>
+
+              <div class="screen-card">
+                <strong>Exits &amp; Access</strong>
+                <span>Clear entry points, circulation, and emergency routes.</span>
+              </div>
+
+              <div class="screen-card">
+                <strong>Shutoffs &amp; Critical Info</strong>
+                <span>Utility locations, contacts, and essential property details.</span>
+              </div>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="phone">
+              <div class="label">FireTactic</div>
+              <div class="title">Responder Context</div>
+
+              <div class="screen-card">
+                <strong>Before Arrival</strong>
+                <span>When available, the property can be understood faster.</span>
+              </div>
+
+              <div class="screen-card">
+                <strong>Training Use</strong>
+                <span>Supports familiarization and reference use when appropriate.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="visual-bottom">
+            <div class="system-line">
+              <span>SYT.FYI</span>
+              <span class="arrow">→</span>
+              <span>FireTactic.com</span>
+            </div>
+            <div class="sub">Property Intelligence → First Responder Access</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="problem-solution">
+      <div class="container section-grid">
+        <div class="panel">
+          <p class="kicker">The Problem</p>
+          <h2>Most Properties Are Not Organized for Emergencies</h2>
+          <div class="stack-lines">
+            <div>Information is scattered.</div>
+            <div>Access is unclear.</div>
+            <div>Decisions are made without full context.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p class="kicker">The Solution</p>
+          <h2>We Organize Your Property into Usable Intelligence</h2>
+          <div class="solution-line">Clear. Structured. Ready.</div>
+          <div class="solution-sub">
+            One place for the critical information your property should already have organized.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container features-grid">
+        <div class="panel">
+          <p class="kicker">What You Get</p>
+          <h2>A Structured Property Profile</h2>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <strong>Exits, Access Points, Shutoffs</strong>
+              <span>Organized visually so critical locations are easier to understand.</span>
+            </div>
+            <div class="feature-item">
+              <strong>Key Contacts &amp; Critical Information</strong>
+              <span>Important property details gathered into one clear system.</span>
+            </div>
+            <div class="feature-item">
+              <strong>Faster Access</strong>
+              <span>Less confusion when information needs to be found quickly.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p class="kicker">Digital Value</p>
+          <h2>Turn Your Property into a Usable Digital Asset</h2>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <strong>Train Your Team</strong>
+              <span>Use real property views to improve staff familiarization.</span>
+            </div>
+            <div class="feature-item">
+              <strong>Walk It Remotely</strong>
+              <span>Review spaces without always needing to be physically on site.</span>
+            </div>
+            <div class="feature-item">
+              <strong>Share with Staff &amp; Vendors</strong>
+              <span>Give the right people structured information when they need it.</span>
+            </div>
+            <div class="feature-item">
+              <strong>Use 3D Models for Planning</strong>
+              <span>Support operations, planning, and future property workflows.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="optional-line">
+          When available, this information can support first responder awareness before arrival.
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works">
+      <div class="container">
+        <div class="panel" style="margin-bottom: 18px;">
+          <p class="kicker">How It Works</p>
+          <h2>Simple Process</h2>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h3>Book Your Visit</h3>
+            <p>
+              Start by scheduling your free on-site safety assessment through SYT.FYI.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <h3>We Walk Your Property with You</h3>
+            <p>
+              We review the property, gather critical information, and document what matters.
+            </p>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <h3>We Organize It into a Structured Profile</h3>
+            <p>
+              Your information is organized into a clear property record for future use.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="panel" style="margin-bottom: 18px;">
+          <p class="kicker">Trust &amp; Authority</p>
+          <h2>Built for Real-World Use</h2>
+        </div>
+
+        <div class="trust-row">
+          <div class="trust-box">Built by a Miami Beach Firefighter</div>
+          <div class="trust-box">Free for First Responders</div>
+          <div class="trust-box">Property-Controlled Information Sharing</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container">
+        <div class="cta-shell">
+          <p class="kicker">Final Step</p>
+          <h2>Book Your Free On-Site Safety Assessment</h2>
+          <p>
+            Start with one visit. We'll handle the information gathering and guide the process from there.
+          </p>
+
+          <div class="hero-actions" style="margin-bottom: 6px;">
+            <a class="primary-btn" href="https://www.syt.fyi/book-online" target="_blank" rel="noopener">
+              Schedule My Visit
+            </a>
+          </div>
+
+          <div class="micro-copy">
+            You'll be taken to the SYT.FYI booking page.
+          </div>
+
+          <div class="legal">
+            For informational and training reference only. This does not replace official procedures,
+            training, or on-scene decision-making by first responders.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-line">
+      <div>SYT.FYI → FireTactic.com</div>
+      <div>Property Intelligence → First Responder Access</div>
+    </div>
+  </footer>
+</body>
+</html>
