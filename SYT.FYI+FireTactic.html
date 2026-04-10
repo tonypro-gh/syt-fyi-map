@@ -82,11 +82,13 @@
     }
 
     .nav {
-      min-height: 74px;
+      min-height: auto;
+      padding: 10px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .brand {
@@ -117,11 +119,13 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 44px;
-      padding: 0 18px;
+      min-height: 42px;
+      width: 100%;
+      padding: 0 14px;
       background: var(--red);
       color: #fff;
       font-weight: 800;
+      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.03em;
       border: 1px solid rgba(255,255,255,0.12);
@@ -547,6 +551,17 @@
     @media (min-width: 640px) {
       .container {
         width: min(var(--max), calc(100% - 32px));
+      }
+      .nav {
+        min-height: 74px;
+        padding: 0;
+        flex-wrap: nowrap;
+      }
+      .nav-cta {
+        width: auto;
+        font-size: 13px;
+        padding: 0 18px;
+        min-height: 44px;
       }
       .hero-copy h1 {
         font-size: clamp(40px, 6vw, 74px);
