@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYT.FYI — Brand Card Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red:    #F50B0B;
+      --blue:   #008AFC;
+      --ink:    #0b0b0b;
+      --muted:  #555555;
+      --soft:   #7a7a7a;
+      --line:   #e8e8e8;
+      --panel:  #fafafa;
+      --white:  #ffffff;
+      --max:    1120px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.05);
+      --font-display: 'Anton', 'Arial Black', sans-serif;
+      --font-body:    'Montserrat', Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: #f0f0f0;
+      color: var(--ink);
+      padding: 40px 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SECTION LABEL (for this reference file only) ─── */
+    .ref-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #999;
+      margin: 36px 0 8px;
+    }
+    .ref-label:first-child { margin-top: 0; }
+
+    /* ══════════════════════════════════════════════
+       COPY-PASTE BLOCK 1 — TOP STRIPE + STICKY NAV
+       ══════════════════════════════════════════════ */
+    .top-stripe {
+      height: 4px;
+      background: var(--red);
+      width: 100%;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .brand .arrow { color: var(--blue); }
+    .brand .fire  { color: var(--red);  }
+
+    /* ══════════════════════════════════════════
+       COPY-PASTE BLOCK 2 — BUTTONS
+       ══════════════════════════════════════════ */
+
+    /* Primary — blue fill (use for book / main CTA) */
+    .btn-blue {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-blue:hover { opacity: 0.88; }
+
+    /* Primary — red fill (use for SYT.FYI / form submit) */
+    .btn-red {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-red:hover { opacity: 0.88; }
+
+    /* Ghost — outline only */
+    .btn-ghost {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: box-shadow 0.15s;
+    }
+    .btn-ghost:hover { box-shadow: var(--shadow); }
+
+    /* ══════════════════════════════════════════
+       COPY-PASTE BLOCK 3 — HERO SECTION
+       ══════════════════════════════════════════ */
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 54px 20px 28px;
+      background: var(--white);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      padding: 7px 12px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .hero-eyebrow .arrow { color: var(--blue); }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 6vw, 72px);
+      text-transform: uppercase;
+      line-height: 0.97;
+      letter-spacing: -0.02em;
+      max-width: 860px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 .accent-red  { color: var(--red);  }
+    .hero h1 .accent-blue { color: var(--blue); }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 680px;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .hero-support {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--ink);
+      max-width: 680px;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .hero-actions a { width: 100%; }
+
+    .hero-micro {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--soft);
+    }
+
+    @media (min-width: 640px) {
+      .hero-actions a { width: auto; }
+    }
+
+    /* ══════════════════════════════════════════
+       COPY-PASTE BLOCK 4 — SECTION KICKER + H2
+       ══════════════════════════════════════════ */
+    .kicker {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--soft);
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.5vw, 40px);
+      text-transform: uppercase;
+      line-height: 0.97;
+      letter-spacing: -0.02em;
+      max-width: 760px;
+      margin-bottom: 16px;
+    }
+
+    /* ══════════════════════════════════════════
+       COPY-PASTE BLOCK 5 — FOOTER
+       ══════════════════════════════════════════ */
+    .site-footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 20px 28px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--soft);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ──────────────────────────────────────────
+       PREVIEW LAYOUT (this file only)
+    ────────────────────────────────────────── */
+    .preview-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .preview-box {
+      background: #fff;
+      border: 1px solid #d0d0d0;
+      margin-bottom: 4px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+<div class="preview-wrap">
+
+  <p class="ref-label">Block 1 — Top Stripe + Sticky Nav</p>
+  <div class="preview-box">
+    <div class="top-stripe"></div>
+    <header style="position:relative;">
+      <div class="nav">
+        <div class="brand">
+          <span>SYT.FYI</span>
+          <span class="arrow">→</span>
+          <span class="fire">FireTactic.com</span>
+        </div>
+        <a class="btn-blue" href="https://www.syt.fyi/book-online" target="_blank" rel="noopener">Book Visit</a>
+      </div>
+    </header>
+  </div>
+
+  <p class="ref-label">Block 2 — Buttons</p>
+  <div class="preview-box" style="padding:24px; display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+    <a class="btn-blue" href="#">Book Visit (Blue)</a>
+    <a class="btn-red"  href="#">Submit / Save (Red)</a>
+    <a class="btn-ghost" href="#">See How It Works (Ghost)</a>
+  </div>
+
+  <p class="ref-label">Block 3 — Hero Section</p>
+  <div class="preview-box">
+    <div class="hero">
+      <div class="hero-eyebrow">
+        <span>SYT.FYI</span>
+        <span class="arrow">→</span>
+        <span>FireTactic.com</span>
+      </div>
+      <h1>Property Information, <span class="accent-red">Organized</span></h1>
+      <p class="hero-sub">Most properties aren't prepared. Information is scattered. Decisions happen without context.</p>
+      <p class="hero-support">We organize your property into clear, usable intelligence.</p>
+      <div class="hero-actions">
+        <a class="btn-blue" href="https://www.syt.fyi/book-online" target="_blank" rel="noopener">Book Complimentary Visit</a>
+        <a class="btn-ghost" href="#how-it-works">See How It Works</a>
+      </div>
+      <div class="hero-micro">Free · 20–30 min · No commitment</div>
+    </div>
+  </div>
+
+  <p class="ref-label">Block 4 — Section Kicker + H2</p>
+  <div class="preview-box" style="padding:28px;">
+    <p class="kicker">The Problem</p>
+    <h2>Most Properties Are Not <span style="color:var(--red)">Prepared</span></h2>
+    <p style="font-size:16px; color:var(--muted); max-width:600px; line-height:1.55;">
+      The problem isn't that the information doesn't exist — it's that it's not organized, accessible, or ready when it matters most.
+    </p>
+  </div>
+
+  <p class="ref-label">Block 5 — Footer</p>
+  <div class="preview-box">
+    <footer class="site-footer">
+      <div>SYT.FYI → FireTactic.com</div>
+      <div>info@syt.fyi · (305) 306-0828</div>
+      <div>
+        <a href="https://www.syt.fyi/terms" target="_blank" rel="noopener" style="color:inherit; text-decoration:none; margin-right:14px;">Terms</a>
+        <a href="https://www.syt.fyi/privacy" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">Privacy</a>
+      </div>
+    </footer>
+  </div>
+
+  <p class="ref-label">Color + Font Tokens</p>
+  <div class="preview-box" style="padding:20px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+    <div style="text-align:center;">
+      <div style="width:56px;height:56px;background:#F50B0B;margin:0 auto 6px;"></div>
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;">--red<br>#F50B0B</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="width:56px;height:56px;background:#008AFC;margin:0 auto 6px;"></div>
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;">--blue<br>#008AFC</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="width:56px;height:56px;background:#0b0b0b;margin:0 auto 6px;"></div>
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;">--ink<br>#0b0b0b</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="width:56px;height:56px;background:#555555;margin:0 auto 6px;"></div>
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;">--muted<br>#555555</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="width:56px;height:56px;background:#e8e8e8;border:1px solid #ccc;margin:0 auto 6px;"></div>
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;">--line<br>#e8e8e8</div>
+    </div>
+    <div style="margin-left:16px; display:flex; flex-direction:column; gap:8px; justify-content:center;">
+      <div style="font-family:'Anton',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:0.02em;">Anton — Display / Headings</div>
+      <div style="font-family:'Montserrat',Arial,sans-serif;font-size:14px;font-weight:400;">Montserrat 400 — Body text</div>
+      <div style="font-family:'Montserrat',Arial,sans-serif;font-size:14px;font-weight:600;">Montserrat 600 — Labels</div>
+      <div style="font-family:'Montserrat',Arial,sans-serif;font-size:14px;font-weight:800;">Montserrat 800 — Buttons / Kickers</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
