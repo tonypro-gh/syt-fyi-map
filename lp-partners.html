@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYT.FYI | Partnerships</title>
+  <meta
+    name="description"
+    content="Build the future of property intelligence with SYT.FYI. Explore strategic conversations around mapping, digital twins, hardware, and deployment."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #F50B0B;
+      --blue: #008AFC;
+      --ink: #0b0b0b;
+      --muted: #555555;
+      --soft: #7a7a7a;
+      --line: #e8e8e8;
+      --panel: #fafafa;
+      --white: #ffffff;
+      --max: 1180px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.05);
+      --font-display: 'Anton', 'Arial Black', sans-serif;
+      --font-body: 'Montserrat', Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: var(--font-body);
+      background: #f0f0f0;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .page-shell {
+      max-width: var(--max);
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-stripe {
+      height: 4px;
+      background: var(--red);
+      width: 100%;
+      flex: 0 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.96);
+      flex: 0 0 auto;
+    }
+
+    .nav {
+      padding: 0 20px;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .brand .arrow { color: var(--blue); }
+    .brand .fire { color: var(--red); }
+
+    .btn-blue,
+    .btn-red,
+    .btn-ghost {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: 0.15s ease;
+      border: none;
+      white-space: nowrap;
+    }
+
+    .btn-blue { background: var(--blue); color: #fff; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+
+    .btn-blue:hover,
+    .btn-red:hover { opacity: 0.88; }
+
+    .btn-ghost:hover { box-shadow: var(--shadow); }
+
+    main {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .hero {
+      width: 100%;
+      padding: 18px 20px 14px;
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .left,
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      padding: 6px 10px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      width: fit-content;
+    }
+
+    .hero-eyebrow .arrow { color: var(--blue); }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 70px);
+      text-transform: uppercase;
+      line-height: 0.93;
+      letter-spacing: -0.02em;
+    }
+
+    .accent-red { color: var(--red); }
+    .accent-blue { color: var(--blue); }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 700px;
+      line-height: 1.45;
+    }
+
+    .hero-support {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.45;
+      max-width: 760px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-micro {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--soft);
+    }
+
+    .mini-grid,
+    .card-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+      flex: 1 1 auto;
+    }
+
+    .mini-card,
+    .card,
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 14px;
+    }
+
+    .mini-card {
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.3;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+    }
+
+    .panel-title,
+    .card strong {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      font-weight: 800;
+    }
+
+    .panel-copy,
+    .card p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .stack-lines {
+      display: grid;
+      gap: 8px;
+    }
+
+    .stack-line {
+      border-left: 4px solid var(--red);
+      padding-left: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .blue-line { border-left-color: var(--blue); }
+
+    .form-wrap {
+      display: none;
+    }
+
+    .form-wrap.active {
+      display: block;
+    }
+
+    .form-card {
+      border: 1px solid var(--line);
+      background: var(--white);
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-card h3 {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      font-size: 28px;
+      line-height: 0.95;
+      margin-bottom: 8px;
+    }
+
+    .form-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--soft);
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 12px;
+      font: inherit;
+      color: var(--ink);
+      outline: none;
+      font-size: 13px;
+    }
+
+    textarea {
+      min-height: 76px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .form-note {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--soft);
+      margin-top: 8px;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 10px;
+      border: 1px solid #cfe8d0;
+      background: #f5fbf5;
+      color: #245b28;
+      padding: 10px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .success-message.show { display: block; }
+
+    .site-footer {
+      padding: 12px 20px 16px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--soft);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--white);
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .page-shell {
+        min-height: auto;
+      }
+
+      html, body {
+        height: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        padding: 14px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero {
+        padding: 18px 16px 18px;
+      }
+
+      .hero-actions,
+      .form-actions,
+      .nav a,
+      .hero-actions a,
+      .hero-actions button,
+      .form-actions a,
+      .form-actions button {
+        width: 100%;
+      }
+
+      .mini-grid,
+      .card-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .site-footer {
+        padding: 12px 16px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="top-stripe"></div>
+
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <span>SYT.FYI</span>
+          <span class="arrow">→</span>
+          <span class="fire">FireTactic.com</span>
+        </div>
+
+        <a class="btn-blue" href="#formWrap" id="openPartnershipNav">
+          Explore Partnership
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="left">
+          <div class="hero-eyebrow">
+            <span>SYT.FYI</span>
+            <span class="arrow">→</span>
+            <span>Strategic Conversations</span>
+          </div>
+
+          <h1>
+            Build The Future Of Property <span class="accent-red">Intelligence</span> With Us.
+          </h1>
+
+          <p class="hero-sub">
+            We're building the property layer. FireTactic delivers the responder layer.
+          </p>
+
+          <p class="hero-support">
+            Property data. Mapping. Digital twins. Real-world deployment.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn-blue" type="button" id="openPartnershipTop">
+              Explore Partnership
+            </button>
+            <button class="btn-ghost" type="button" id="openConversationTop">
+              Start A Conversation
+            </button>
+          </div>
+
+          <div class="hero-micro">Early conversations · Practical overlap · Small tests first</div>
+
+          <div class="mini-grid">
+            <div class="mini-card">Open the door early</div>
+            <div class="mini-card">Find real overlap fast</div>
+            <div class="mini-card">Test small before scale</div>
+            <div class="mini-card">Build leverage over time</div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="panel">
+            <strong class="panel-title">Who This Is For</strong>
+            <div class="stack-lines">
+              <div class="stack-line">Mapping & GIS</div>
+              <div class="stack-line">Digital twin / 3D</div>
+              <div class="stack-line">Drone / capture</div>
+              <div class="stack-line">Hardware / sensors</div>
+            </div>
+          </div>
+
+          <div class="card-grid">
+            <div class="card">
+              <strong>Insurance Tech</strong>
+              <p>Teams exploring property intelligence and risk workflows.</p>
+            </div>
+            <div class="card">
+              <strong>City / Infrastructure</strong>
+              <p>Groups thinking about deployment, safety, and coordination.</p>
+            </div>
+            <div class="card">
+              <strong>Channel / Delivery</strong>
+              <p>People who can help extend reach or execute locally.</p>
+            </div>
+            <div class="card">
+              <strong>Integration Interest</strong>
+              <p>Early conversations around where systems may fit later.</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <strong class="panel-title">How It Works</strong>
+            <div class="stack-lines">
+              <div class="stack-line blue-line">Start with a conversation. Identify overlap. Test small. Expand if it makes sense.</div>
+            </div>
+            <div class="hero-actions" style="margin-top:10px;">
+              <button class="btn-blue" type="button" id="openPartnershipBottom">Explore Partnership</button>
+              <button class="btn-ghost" type="button" id="openConversationBottom">Start A Conversation</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <section class="form-wrap" id="formWrap" style="padding: 0 20px 16px;">
+      <div class="form-card">
+        <h3>Explore Partnership</h3>
+        <p class="form-sub">Leave a few details. We'll reach out shortly.</p>
+
+        <form id="leadForm">
+          <input type="hidden" name="persona" id="personaField" value="partner" />
+          <input type="hidden" name="intent" id="intentField" value="explore_partnership" />
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input id="fullName" name="full_name" type="text" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+
+            <div class="field">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" required />
+            </div>
+
+            <div class="field">
+              <label for="category">Category</label>
+              <select id="category" name="partner_category">
+                <option value="">Select</option>
+                <option>Mapping / GIS</option>
+                <option>Digital Twin / 3D</option>
+                <option>Drone / Capture</option>
+                <option>Hardware / Sensors</option>
+                <option>Insurance / Risk Tech</option>
+                <option>City / Infrastructure</option>
+                <option>Channel / Delivery</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="message">What Are You Building?</label>
+              <textarea id="message" name="message" placeholder="Tell us what you do and where you think there may be overlap."></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-red" type="submit">Send My Info</button>
+            <button class="btn-ghost" type="button" id="conversationFormButton">Start A Conversation</button>
+          </div>
+
+          <div class="form-note">Fast follow-up. No spam.</div>
+          <div class="success-message" id="successMessage">Thanks. We'll reach out shortly.</div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div>SYT.FYI → FireTactic.com</div>
+      <div>info@syt.fyi · (305) 306-0828</div>
+      <div>
+        <a href="https://www.syt.fyi/terms" target="_blank" rel="noopener" style="margin-right:14px;">Terms</a>
+        <a href="https://www.syt.fyi/privacy" target="_blank" rel="noopener">Privacy</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const formWrap = document.getElementById('formWrap');
+    const personaField = document.getElementById('personaField');
+    const intentField = document.getElementById('intentField');
+    const successMessage = document.getElementById('successMessage');
+    const leadForm = document.getElementById('leadForm');
+
+    const openPartnershipNav = document.getElementById('openPartnershipNav');
+    const openPartnershipTop = document.getElementById('openPartnershipTop');
+    const openConversationTop = document.getElementById('openConversationTop');
+    const openPartnershipBottom = document.getElementById('openPartnershipBottom');
+    const openConversationBottom = document.getElementById('openConversationBottom');
+    const conversationFormButton = document.getElementById('conversationFormButton');
+
+    function openForm(intentType) {
+      personaField.value = 'partner';
+      intentField.value = intentType;
+      formWrap.classList.add('active');
+      formWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    openPartnershipNav.addEventListener('click', function (e) {
+      e.preventDefault();
+      openForm('explore_partnership');
+    });
+
+    openPartnershipTop.addEventListener('click', () => openForm('explore_partnership'));
+    openConversationTop.addEventListener('click', () => openForm('start_conversation'));
+    openPartnershipBottom.addEventListener('click', () => openForm('explore_partnership'));
+    openConversationBottom.addEventListener('click', () => openForm('start_conversation'));
+    conversationFormButton.addEventListener('click', () => openForm('start_conversation'));
+
+    leadForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(leadForm);
+      const payload = Object.fromEntries(formData.entries());
+
+      try {
+        // Replace with your real backend endpoint
+        console.log('Partner lead payload:', payload);
+        successMessage.classList.add('show');
+        leadForm.reset();
+        personaField.value = 'partner';
+        intentField.value = 'explore_partnership';
+      } catch (error) {
+        console.error(error);
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>
