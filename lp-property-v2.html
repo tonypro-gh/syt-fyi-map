@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYT.FYI | Property Rep v.2</title>
+  <meta
+    name="description"
+    content="Schedule a free SYT.360 property visit. Organize your property, reduce chaos, and connect approved information to verified first responders through FireTactic.com."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --red: #F50B0B;
+      --blue: #008AFC;
+      --ink: #0b0b0b;
+      --muted: #555555;
+      --soft: #7a7a7a;
+      --line: #e8e8e8;
+      --panel: #fafafa;
+      --white: #ffffff;
+      --max: 1120px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.05);
+      --font-display: 'Anton', 'Arial Black', sans-serif;
+      --font-body: 'Montserrat', Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: #f0f0f0;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.45;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page-shell {
+      max-width: var(--max);
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .top-stripe {
+      height: 4px;
+      background: var(--red);
+      width: 100%;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .brand .arrow { color: var(--blue); }
+    .brand .fire { color: var(--red); }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-blue,
+    .btn-red,
+    .btn-ghost,
+    .btn-dark {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.15s ease;
+      white-space: nowrap;
+      border: none;
+    }
+
+    .btn-blue { background: var(--blue); color: #fff; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-dark { background: var(--ink); color: #fff; }
+    .btn-ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+
+    .btn-blue:hover,
+    .btn-red:hover,
+    .btn-dark:hover { opacity: 0.88; }
+
+    .btn-ghost:hover { box-shadow: var(--shadow); }
+
+    .hero {
+      padding: 34px 20px 18px;
+      background: var(--white);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      padding: 7px 12px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .hero-eyebrow .arrow { color: var(--blue); }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 6vw, 68px);
+      text-transform: uppercase;
+      line-height: 0.94;
+      letter-spacing: -0.02em;
+      max-width: 860px;
+      margin-bottom: 10px;
+    }
+
+    .accent-red { color: var(--red); }
+    .accent-blue { color: var(--blue); }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 6px;
+    }
+
+    .hero-support {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--ink);
+      max-width: 840px;
+      margin-bottom: 16px;
+    }
+
+    .geo-line {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--soft);
+      margin-bottom: 16px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .hero-micro {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--soft);
+      margin-bottom: 16px;
+    }
+
+    .compact-grid-4,
+    .compact-grid-3,
+    .compact-grid-2 {
+      display: grid;
+      gap: 12px;
+    }
+
+    .compact-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .compact-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .compact-grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .mini-card,
+    .card,
+    .story-band,
+    .cta-band,
+    .step,
+    .problem-solution {
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .mini-card {
+      background: var(--panel);
+      padding: 14px;
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .section {
+      padding: 14px 20px 18px;
+      background: var(--white);
+    }
+
+    .section.alt {
+      background: #fcfcfc;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kicker {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--soft);
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3.5vw, 38px);
+      text-transform: uppercase;
+      line-height: 0.96;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      max-width: 900px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 10px;
+    }
+
+    .story-band {
+      padding: 18px;
+      background: var(--panel);
+    }
+
+    .story-band strong {
+      display: block;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .story-band p {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 760px;
+    }
+
+    .problem-solution-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .problem-solution {
+      padding: 16px;
+      background: var(--panel);
+    }
+
+    .problem-solution strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--soft);
+      margin-bottom: 8px;
+    }
+
+    .problem-solution p {
+      font-size: 14px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .simple-list {
+      display: grid;
+      gap: 8px;
+      margin: 6px 0 10px;
+    }
+
+    .simple-list div {
+      border-left: 4px solid var(--blue);
+      padding-left: 10px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .closing-line {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .card {
+      padding: 16px;
+      min-height: 98px;
+    }
+
+    .card strong {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .step {
+      background: var(--panel);
+      padding: 16px;
+    }
+
+    .step-num {
+      display: inline-flex;
+      width: 28px;
+      height: 28px;
+      align-items: center;
+      justify-content: center;
+      background: var(--blue);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .step strong {
+      display: block;
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cta-band {
+      background: var(--panel);
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .cta-copy strong {
+      display: block;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 0.95;
+      margin-bottom: 8px;
+    }
+
+    .cta-copy p {
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 560px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--line);
+    }
+
+    .form-wrap {
+      display: block;
+    }
+
+    .form-card {
+      border: 1px solid var(--line);
+      background: var(--white);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-card h3 {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 0.95;
+      margin-bottom: 8px;
+    }
+
+    .form-card .form-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      max-width: 560px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--soft);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 12px 12px;
+      font: inherit;
+      color: var(--ink);
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus { border-color: var(--blue); }
+
+    textarea {
+      min-height: 84px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+      align-items: center;
+    }
+
+    .form-note {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--soft);
+      margin-top: 8px;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 12px;
+      border: 1px solid #cfe8d0;
+      background: #f5fbf5;
+      color: #245b28;
+      padding: 12px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .success-message.show { display: block; }
+
+    .site-footer {
+      padding: 14px 20px 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: var(--soft);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--white);
+    }
+
+    details.legal-toggle {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    details.legal-toggle summary {
+      cursor: pointer;
+      list-style: none;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+    }
+
+    details.legal-toggle summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .legal-content {
+      padding-top: 10px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--muted);
+      text-transform: none;
+      letter-spacing: normal;
+      font-weight: 600;
+      max-width: 900px;
+    }
+
+    @media (max-width: 980px) {
+      .compact-grid-4,
+      .compact-grid-3,
+      .compact-grid-2,
+      .problem-solution-wrap,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-band {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        min-height: auto;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-actions,
+      .hero-actions,
+      .form-actions {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .nav-actions a,
+      .hero-actions a,
+      .hero-actions button,
+      .form-actions a,
+      .form-actions button {
+        width: 100%;
+      }
+
+      .compact-grid-4,
+      .compact-grid-3,
+      .compact-grid-2,
+      .problem-solution-wrap,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="top-stripe"></div>
+
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <span>SYT.FYI</span>
+          <span class="arrow">→</span>
+          <span class="fire">FireTactic.com</span>
+        </div>
+
+        <div class="nav-actions">
+          <a class="btn-ghost" href="#info-form">Ask A Quick Question First</a>
+          <a class="btn-blue" href="https://www.syt.fyi/book-online" target="_blank" rel="noopener">Schedule Free Property Visit</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-eyebrow">
+          <span>SYT.FYI</span>
+          <span class="arrow">→</span>
+          <span>FireTactic.com</span>
+        </div>
+
+        <h1>Be Ready Before Something <span class="accent-red">Happens</span>.</h1>
+
+        <p class="hero-sub">Organize your property. Reduce chaos. Move faster in an emergency.</p>
+
+        <p class="hero-support">
+          With your approval, key information can be accessible to verified first responders through <span class="accent-blue">FireTactic.com</span>.
+        </p>
+
+        <div class="geo-line">Starting in Miami Beach and now expanding into Downtown Miami</div>
+
+        <div class="hero-actions">
+          <a class="btn-blue" href="https://www.syt.fyi/book-online" target="_blank" rel="noopener">Schedule Free Property Visit</a>
+          <button class="btn-ghost" type="button" id="openInfoTop">Ask A Quick Question First</button>
+        </div>
+
+        <div class="hero-micro">Takes 30–45 min · No prep needed</div>
+
+        <div class="compact-grid-4">
+          <div class="mini-card">Reduce forced-entry damage</div>
+          <div class="mini-card">Be inspection-ready</div>
+          <div class="mini-card">Keep property information organized</div>
+          <div class="mini-card">Less reliance on staff memory</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="story-band">
+          <strong>Most Properties Believe They’re Prepared. Until Something Actually Happens.</strong>
+          <p>The problem is not that the information does not exist. It is that it is not organized, accessible, or ready when it matters.</p>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="problem-solution-wrap">
+          <div class="problem-solution">
+            <strong>The Problem</strong>
+            <p>Information is scattered. Access is unclear. Documents go stale. Knowledge walks out the door.</p>
+          </div>
+          <div class="problem-solution">
+            <strong>The Solution</strong>
+            <p>We walk the property, organize what matters, and turn it into a clean, usable property record.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="kicker">How It Works</p>
+        <h2>Request. Visit. <span class="accent-blue">Activate</span>.</h2>
+
+        <div class="process">
+          <div class="step">
+            <div class="step-num">1</div>
+            <strong>Request</strong>
+            <p>Book the visit or ask a quick question first.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <strong>Visit</strong>
+            <p>We walk the property and gather what matters.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <strong>Activate</strong>
+            <p>Your property profile is organized and ready to use.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <p class="kicker">Platform Benefits</p>
+        <h2>Built For <span class="accent-red">Clarity</span>.</h2>
+
+        <div class="compact-grid-4">
+          <div class="card">
+            <strong>Centralized Documents</strong>
+            <p>One place for the information that matters.</p>
+          </div>
+          <div class="card">
+            <strong>Structured Records</strong>
+            <p>Clean, usable property intelligence.</p>
+          </div>
+          <div class="card">
+            <strong>Owner Controlled</strong>
+            <p>You control what is kept private and what is shared.</p>
+          </div>
+          <div class="card">
+            <strong>Fast Retrieval</strong>
+            <p>Faster access when time matters most.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="kicker">Preparedness Layer</p>
+        <h2>EAP + PIP, <span class="accent-blue">Organized</span>.</h2>
+        <p class="section-sub">
+          SYT.360 helps create a stronger starting point for Emergency Action Plan readiness and Pre-Incident Planning structure.
+        </p>
+        <p class="closing-line">Not just stored. Structured.</p>
+      </section>
+
+      <section class="section alt">
+        <p class="kicker">FireTactic Connection</p>
+        <h2>Connected To First <span class="accent-red">Responders</span></h2>
+        <p class="section-sub">
+          With your approval, selected property information can be accessible to verified fire and police through FireTactic.com.
+        </p>
+        <p class="closing-line">You control what is shared.</p>
+      </section>
+
+      <section class="section">
+        <p class="kicker">SYT.PRO</p>
+        <h2>Need More Than The <span class="accent-blue">Basics</span>?</h2>
+
+        <div class="compact-grid-3">
+          <div class="card">
+            <strong>3D Models</strong>
+            <p>Clear digital views of the property.</p>
+          </div>
+          <div class="card">
+            <strong>Drone Capture</strong>
+            <p>Aerial perspective and site context.</p>
+          </div>
+          <div class="card">
+            <strong>Wayfinding Systems</strong>
+            <p>Better movement and navigation planning.</p>
+          </div>
+        </div>
+
+        <div class="hero-actions" style="margin-top:12px; margin-bottom:0;">
+          <button class="btn-blue" type="button" id="openProjectTop">Discuss My Project</button>
+          <button class="btn-ghost" type="button" id="openProjectInfoTop">Ask About SYT.PRO</button>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="cta-band">
+          <div class="cta-copy">
+            <strong>This Is How Properties Should Be Prepared.</strong>
+            <p>No cost. No obligation. Start with the visit. Expand only if needed.</p>
+          </div>
+          <a class="btn-blue" href="https://www.syt.fyi/book-online" target="_blank" rel="noopener">Schedule Free Property Visit</a>
+        </div>
+      </section>
+
+      <section class="section" id="info-form">
+        <div class="form-wrap active" id="formWrap">
+          <div class="form-card">
+            <h3>Send My Info</h3>
+            <p class="form-sub">Leave a few details. We’ll reach out shortly.</p>
+
+            <form id="leadForm">
+              <input type="hidden" name="persona" id="personaField" value="property" />
+
+              <div class="form-grid">
+                <div class="field">
+                  <label for="fullName">Full Name</label>
+                  <input id="fullName" name="full_name" type="text" required />
+                </div>
+
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" required />
+                </div>
+
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input id="phone" name="phone" type="tel" required />
+                </div>
+
+                <div class="field">
+                  <label for="company">Property / Company Name</label>
+                  <input id="company" name="company_name" type="text" required />
+                </div>
+
+                <div class="field full">
+                  <label for="propertyAddress">Property Address (Optional)</label>
+                  <input id="propertyAddress" name="property_address" type="text" />
+                </div>
+
+                <div class="field full">
+                  <label for="message">Message (Optional)</label>
+                  <textarea id="message" name="message" placeholder="Tell us what you want to discuss."></textarea>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn-red" type="submit">Send My Info</button>
+                <a class="btn-blue" href="https://www.syt.fyi/book-online" target="_blank" rel="noopener">Schedule Free Property Visit</a>
+              </div>
+
+              <div class="form-note">We respond fast. No spam.</div>
+              <div class="success-message" id="successMessage">Thanks. We’ll reach out shortly.</div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>SYT.FYI → FireTactic.com</div>
+      <div>info@syt.fyi · (305) 306-0828</div>
+      <div>
+        <a href="https://www.syt.fyi/terms" target="_blank" rel="noopener" style="margin-right:14px;">Terms</a>
+        <a href="https://www.syt.fyi/privacy" target="_blank" rel="noopener">Privacy</a>
+      </div>
+
+      <details class="legal-toggle">
+        <summary>Important Information ▸</summary>
+        <div class="legal-content">
+          SYT.FYI provides property information organization, preparedness support, and related technology services. Any information shared to FireTactic.com is subject to property approval, access controls, and operational limitations. SYT.FYI does not replace emergency services, authority having jurisdiction requirements, official emergency action plans, code compliance obligations, legal counsel, insurance underwriting decisions, or incident command procedures. EAP and PIP references are intended to support preparedness and organization, not to guarantee compliance or operational outcomes. Property owners and representatives remain responsible for maintaining accurate records, following applicable regulations, and determining what information may be shared.
+        </div>
+      </details>
+    </footer>
+  </div>
+
+  <script>
+    const personaField = document.getElementById('personaField');
+    const successMessage = document.getElementById('successMessage');
+    const leadForm = document.getElementById('leadForm');
+
+    const openInfoTop = document.getElementById('openInfoTop');
+    const openProjectTop = document.getElementById('openProjectTop');
+    const openProjectInfoTop = document.getElementById('openProjectInfoTop');
+
+    function openForm(personaType) {
+      personaField.value = personaType;
+      document.getElementById('info-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    openInfoTop.addEventListener('click', () => openForm('property'));
+    openProjectTop.addEventListener('click', () => openForm('syt_pro'));
+    openProjectInfoTop.addEventListener('click', () => openForm('syt_pro'));
+
+    leadForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(leadForm);
+      const payload = Object.fromEntries(formData.entries());
+
+      try {
+        // Replace with your Manus backend endpoint
+        console.log('Lead payload:', payload);
+
+        successMessage.classList.add('show');
+        leadForm.reset();
+        personaField.value = 'property';
+      } catch (error) {
+        console.error(error);
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>
