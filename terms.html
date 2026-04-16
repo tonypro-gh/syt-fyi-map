@@ -51,12 +51,6 @@
       flex-direction: column;
     }
 
-    .top-stripe {
-      height: 4px;
-      background: var(--red);
-      flex-shrink: 0;
-    }
-
     /* ─── Nav ─── */
     header {
       position: sticky;
@@ -254,7 +248,7 @@
     /* ─── Print ─── */
     @media print {
       @page { margin: 0.65in; }
-      .top-stripe, header, .site-footer, .btn-print { display: none !important; }
+      header, .site-footer, .btn-print { display: none !important; }
       body, .page-shell { background: #fff !important; box-shadow: none !important; }
       .content-wrap { padding: 0 !important; }
       h2 { background: #eee !important; color: #000 !important; }
@@ -264,14 +258,11 @@
 </head>
 <body>
   <div class="page-shell">
-    <div class="top-stripe"></div>
 
     <header>
       <div class="nav">
         <div class="brand">
           <span>SYT.FYI</span>
-          <span class="arrow">→</span>
-          <span class="fire">FireTactic.com</span>
         </div>
         <div class="nav-right">
           <button class="btn-print" type="button" onclick="window.print()">Save as PDF</button>
