@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SYT.FYI — Privacy Policy</title>
+  <meta name="description" content="SYT.FYI Privacy Policy describing how FireTactic, LLC collects, uses, and protects property and user information on its platform." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red:   #F50B0B;
+      --blue:  #008AFC;
+      --ink:   #0b0b0b;
+      --muted: #555555;
+      --soft:  #7a7a7a;
+      --line:  #e8e8e8;
+      --panel: #fafafa;
+      --white: #ffffff;
+      --max:   1000px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.05);
+      --font-display: 'Anton', 'Arial Black', sans-serif;
+      --font-body:    'Montserrat', Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: #f0f0f0;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--ink); text-decoration: none; }
+    a:hover { color: var(--red); }
+
+    /* ─── Shell ─── */
+    .page-shell {
+      max-width: var(--max);
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-stripe {
+      height: 4px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    /* ─── Nav ─── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+
+    .nav {
+      padding: 0 24px;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .brand .arrow { color: var(--blue); }
+    .brand .fire  { color: var(--red); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: var(--blue);
+      color: #fff;
+      padding: 5px 12px;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .btn-print:hover { background: var(--panel); border-color: var(--ink); }
+
+    /* ─── Content ─── */
+    .content-wrap {
+      padding: 36px 24px 56px;
+      flex: 1 1 auto;
+    }
+
+    .page-header {
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 22px;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 60px);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 0.95;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 860px;
+    }
+
+    /* ─── Callout ─── */
+    .callout {
+      border-left: 4px solid var(--blue);
+      background: var(--panel);
+      padding: 14px 18px;
+      margin: 24px 0;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    /* ─── Section headings ─── */
+    h2 {
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 32px;
+      margin-bottom: 12px;
+      padding: 6px 10px;
+      background: var(--ink);
+      color: var(--white);
+      display: inline-block;
+    }
+
+    p {
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    /* ─── Lists ─── */
+    ul {
+      list-style: none;
+      margin: 10px 0 12px;
+      padding: 0;
+      border-left: 3px solid var(--ink);
+      padding-left: 16px;
+    }
+
+    ul li {
+      font-size: 14px;
+      line-height: 1.55;
+      padding: 3px 0;
+    }
+
+    ul li::before {
+      content: '—';
+      color: var(--blue);
+      font-weight: 800;
+      margin-right: 8px;
+    }
+
+    /* ─── Divider ─── */
+    .hr {
+      height: 1px;
+      background: var(--line);
+      margin: 28px 0;
+    }
+
+    /* ─── Footer ─── */
+    .site-footer {
+      padding: 14px 24px 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      color: var(--soft);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+    .site-footer a { color: var(--soft); }
+    .site-footer a:hover { color: var(--red); }
+
+    /* ─── Mobile ─── */
+    @media (max-width: 640px) {
+      .nav {
+        padding: 14px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: auto;
+      }
+      .content-wrap { padding: 24px 16px 40px; }
+      .site-footer { padding: 12px 16px 20px; }
+      h2 { font-size: 10px; }
+    }
+
+    /* ─── Print ─── */
+    @media print {
+      @page { margin: 0.65in; }
+      .top-stripe, header, .site-footer, .btn-print { display: none !important; }
+      body, .page-shell { background: #fff !important; box-shadow: none !important; }
+      .content-wrap { padding: 0 !important; }
+      h2 { background: #eee !important; color: #000 !important; }
+      .callout { border-left: 4px solid #000 !important; background: #f5f5f5 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="top-stripe"></div>
+
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <span>SYT.FYI</span>
+          <span class="arrow">→</span>
+          <span class="fire">FireTactic.com</span>
+        </div>
+        <div class="nav-right">
+          <button class="btn-print" type="button" onclick="window.print()">Save as PDF</button>
+          <span class="badge">Privacy Policy</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="content-wrap">
+
+      <div class="page-header">
+        <h1>Privacy Policy</h1>
+        <p class="subtitle">
+          This Privacy Policy explains how <strong>FireTactic, LLC</strong>, doing business as SYT.FYI ("SYT.FYI," "we," "us," or "our"), collects, uses, and protects information submitted to or accessed through the SYT.FYI platform (the "Platform"). The Platform provides documentation and organizational tools for properties and authorized users.
+        </p>
+      </div>
+
+      <div class="callout">
+        SYT.FYI is a documentation platform only. It is not an inspection service, compliance authority, life-safety system, or emergency operations service. Do not rely on this Platform for real-time decisions or regulatory compliance.
+      </div>
+
+      <h2>1. Who We Are</h2>
+      <p>
+        SYT.FYI is owned and operated by FireTactic, LLC, a private, for-profit Florida company. We are not a government agency, inspection authority, compliance body, or public safety department.
+      </p>
+
+      <h2>2. Our Role</h2>
+      <p>
+        SYT.FYI functions solely as a documentation and information hosting service. We store and display information submitted by authorized users. We do not analyze, certify, verify, or determine compliance, safety status, inspection results, or regulatory sufficiency of submitted materials. The Platform is not intended for real-time or emergency decision-making.
+      </p>
+
+      <h2>3. Information We Collect</h2>
+      <p>
+        We collect only information reasonably necessary to operate the Platform, including:
+      </p>
+      <ul>
+        <li>Property and building information submitted by authorized users</li>
+        <li>Account and contact information (name, email, phone, organization)</li>
+        <li>Technical and security data (IP address, device/browser info, access logs)</li>
+      </ul>
+      <p>
+        We do not sell personal or property information.
+      </p>
+
+      <h2>4. How We Use Information</h2>
+      <p>
+        We use information to:
+      </p>
+      <ul>
+        <li>Host and display property documentation</li>
+        <li>Manage accounts and permissions</li>
+        <li>Provide secure access and sharing controls</li>
+        <li>Maintain platform security and reliability</li>
+        <li>Respond to support or legal requests</li>
+      </ul>
+      <p>
+        We do not use property information for advertising or marketing.
+      </p>
+
+      <h2>5. Optional Data Sharing</h2>
+      <p>
+        If a property representative authorizes it, selected non-sensitive reference information may be displayed on FireTactic.com for supplemental informational purposes. FireTactic.com is operated separately by First In Safety Foundation, Inc. Sharing is optional, consent-based, and revocable. FireTactic, LLC and the Foundation operate independently and maintain separate systems.
+      </p>
+
+      <h2>6. Data Security</h2>
+      <p>
+        We implement reasonable administrative, technical, and organizational safeguards. However, no system can guarantee absolute security, and use of the Platform is at your own risk.
+      </p>
+
+      <h2>7. Retention</h2>
+      <p>
+        We retain information only as long as reasonably necessary for operational, security, or legal purposes. Retention does not imply validation or certification of submitted materials.
+      </p>
+
+      <h2>8. No Duty to Monitor or Update</h2>
+      <p>
+        We have no obligation to monitor property conditions, verify accuracy, update information, or notify users of hazards or regulatory requirements. Information is stored and displayed as submitted.
+      </p>
+
+      <h2>9. Children's Privacy</h2>
+      <p>
+        The Platform is intended only for authorized adults representing properties or organizations. We do not knowingly collect information from individuals under 18.
+      </p>
+
+      <h2>10. Informational Platform Only</h2>
+      <p>
+        SYT.FYI is a documentation platform only. It is not an inspection service, compliance authority, safety system, or emergency operations service.
+      </p>
+
+      <h2>11. Contact</h2>
+      <p>
+        <strong>FireTactic, LLC</strong><br />
+        Email: <a href="mailto:info@syt.fyi">info@syt.fyi</a><br />
+        Phone: <a href="tel:+13053060828">(305) 306-0828</a><br />
+        Web: <a href="https://www.syt.fyi" target="_blank" rel="noopener">https://www.syt.fyi</a>
+      </p>
+
+      <div class="hr"></div>
+      <p class="subtitle" style="margin:0;">Last updated: <span id="lastUpdated"></span></p>
+
+    </div>
+
+    <footer class="site-footer">
+      <div>© <span id="yr"></span> FireTactic, LLC. All rights reserved.</div>
+      <div>info@syt.fyi · (305) 306-0828</div>
+      <div>
+        <a href="https://www.syt.fyi/terms" target="_blank" rel="noopener noreferrer" style="margin-right:14px;">Terms of Use</a>
+        <a href="https://www.syt.fyi/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  </script>
+</body>
+</html>
